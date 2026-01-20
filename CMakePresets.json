@@ -1,0 +1,64 @@
+{
+    "version": 3,
+    "configurePresets": [
+        {
+            "name": "default",
+            "hidden": true,
+            "generator": "Ninja",
+            "binaryDir": "${sourceDir}/build/${presetName}",
+		    "toolchainFile": "${sourceDir}/cmake/gcc-arm-none-eabi.cmake",
+            "cacheVariables": {
+            }
+        },
+        {
+            "name": "Debug",
+            "inherits": "default",
+            "cacheVariables": {
+                "CMAKE_BUILD_TYPE": "Debug"
+            }
+        },
+        {
+            "name": "RelWithDebInfo",
+            "inherits": "default",
+            "cacheVariables": {
+                "CMAKE_BUILD_TYPE": "RelWithDebInfo"
+            }
+        },
+        {
+            "name": "Release",
+            "inherits": "default",
+            "cacheVariables": {
+                "CMAKE_BUILD_TYPE": "Release",
+                "CMAKE_C_FLAGS_RELEASE": "-O2 -flto -DNDEBUG -ffunction-sections -fdata-sections",
+                "CMAKE_EXE_LINKER_FLAGS_RELEASE": "-Wl,--gc-sections -Wl,--strip-all"
+            }
+        },
+        {
+            "name": "MinSizeRel",
+            "inherits": "default",
+            "cacheVariables": {
+                "CMAKE_BUILD_TYPE": "MinSizeRel",
+                "CMAKE_C_FLAGS_MINSIZEREL": "-Os -DNDEBUG -ffunction-sections -fdata-sections",
+                "CMAKE_EXE_LINKER_FLAGS_MINSIZEREL": "-Wl,--gc-sections -Wl,--strip-all"
+            }
+        }
+    ],
+    "buildPresets": [
+        {
+            "name": "Debug",
+            "configurePreset": "Debug"
+        },
+        {
+            "name": "RelWithDebInfo",
+            "configurePreset": "RelWithDebInfo"
+        },
+        {
+            "name": "Release",
+            "configurePreset": "Release"
+        },
+        {
+            "name": "MinSizeRel",
+            "configurePreset": "MinSizeRel"
+        }
+    ]
+}

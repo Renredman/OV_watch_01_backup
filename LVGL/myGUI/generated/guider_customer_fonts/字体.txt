@@ -1,0 +1,5 @@
+lv_customer_font_simsun_48.c
+0123456789:
+
+lv_customer_font_simsun_32.c
+LV_SYMBOL_PLAY,LV_SYMBOL_REFRESH,LV_SYMBOL_TINT

@@ -1,0 +1,1 @@
+GEN_CSRCS += lv_font_simsun_18.c lv_font_simsun_24.c lv_font_simsun_48.c lv_font_icomoon_24.c lv_font_icomoon_32.c lv_font_icomoon_18.c lv_font_simsun_12.c lv_font_simsun_32.c

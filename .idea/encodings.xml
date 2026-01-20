@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="Encoding">
+    <file url="file://$PROJECT_DIR$/BSP/IIC/iic_hal.c" charset="GBK" />
+    <file url="file://$PROJECT_DIR$/BSP/LCD/lcd.c" charset="GBK" />
+    <file url="file://$PROJECT_DIR$/BSP/LCD/lcd.h" charset="GBK" />
+    <file url="file://$PROJECT_DIR$/BSP/LCD/lcd_init.c" charset="GBK" />
+    <file url="file://$PROJECT_DIR$/BSP/LCD/lcd_init.h" charset="GBK" />
+    <file url="file://$PROJECT_DIR$/BSP/LCD/lcdfont.h" charset="GBK" />
+    <file url="file://$PROJECT_DIR$/BSP/MPU6050/eMPL/inv_mpu.c" charset="GBK" />
+    <file url="file://$PROJECT_DIR$/SYSTEM/delay.c" charset="GBK" />
+  </component>
+</project>
