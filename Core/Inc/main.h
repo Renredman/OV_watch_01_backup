@@ -44,8 +44,6 @@ extern "C" {
 extern osMessageQueueId_t PageQueueHandle;
 extern osMessageQueueId_t EnvirQueueHandle;
 
-extern osMutexId_t lvgl_mutex;
-
 extern uint8_t Sensor_LSM303_Erro;
 extern uint8_t Sensor_AHT21_Erro;
 extern uint8_t Sensor_SPL_Erro;

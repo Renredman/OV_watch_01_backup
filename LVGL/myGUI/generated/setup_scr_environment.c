@@ -214,13 +214,13 @@ void setup_scr_environment(lv_ui *ui)
     //The custom code of environment.
 
 
-    char text_buf[15];
-    snprintf(text_buf,sizeof(text_buf),"%d",(uint8_t)temperature);
-    lv_label_set_text(ui->environment_label_1, text_buf);
-    lv_bar_set_value(ui->environment_bar_1, (uint8_t)temperature, LV_ANIM_OFF);
-    snprintf(text_buf,sizeof(text_buf),"%d",(uint8_t)humidity);
-    lv_label_set_text(ui->environment_label_3, text_buf);
-    lv_bar_set_value(ui->environment_bar_2, (uint8_t)humidity, LV_ANIM_OFF);
+    // char text_buf[15];
+    // snprintf(text_buf,sizeof(text_buf),"%d",(uint8_t)temperature);
+    // lv_label_set_text(ui->environment_label_1, text_buf);
+    // lv_bar_set_value(ui->environment_bar_1, (uint8_t)temperature, LV_ANIM_OFF);
+    // snprintf(text_buf,sizeof(text_buf),"%d",(uint8_t)humidity);
+    // lv_label_set_text(ui->environment_label_3, text_buf);
+    // lv_bar_set_value(ui->environment_bar_2, (uint8_t)humidity, LV_ANIM_OFF);
 
     //Update current screen layout.
     lv_obj_update_layout(ui->environment);

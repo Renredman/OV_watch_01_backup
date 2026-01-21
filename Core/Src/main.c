@@ -169,10 +169,8 @@ int main(void)
   LCD_ShowString(72,LCD_H/2,(uint8_t*)"Welcome!",WHITE,BLACK,24,0);
   LCD_ShowString(42,LCD_H/2+48,(uint8_t*)"OV-Watch V1.0",WHITE,BLACK,24,0);
 
-  osMutexId_t lvgl_mutex;
 
   // 在 main() 中初始化
-  lvgl_mutex = osMutexNew(NULL);
 
   lv_init();
   lv_port_disp_init();

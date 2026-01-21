@@ -12,6 +12,10 @@ typedef struct {
     lv_scr_load_anim_t anim;
 }PageMessage;
 
+// typedef struct {
+//     float humidity;
+//     float temperature;
+// }EnvirMessage;
 
 typedef enum {
     scr1_index = 0,

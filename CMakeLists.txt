@@ -264,6 +264,7 @@ add_executable(${CMAKE_PROJECT_NAME}
         Core/APP/Tasks/DataUpdateTask.c
         Core/APP/Tasks/TimeUpdateTask.c
         Core/APP/Tasks/TimeUpdateTask.h
+        Core/APP/Tasks/SensorDataTask.h
 )
 
 # Add STM32CubeMX generated sources

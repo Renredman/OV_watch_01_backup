@@ -785,7 +785,7 @@ void setup_scr_scr1(lv_ui *ui)
     // switch (nowdate.WeekDay) {
     //     case 0:snprintf(text_buf, sizeof(text_buf), "Sun.");break;
     //     case 1:snprintf(text_buf, sizeof(text_buf), "Mon.");break;
-    //     case 2:snprintf(text_buf, sizeof(text_buf), "Tue.");break;
+    //     case 2:snprintf(text_buf`, sizeof(text_buf), "Tue.");break;
     //     case 3:snprintf(text_buf, sizeof(text_buf), "Wed.");break;
     //     case 4:snprintf(text_buf, sizeof(text_buf), "Thu.");break;
     //     case 5:snprintf(text_buf, sizeof(text_buf), "Fri.");break;
@@ -799,7 +799,7 @@ void setup_scr_scr1(lv_ui *ui)
     // extern float humidity, temperature;
     extern uint8_t AHT_State;
     extern int key_state;
-    snprintf(text_buf,sizeof(text_buf),"%d %d",nowtime.Minutes,nowtime.Seconds);
+    snprintf(text_buf,sizeof(text_buf),"%d",1234);
     lv_label_set_text(guider_ui.scr1_label_6, text_buf);
 
 

@@ -3,7 +3,7 @@
 #include "custom.h"
 #include "gui_guider.h"  // 包含UI结构体定义
 #include "Tasks/TimeUpdateTask.h"
-
+#include "Tasks/SensorDataTask.h"
 
 
 // 声明自动生成的计算器屏幕初始化函数（必须添加，否则链接失败）
@@ -14,6 +14,10 @@ void scr1_screen_loaded_event_handler(lv_event_t *e) {
     if (code == LV_EVENT_SCREEN_LOADED) {
         refresh_current_time_on_scr1();
     }
+}
+
+void environment_screen_loaded_cb(lv_event_t *e) {
+    trigger_immediate_envir_update();
 }
 
 // 自定义初始化函数（GUI Guider会自动调用）

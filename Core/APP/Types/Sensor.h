@@ -22,7 +22,7 @@ typedef struct {
     float temperature;
 }EnvirMessage;
 
-extern float humidity, temperature;
+// extern float humidity, temperature;
 // extern date_time time;
 extern RTC_DateTypeDef nowdate;
 extern RTC_TimeTypeDef nowtime;

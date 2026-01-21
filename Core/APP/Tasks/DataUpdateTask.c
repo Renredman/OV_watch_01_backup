@@ -8,32 +8,41 @@
 static osStatus_t queue_status;
 extern lv_ui  guider_ui;
 
-static void environment_update(void *user_data) {
-    char text_buf[15];
-    EnvirMessage *data = (EnvirMessage *)user_data;
+typedef struct {
+    float humidity;
+    float temperature;
+}envir_update_data_t;
 
-    // snprintf(text_buf,sizeof(text_buf),"%d",(uint8_t)data->temperature);
-    // lv_label_set_text(guider_ui.environment_label_1, text_buf);
-    // lv_bar_set_value(guider_ui.environment_bar_1, data->temperature, LV_ANIM_OFF);
-    // snprintf(text_buf,sizeof(text_buf),"%d",(uint8_t)data->humidity);
-    // lv_label_set_text(guider_ui.environment_label_3, text_buf);
-    // lv_bar_set_value(guider_ui.environment_bar_2, data->humidity, LV_ANIM_OFF);
+static void environment_update_callback(void *data) {
+    envir_update_data_t *envir_data = (envir_update_data_t*)data;
 
-    vPortFree(data);
+    if (lv_scr_act() == guider_ui.environment) {
+        char humi_str[10],temp_str[10];
+        snprintf(humi_str, sizeof(humi_str), "%d",(uint8_t)envir_data->humidity);
+        snprintf(temp_str, sizeof(temp_str), "%d",(uint8_t)envir_data->temperature);
+
+        lv_label_set_text(guider_ui.environment_label_3,humi_str);
+        lv_label_set_text(guider_ui.environment_label_1,temp_str);
+
+        lv_bar_set_value(guider_ui.environment_bar_2, (uint8_t)envir_data->humidity, LV_ANIM_OFF);
+        lv_bar_set_value(guider_ui.environment_bar_1, (uint8_t)envir_data->temperature, LV_ANIM_OFF);
+    }
+
+    vPortFree(envir_data);
 }
 
 void SensorDataUpdateTask(void *argument) {
     for (;;) {
-        lv_obj_t *current_scr = lv_scr_act();
-        EnvirMessage *message;// = pvPortMalloc(sizeof(EnvirMessage));
-        queue_status = osMessageQueueGet(EnvirQueueHandle,&message,0,osWaitForever);
-        if (queue_status == osOK && message!=NULL) {
-            if (current_scr == guider_ui.environment) {
-                lv_async_call(environment_update,message);
+        EnvirMessage *envir_msg = NULL;
+        if (osMessageQueueGet(EnvirQueueHandle,&envir_msg,NULL,osWaitForever)==osOK) {
+            envir_update_data_t *p_async_data =(envir_update_data_t*)pvPortMalloc(sizeof(envir_update_data_t));
+            if (p_async_data != NULL) {
+                p_async_data->humidity = envir_msg->humidity;
+                p_async_data->temperature = envir_msg->temperature;
+
+                lv_async_call(environment_update_callback,p_async_data);
             }
-            else {
-                vPortFree(message);
-            }
+            vPortFree(envir_msg);
         }
     }
 }

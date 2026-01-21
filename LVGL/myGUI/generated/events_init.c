@@ -593,6 +593,7 @@ static void environment_event_handler (lv_event_t *e)
 void events_init_environment (lv_ui *ui)
 {
     lv_obj_add_event_cb(ui->environment, environment_event_handler, LV_EVENT_ALL, ui);
+    lv_obj_add_event_cb(guider_ui.environment, environment_screen_loaded_cb, LV_EVENT_SCREEN_LOADED, NULL);
 }
 
 static void card_bag_event_handler (lv_event_t *e)
