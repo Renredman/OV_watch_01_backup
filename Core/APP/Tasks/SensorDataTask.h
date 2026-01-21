@@ -1,0 +1,8 @@
+//
+// Created by 侯力楷 on 2026/1/21.
+//
+
+#ifndef OV_WATCH_01_SENSORDATATASK_H
+#define OV_WATCH_01_SENSORDATATASK_H
+
+#endif //OV_WATCH_01_SENSORDATATASK_H
