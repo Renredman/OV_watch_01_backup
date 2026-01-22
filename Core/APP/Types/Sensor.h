@@ -24,7 +24,7 @@ typedef struct {
 
 // extern float humidity, temperature;
 // extern date_time time;
-extern RTC_DateTypeDef nowdate;
-extern RTC_TimeTypeDef nowtime;
+// extern RTC_DateTypeDef nowdate;
+// extern RTC_TimeTypeDef nowtime;
 
 #endif //OV_WATCH_01_SENSOR_H

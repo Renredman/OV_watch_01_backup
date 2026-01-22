@@ -30,6 +30,13 @@ void StartKeyTask(void *argument) {
                 msg->setup_cb = setup_scr_scr1;
                 msg->anim = LV_SCR_LOAD_ANIM_MOVE_LEFT;
             }
+            else if (current_scr == guider_ui.game_2048) {
+                msg->new_screen = &guider_ui.game;
+                msg->new_scr_del = guider_ui.game_del;
+                msg->old_scr_del = &guider_ui.game_2048_del;
+                msg->setup_cb = setup_scr_game;
+                msg->anim = LV_SCR_LOAD_ANIM_MOVE_RIGHT;
+            }
             else {
                 msg->new_screen = &guider_ui.menu2;
                 msg->new_scr_del = guider_ui.menu2_del;

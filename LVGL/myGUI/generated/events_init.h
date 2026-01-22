@@ -26,6 +26,10 @@ void events_init_second_chronograph(lv_ui *ui);
 void events_init_environment(lv_ui *ui);
 void events_init_card_bag(lv_ui *ui);
 void events_init_menu2(lv_ui *ui);
+void events_init_about_watch(lv_ui *ui);
+void events_init_heart(lv_ui *ui);
+void events_init_game(lv_ui *ui);
+void events_init_game_2048(lv_ui *ui);
 
 #ifdef __cplusplus
 }

@@ -153,6 +153,50 @@ typedef struct
 	lv_obj_t *menu2_label_10;
 	lv_obj_t *menu2_label_11;
 	lv_obj_t *menu2_label_12;
+	lv_obj_t *about_watch;
+	bool about_watch_del;
+	lv_obj_t *about_watch_spangroup_1;
+	lv_span_t *about_watch_spangroup_1_span;
+	lv_obj_t *heart;
+	bool heart_del;
+	lv_obj_t *heart_label_4;
+	lv_obj_t *heart_label_3;
+	lv_obj_t *heart_label_2;
+	lv_obj_t *heart_label_1;
+	lv_obj_t *heart_btn_1;
+	lv_obj_t *heart_btn_1_label;
+	lv_obj_t *game;
+	bool game_del;
+	lv_obj_t *game_btn_3;
+	lv_obj_t *game_btn_3_label;
+	lv_obj_t *game_btn_2;
+	lv_obj_t *game_btn_2_label;
+	lv_obj_t *game_btn_1;
+	lv_obj_t *game_btn_1_label;
+	lv_obj_t *game_label_1;
+	lv_obj_t *game_label_2;
+	lv_obj_t *game_label_3;
+	lv_obj_t *game_2048;
+	bool game_2048_del;
+	lv_obj_t *game_2048_btn_1;
+	lv_obj_t *game_2048_btn_1_label;
+	lv_obj_t *game_2048_label_score;
+	lv_obj_t *game_2048_label_1;
+	lv_obj_t *game_2048_label_2;
+	lv_obj_t *game_2048_label_3;
+	lv_obj_t *game_2048_label_4;
+	lv_obj_t *game_2048_label_5;
+	lv_obj_t *game_2048_label_6;
+	lv_obj_t *game_2048_label_7;
+	lv_obj_t *game_2048_label_8;
+	lv_obj_t *game_2048_label_9;
+	lv_obj_t *game_2048_label_10;
+	lv_obj_t *game_2048_label_11;
+	lv_obj_t *game_2048_label_12;
+	lv_obj_t *game_2048_label_13;
+	lv_obj_t *game_2048_label_14;
+	lv_obj_t *game_2048_label_15;
+	lv_obj_t *game_2048_label_16;
 }lv_ui;
 
 typedef void (*ui_setup_scr_t)(lv_ui * ui);
@@ -174,10 +218,7 @@ void setup_ui(lv_ui *ui);
 void init_keyboard(lv_ui *ui);
 
 extern lv_ui guider_ui;
-// static page_state_t pages = {
-// 	.scr1_valid = true,   // 假设 scr1 在 setup_ui 中已创建
-// 	.menu2_valid = false
-// };
+
 
 void setup_scr_scr1(lv_ui *ui);
 void setup_scr_menu(lv_ui *ui);
@@ -187,6 +228,10 @@ void setup_scr_second_chronograph(lv_ui *ui);
 void setup_scr_environment(lv_ui *ui);
 void setup_scr_card_bag(lv_ui *ui);
 void setup_scr_menu2(lv_ui *ui);
+void setup_scr_about_watch(lv_ui *ui);
+void setup_scr_heart(lv_ui *ui);
+void setup_scr_game(lv_ui *ui);
+void setup_scr_game_2048(lv_ui *ui);
 
 LV_FONT_DECLARE(lv_font_simsun_18)
 LV_FONT_DECLARE(lv_font_simsun_24)

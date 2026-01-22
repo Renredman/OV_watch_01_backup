@@ -104,7 +104,7 @@ void setup_scr_scr1(lv_ui *ui)
 
     //Write codes scr1_label_2
     ui->scr1_label_2 = lv_label_create(ui->scr1);
-    lv_label_set_text(ui->scr1_label_2, "11-08");
+    lv_label_set_text(ui->scr1_label_2, "11-08");//日期
     lv_label_set_long_mode(ui->scr1_label_2, LV_LABEL_LONG_WRAP);
     lv_obj_set_pos(ui->scr1_label_2, 80, 20);
     lv_obj_set_size(ui->scr1_label_2, 86, 32);
@@ -127,7 +127,7 @@ void setup_scr_scr1(lv_ui *ui)
 
     //Write codes scr1_label_3
     ui->scr1_label_3 = lv_label_create(ui->scr1);
-    lv_label_set_text(ui->scr1_label_3, "Sat.");
+    lv_label_set_text(ui->scr1_label_3, "Sat.");//星期
     lv_label_set_long_mode(ui->scr1_label_3, LV_LABEL_LONG_WRAP);
     lv_obj_set_pos(ui->scr1_label_3, 158, 20);
     lv_obj_set_size(ui->scr1_label_3, 100, 32);
@@ -150,7 +150,7 @@ void setup_scr_scr1(lv_ui *ui)
 
     //Write codes scr1_label_4
     ui->scr1_label_4 = lv_label_create(ui->scr1);
-    lv_label_set_text(ui->scr1_label_4, "11:59");
+    lv_label_set_text(ui->scr1_label_4, "11:59");//时间
     lv_label_set_long_mode(ui->scr1_label_4, LV_LABEL_LONG_WRAP);
     lv_obj_set_pos(ui->scr1_label_4, 93, 55);
     lv_obj_set_size(ui->scr1_label_4, 136, 53);

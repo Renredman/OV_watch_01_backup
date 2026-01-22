@@ -75,7 +75,6 @@ void ui_animation(void * var, int32_t duration, int32_t delay, int32_t start_val
 
 void init_scr_del_flag(lv_ui *ui)
 {
-
     ui->scr1_del = true;
     ui->menu_del = true;
     ui->calendar_del = true;
@@ -84,6 +83,10 @@ void init_scr_del_flag(lv_ui *ui)
     ui->environment_del = true;
     ui->card_bag_del = true;
     ui->menu2_del = true;
+    ui->about_watch_del = true;
+    ui->heart_del = true;
+    ui->game_del = true;
+    ui->game_2048_del = true;
 }
 
 void setup_ui(lv_ui *ui)
@@ -92,6 +95,7 @@ void setup_ui(lv_ui *ui)
     init_keyboard(ui);
     setup_scr_scr1(ui);
     // setup_scr_menu2(ui);
+    // setup_scr_game_2048(ui);
     lv_scr_load(ui->scr1);
 }
 

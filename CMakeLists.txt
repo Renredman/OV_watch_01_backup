@@ -265,6 +265,10 @@ add_executable(${CMAKE_PROJECT_NAME}
         Core/APP/Tasks/TimeUpdateTask.c
         Core/APP/Tasks/TimeUpdateTask.h
         Core/APP/Tasks/SensorDataTask.h
+        LVGL/myGUI/generated/setup_scr_about_watch.c
+        LVGL/myGUI/generated/setup_scr_heart.c
+        LVGL/myGUI/generated/setup_scr_game.c
+        LVGL/myGUI/generated/setup_scr_game_2048.c
 )
 
 # Add STM32CubeMX generated sources

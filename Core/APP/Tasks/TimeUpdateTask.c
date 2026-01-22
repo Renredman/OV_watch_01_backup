@@ -27,6 +27,9 @@ static void time_update_callback(void *data) {
         lv_label_set_text(guider_ui.scr1_label_2,p_data->data_str);
         lv_label_set_text(guider_ui.scr1_label_3,p_data->week_str);
     }
+    // else if (lv_scr_act() == guider_ui.calendar) {
+    //
+    // }
 
 
     vPortFree(p_data);

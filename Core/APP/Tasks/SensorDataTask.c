@@ -6,8 +6,8 @@
 #include "rtc.h"
 #include "Types/Sensor.h"
 
-RTC_DateTypeDef nowdate;
-RTC_TimeTypeDef nowtime;
+// RTC_DateTypeDef nowdate;
+// RTC_TimeTypeDef nowtime;
 date_time time={2025, 12, 31, 17, 34, 32};
 // float humidity, temperature;
 uint8_t AHT_State=0;

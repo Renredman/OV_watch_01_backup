@@ -14,12 +14,18 @@
 #include "widgets_init.h"
 #include "custom.h"
 #include "Types/Sensor.h"
-
+#include "rtc.h"
 
 lv_calendar_date_t calendar_calendar_1_today;
 lv_calendar_date_t calendar_calendar_1_highlihted_days[1];
 void setup_scr_calendar(lv_ui *ui)
 {
+    RTC_TimeTypeDef nowtime;
+    RTC_DateTypeDef nowdate;
+
+    HAL_RTC_GetTime(&hrtc, &nowtime, RTC_FORMAT_BIN);
+    HAL_RTC_GetDate(&hrtc, &nowdate, RTC_FORMAT_BIN);
+
     //Write codes calendar
     ui->calendar = lv_obj_create(NULL);
     lv_obj_set_size(ui->calendar, 240, 320);
