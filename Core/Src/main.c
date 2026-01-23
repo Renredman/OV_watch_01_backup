@@ -33,6 +33,8 @@
 #include <sys/types.h>
 
 #include "AHT21.h"
+#include "em70x8.h"
+#include "HrAlgorythm.h"
 #include "stm32f4xx_it.h"
 #include "delay.h"
 #include "lcd.h"
@@ -159,8 +161,14 @@ int main(void)
     Sensor_AHT21_Erro = AHT_Init();
   }
 
-  // RTC_DateTypeDef nowdate;
-  // HAL_RTC_GetDate(&hrtc,&nowdate,RTC_FORMAT_BIN);
+  num = 3;
+  while(num && Sensor_EM_Erro){
+    num--;
+    Sensor_EM_Erro = EM7028_hrs_init();
+  }
+  if(!Sensor_EM_Erro)
+    EM7028_hrs_DisEnable();
+
 
   LCD_Init();
   LCD_Fill(0,0,LCD_W,LCD_H,BLACK);
@@ -168,7 +176,7 @@ int main(void)
   LCD_Set_Light(50);
   LCD_ShowString(72,LCD_H/2,(uint8_t*)"Welcome!",WHITE,BLACK,24,0);
   LCD_ShowString(42,LCD_H/2+48,(uint8_t*)"OV-Watch V1.0",WHITE,BLACK,24,0);
-
+  HAL_Delay(1000);
 
   // 在 main() 中初始化
 

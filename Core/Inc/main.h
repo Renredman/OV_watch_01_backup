@@ -43,6 +43,8 @@ extern "C" {
 /* USER CODE BEGIN EC */
 extern osMessageQueueId_t PageQueueHandle;
 extern osMessageQueueId_t EnvirQueueHandle;
+extern osMessageQueueId_t HeartQueueHandle;
+extern osMessageQueueId_t HrCmdQueueHandle;
 
 extern uint8_t Sensor_LSM303_Erro;
 extern uint8_t Sensor_AHT21_Erro;

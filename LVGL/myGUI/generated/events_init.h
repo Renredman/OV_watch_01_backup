@@ -15,6 +15,7 @@ extern "C" {
 #endif
 
 #include "gui_guider.h"
+#include "Types/Sensor.h"
 
 void events_init(lv_ui *ui);
 
@@ -31,6 +32,7 @@ void events_init_heart(lv_ui *ui);
 void events_init_game(lv_ui *ui);
 void events_init_game_2048(lv_ui *ui);
 
+void heart_update_callback_from_data_task(HeartMessage *msg);
 #ifdef __cplusplus
 }
 #endif

@@ -22,6 +22,21 @@ typedef struct {
     float temperature;
 }EnvirMessage;
 
+typedef struct {
+    uint8_t status;
+    uint16_t heart;
+}HeartMessage;
+
+typedef enum {
+    HR_CMD_STOP,
+    HR_CMD_START
+} hr_command_t;
+
+// extern  uint16_t heart;
+// extern uint16_t raw_ppg;
+// extern uint32_t current_time;
+// extern uint16_t heart_rate;
+// extern uint32_t user_HR_timecount;
 // extern float humidity, temperature;
 // extern date_time time;
 // extern RTC_DateTypeDef nowdate;

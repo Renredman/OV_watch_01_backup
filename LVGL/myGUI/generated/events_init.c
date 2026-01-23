@@ -13,6 +13,9 @@
 
 #include "custom.h"
 #include "lvgl.h"
+#include "Tasks/SensorDataTask.h"
+
+static  bool g_is_measuring = false;
 
 #if LV_USE_GUIDER_SIMULATOR && LV_USE_FREEMASTER
 #include "freemaster_client.h"
@@ -842,10 +845,66 @@ static void heart_label_2_event_handler (lv_event_t *e)
     }
 }
 
+static void heart_btn_1_event_handler(lv_event_t *e)
+{
+    lv_event_code_t code = lv_event_get_code(e);
+    if (code == LV_EVENT_CLICKED)
+    {
+        // 【1. 隐藏按钮】
+        lv_obj_add_flag(guider_ui.heart_btn_1, LV_OBJ_FLAG_HIDDEN);
+
+        // 【2. 显示其他标签】
+        lv_obj_clear_flag(guider_ui.heart_label_2, LV_OBJ_FLAG_HIDDEN);
+        lv_obj_clear_flag(guider_ui.heart_label_3, LV_OBJ_FLAG_HIDDEN);
+        lv_obj_clear_flag(guider_ui.heart_label_4, LV_OBJ_FLAG_HIDDEN);
+
+        // 【3. 更新Label4为“正在测量...”】
+        lv_label_set_text(guider_ui.heart_label_4, "正在测量...");
+
+        // 【4. 发送开始测量命令】
+        hr_command_t cmd = HR_CMD_START;
+        osMessageQueuePut(HrCmdQueueHandle, &cmd, 0, 0);
+
+        g_is_measuring = true;
+    }
+}
+
+void heart_update_callback_from_data_task(HeartMessage *msg)
+{
+    if (lv_scr_act() == guider_ui.heart)
+    {
+        if (msg->status == 1) {
+            // 更新实时心率
+            char hr_str[10];
+            snprintf(hr_str, sizeof(hr_str), "%d", msg->heart);
+            lv_label_set_text(guider_ui.heart_label_2, hr_str);
+        }
+        else if (msg->status == 2) {
+            // 测量完成
+            lv_label_set_text(guider_ui.heart_label_4, "测量完成");
+            g_is_measuring = false;
+        }
+    }
+}
+
 void events_init_heart (lv_ui *ui)
 {
+    // lv_obj_add_event_cb(ui->heart, heart_event_handler, LV_EVENT_ALL, ui);
+    // lv_obj_add_event_cb(ui->heart_label_2, heart_label_2_event_handler, LV_EVENT_ALL, ui);
+
+    // 【初始化UI状态】
+    // 刚进入页面时，只有btn_1和label_1可见
+    lv_obj_clear_flag(ui->heart_btn_1, LV_OBJ_FLAG_HIDDEN); // 确保按钮可见
+    lv_obj_add_flag(ui->heart_label_2, LV_OBJ_FLAG_HIDDEN);
+    lv_obj_add_flag(ui->heart_label_3, LV_OBJ_FLAG_HIDDEN);
+    lv_obj_add_flag(ui->heart_label_4, LV_OBJ_FLAG_HIDDEN);
+
+    // 【绑定事件】
     lv_obj_add_event_cb(ui->heart, heart_event_handler, LV_EVENT_ALL, ui);
-    lv_obj_add_event_cb(ui->heart_label_2, heart_label_2_event_handler, LV_EVENT_ALL, ui);
+    lv_obj_add_event_cb(ui->heart_btn_1, heart_btn_1_event_handler, LV_EVENT_CLICKED, ui);
+
+    // 【重置状态】
+    g_is_measuring = false;
 }
 
 static void game_event_handler (lv_event_t *e)

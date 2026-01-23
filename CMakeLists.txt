@@ -60,6 +60,9 @@ add_executable(${CMAKE_PROJECT_NAME}
         BSP/OWDG/WDOG.c
         BSP/AHT21/AHT21.c
         BSP/IIC/iic_hal.c
+        BSP/EM7028/em70x8.c
+        BSP/EM7028/HrAlgorythm.c
+        BSP/EM7028/user_Queue.c
         LVGL_porting/lv_port_disp.c
         LVGL_porting/lv_port_indev.c
         LVGL_porting/lv_port_indev.h

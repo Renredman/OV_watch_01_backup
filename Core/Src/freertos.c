@@ -39,6 +39,7 @@
 #include "gui_guider.h"           // Gui Guider 生成的界面和控件的声明
 #include "events_init.h"          // Gui Guider 生成的初始化事件、回调函数
 #include "custom.h"
+#include "Tasks//SensorDataTask.h"
 #include "Types/PageType.h"
 #include "Types/Sensor.h"
 /* USER CODE END Includes */
@@ -111,6 +112,13 @@ const osThreadAttr_t myTimeTask_attributes = {
   .stack_size = 128 * 4,
   .priority = (osPriority_t) osPriorityLow3,
 };
+/* Definitions for HeartDataTask */
+osThreadId_t HeartDataTaskHandle;
+const osThreadAttr_t HeartDataTask_attributes = {
+  .name = "HeartDataTask",
+  .stack_size = 128 * 4,
+  .priority = (osPriority_t) osPriorityLow3,
+};
 /* Definitions for PageQueue */
 osMessageQueueId_t PageQueueHandle;
 const osMessageQueueAttr_t PageQueue_attributes = {
@@ -120,6 +128,16 @@ const osMessageQueueAttr_t PageQueue_attributes = {
 osMessageQueueId_t EnvirQueueHandle;
 const osMessageQueueAttr_t EnvirQueue_attributes = {
   .name = "EnvirQueue"
+};
+/* Definitions for HeartQueue */
+osMessageQueueId_t HeartQueueHandle;
+const osMessageQueueAttr_t HeartQueue_attributes = {
+  .name = "HeartQueue"
+};
+/* Definitions for HrCmdQueue */
+osMessageQueueId_t HrCmdQueueHandle;
+const osMessageQueueAttr_t HrCmdQueue_attributes = {
+  .name = "HrCmdQueue"
 };
 
 /* Private function prototypes -----------------------------------------------*/
@@ -134,6 +152,7 @@ extern void WdogFeedTask(void *argument);
 extern void SensorDataRenewTask(void *argument);
 extern void SensorDataUpdateTask(void *argument);
 extern void TimeUpdateTask(void *argument);
+extern void HeartDataRenewTask(void *argument);
 
 void MX_FREERTOS_Init(void); /* (MISRA C 2004 rule 8.1) */
 
@@ -211,6 +230,12 @@ void MX_FREERTOS_Init(void) {
   /* creation of EnvirQueue */
   EnvirQueueHandle = osMessageQueueNew (16, sizeof(EnvirMessage*), &EnvirQueue_attributes);
 
+  /* creation of HeartQueue */
+  HeartQueueHandle = osMessageQueueNew (16, sizeof(HeartMessage*), &HeartQueue_attributes);
+
+  /* creation of HrCmdQueue */
+  HrCmdQueueHandle = osMessageQueueNew (16, sizeof(hr_command_t), &HrCmdQueue_attributes);
+
   /* USER CODE BEGIN RTOS_QUEUES */
   /* add queues, ... */
   /* USER CODE END RTOS_QUEUES */
@@ -236,6 +261,9 @@ void MX_FREERTOS_Init(void) {
 
   /* creation of myTimeTask */
   myTimeTaskHandle = osThreadNew(TimeUpdateTask, NULL, &myTimeTask_attributes);
+
+  /* creation of HeartDataTask */
+  HeartDataTaskHandle = osThreadNew(HeartDataRenewTask, NULL, &HeartDataTask_attributes);
 
   /* USER CODE BEGIN RTOS_THREADS */
   /* add threads, ... */
@@ -271,6 +299,7 @@ void StartLvglTask(void *argument)
     uint32_t now = osKernelGetTickCount();
     if (now - last_tick > 0) {
       lv_tick_inc(now - last_tick);
+      // user_HR_timecount+=(now - last_tick);
       last_tick = now;
     }
     lv_timer_handler();

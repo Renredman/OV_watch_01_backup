@@ -200,7 +200,7 @@ void setup_scr_scr1(lv_ui *ui)
     lv_label_set_text(ui->scr1_label_6, "0");
     lv_label_set_long_mode(ui->scr1_label_6, LV_LABEL_LONG_WRAP);
     lv_obj_set_pos(ui->scr1_label_6, 3, 175);
-    lv_obj_set_size(ui->scr1_label_6, 65, 23);
+    lv_obj_set_size(ui->scr1_label_6, 65+20, 23);
 
     //Write style for scr1_label_6, Part: LV_PART_MAIN, State: LV_STATE_DEFAULT.
     lv_obj_set_style_border_width(ui->scr1_label_6, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
@@ -794,12 +794,13 @@ void setup_scr_scr1(lv_ui *ui)
     // lv_label_set_text(ui->scr1_label_3, text_buf);
     //
     // //time
-    // snprintf(text_buf, sizeof(text_buf), "%02d:%02d", nowtime.Hours,nowtime.Minutes);
+    // snprintf(text_buf, siz                                                                             eof(text_buf), "%02d:%02d", nowtime.Hours,nowtime.Minutes);
     // lv_label_set_text(ui->scr1_label_4, text_buf);
     // extern float humidity, temperature;
     extern uint8_t AHT_State;
     extern int key_state;
-    snprintf(text_buf,sizeof(text_buf),"%d",1234);
+    // extern  uint16_t heart;
+    snprintf(text_buf,sizeof(text_buf),"%d",123);
     lv_label_set_text(guider_ui.scr1_label_6, text_buf);
 
 

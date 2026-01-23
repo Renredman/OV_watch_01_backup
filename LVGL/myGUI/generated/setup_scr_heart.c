@@ -53,7 +53,7 @@ void setup_scr_heart(lv_ui *ui)
 
     //Write codes heart_label_3
     ui->heart_label_3 = lv_label_create(ui->heart);
-    lv_label_set_text(ui->heart_label_3, "Label3");
+    lv_label_set_text(ui->heart_label_3, "次/分");
     lv_label_set_long_mode(ui->heart_label_3, LV_LABEL_LONG_WRAP);
     lv_obj_set_pos(ui->heart_label_3, 149, 162);
     lv_obj_set_size(ui->heart_label_3, 80, 28);
@@ -76,7 +76,7 @@ void setup_scr_heart(lv_ui *ui)
 
     //Write codes heart_label_2
     ui->heart_label_2 = lv_label_create(ui->heart);
-    lv_label_set_text(ui->heart_label_2, "Label2");
+    lv_label_set_text(ui->heart_label_2, "0");
     lv_label_set_long_mode(ui->heart_label_2, LV_LABEL_LONG_WRAP);
     lv_obj_set_pos(ui->heart_label_2, 51, 109);
     lv_obj_set_size(ui->heart_label_2, 121, 99);
@@ -85,7 +85,7 @@ void setup_scr_heart(lv_ui *ui)
     lv_obj_set_style_border_width(ui->heart_label_2, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
     lv_obj_set_style_radius(ui->heart_label_2, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
     lv_obj_set_style_text_color(ui->heart_label_2, lv_color_hex(0xffffff), LV_PART_MAIN|LV_STATE_DEFAULT);
-    lv_obj_set_style_text_font(ui->heart_label_2, &lv_font_simsun_18, LV_PART_MAIN|LV_STATE_DEFAULT);
+    lv_obj_set_style_text_font(ui->heart_label_2, &lv_font_simsun_48, LV_PART_MAIN|LV_STATE_DEFAULT);
     lv_obj_set_style_text_opa(ui->heart_label_2, 255, LV_PART_MAIN|LV_STATE_DEFAULT);
     lv_obj_set_style_text_letter_space(ui->heart_label_2, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
     lv_obj_set_style_text_line_space(ui->heart_label_2, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
