@@ -46,6 +46,10 @@ extern osMessageQueueId_t EnvirQueueHandle;
 extern osMessageQueueId_t HeartQueueHandle;
 extern osMessageQueueId_t HrCmdQueueHandle;
 extern osMessageQueueId_t CommonQueueHandle;
+extern osMessageQueueId_t Idle_MessageQueueHandle;
+extern osMessageQueueId_t IdleBreak_MessageQueueHandle;
+extern osMessageQueueId_t Stop_MessageQueueHandle;
+extern osTimerId_t Idle_TimerHandle;
 
 extern uint8_t Sensor_LSM303_Erro;
 extern uint8_t Sensor_AHT21_Erro;
@@ -56,7 +60,7 @@ extern uint8_t Sensor_MPU_Erro;
 
 /* Exported macro ------------------------------------------------------------*/
 /* USER CODE BEGIN EM */
-
+void SystemClock_Config(void);
 /* USER CODE END EM */
 
 /* Exported functions prototypes ---------------------------------------------*/

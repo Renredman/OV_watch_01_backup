@@ -40,6 +40,7 @@
 #include "events_init.h"          // Gui Guider 生成的初始化事件、回调函数
 #include "custom.h"
 #include "Tasks//SensorDataTask.h"
+#include "Tasks/user_PowerManager.h"
 #include "Types/PageType.h"
 #include "Types/Sensor.h"
 /* USER CODE END Includes */
@@ -144,6 +145,26 @@ osMessageQueueId_t CommonQueueHandle;
 const osMessageQueueAttr_t CommonQueue_attributes = {
   .name = "CommonQueue"
 };
+/* Definitions for Idle_MessageQueue */
+osMessageQueueId_t Idle_MessageQueueHandle;
+const osMessageQueueAttr_t Idle_MessageQueue_attributes = {
+  .name = "Idle_MessageQueue"
+};
+/* Definitions for IdleBreak_MessageQueue */
+osMessageQueueId_t IdleBreak_MessageQueueHandle;
+const osMessageQueueAttr_t IdleBreak_MessageQueue_attributes = {
+  .name = "IdleBreak_MessageQueue"
+};
+/* Definitions for Stop_MessageQueue */
+osMessageQueueId_t Stop_MessageQueueHandle;
+const osMessageQueueAttr_t Stop_MessageQueue_attributes = {
+  .name = "Stop_MessageQueue"
+};
+/* Definitions for Idle_Timer */
+osTimerId_t Idle_TimerHandle;
+const osTimerAttr_t Idle_Timer_attributes = {
+  .name = "Idle_Timer"
+};
 
 /* Private function prototypes -----------------------------------------------*/
 /* USER CODE BEGIN FunctionPrototypes */
@@ -158,6 +179,7 @@ extern void SensorDataRenewTask(void *argument);
 extern void SensorDataUpdateTask(void *argument);
 extern void TimeUpdateTask(void *argument);
 extern void HeartDataRenewTask(void *argument);
+extern void IdleTimerCallback(void *argument);
 
 void MX_FREERTOS_Init(void); /* (MISRA C 2004 rule 8.1) */
 
@@ -224,7 +246,12 @@ void MX_FREERTOS_Init(void) {
   /* add semaphores, ... */
   /* USER CODE END RTOS_SEMAPHORES */
 
+  /* Create the timer(s) */
+  /* creation of Idle_Timer */
+  Idle_TimerHandle = osTimerNew(IdleTimerCallback, osTimerPeriodic, NULL, &Idle_Timer_attributes);
+
   /* USER CODE BEGIN RTOS_TIMERS */
+  osTimerStart(Idle_TimerHandle,100);
   /* start timers, add new ones, ... */
   /* USER CODE END RTOS_TIMERS */
 
@@ -243,6 +270,15 @@ void MX_FREERTOS_Init(void) {
 
   /* creation of CommonQueue */
   CommonQueueHandle = osMessageQueueNew (16, sizeof(CommonMessage*), &CommonQueue_attributes);
+
+  /* creation of Idle_MessageQueue */
+  Idle_MessageQueueHandle = osMessageQueueNew (1, sizeof(uint8_t), &Idle_MessageQueue_attributes);
+
+  /* creation of IdleBreak_MessageQueue */
+  IdleBreak_MessageQueueHandle = osMessageQueueNew (1, sizeof(uint8_t), &IdleBreak_MessageQueue_attributes);
+
+  /* creation of Stop_MessageQueue */
+  Stop_MessageQueueHandle = osMessageQueueNew (1, sizeof(uint8_t), &Stop_MessageQueue_attributes);
 
   /* USER CODE BEGIN RTOS_QUEUES */
   /* add queues, ... */
@@ -274,6 +310,8 @@ void MX_FREERTOS_Init(void) {
   HeartDataTaskHandle = osThreadNew(HeartDataRenewTask, NULL, &HeartDataTask_attributes);
 
   /* USER CODE BEGIN RTOS_THREADS */
+  osThreadNew(IdleEnterTask,NULL,NULL);
+  osThreadNew(StopEnterTask,NULL,NULL);
   /* add threads, ... */
   /* USER CODE END RTOS_THREADS */
 

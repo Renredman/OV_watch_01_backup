@@ -6,6 +6,7 @@
 #include "FreeRTOS.h"
 #include "Types/PageType.h"
 #include "gui_guider.h"
+#include "main.h"
 
 // extern bool scr1_del;
 char text_buf[10];
@@ -13,6 +14,9 @@ int key_state = 0;
 void StartKeyTask(void *argument) {
     for (;;) {
         if (Key1_Scan() == 1) {
+            uint8_t break_msg = 0;
+            osMessageQueuePut(IdleBreak_MessageQueueHandle, &break_msg, 0, osPriorityRealtime);
+
             lv_obj_t *current_scr = lv_scr_act();
             PageMessage *msg = pvPortMalloc(sizeof(PageMessage));
 

@@ -63,6 +63,7 @@ add_executable(${CMAKE_PROJECT_NAME}
         BSP/EM7028/em70x8.c
         BSP/EM7028/HrAlgorythm.c
         BSP/EM7028/user_Queue.c
+        BSP/POWER/power.c
         LVGL_porting/lv_port_disp.c
         LVGL_porting/lv_port_indev.c
         LVGL_porting/lv_port_indev.h
@@ -275,6 +276,8 @@ add_executable(${CMAKE_PROJECT_NAME}
         LVGL/myGUI/generated/setup_scr_story.c
         Core/APP/Tasks/AppState.c
         Core/APP/Tasks/AppState.h
+        Core/APP/Tasks/user_PowerManager.c
+        Core/APP/Tasks/user_PowerManager.h
 )
 
 # Add STM32CubeMX generated sources

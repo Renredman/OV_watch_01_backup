@@ -1,11 +1,14 @@
 #include <stdio.h>
 #include "lvgl.h"
 #include "custom.h"
+
+#include "cmsis_os2.h"
 #include "gui_guider.h"  // 包含UI结构体定义
+#include "main.h"
 #include "Tasks/AppState.h"
 #include "Tasks/TimeUpdateTask.h"
 #include "Tasks/SensorDataTask.h"
-
+#include "Tasks/user_PowerManager.h"
 
 // 声明自动生成的计算器屏幕初始化函数（必须添加，否则链接失败）
 extern void setup_scr_calculator(lv_ui *ui);

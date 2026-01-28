@@ -86,7 +86,7 @@ void AppState_SyncToScr1(lv_ui *ui)
     }
 
     lv_slider_set_value(ui->scr1_slider_1, g_app_state.scr1_slider_value, LV_ANIM_OFF);
-}
+} 
 
 // 【实现】同步 settings
 void AppState_SyncToSettings(lv_ui *ui)
