@@ -49,6 +49,7 @@
 #include "gui_guider.h"           // Gui Guider 生成的界面和控件的声明
 #include "events_init.h"          // Gui Guider 生成的初始化事件、回调函数
 #include "custom.h"
+#include "Tasks/AppState.h"
 lv_ui  guider_ui;                     // 声明 界面对象
 
 
@@ -180,6 +181,7 @@ int main(void)
 
   // 在 main() 中初始化
 
+  Appstate_Init();
   lv_init();
   lv_port_disp_init();
   lv_port_indev_init();

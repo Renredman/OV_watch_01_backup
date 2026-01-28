@@ -272,6 +272,9 @@ add_executable(${CMAKE_PROJECT_NAME}
         LVGL/myGUI/generated/setup_scr_heart.c
         LVGL/myGUI/generated/setup_scr_game.c
         LVGL/myGUI/generated/setup_scr_game_2048.c
+        LVGL/myGUI/generated/setup_scr_story.c
+        Core/APP/Tasks/AppState.c
+        Core/APP/Tasks/AppState.h
 )
 
 # Add STM32CubeMX generated sources

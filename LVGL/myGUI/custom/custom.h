@@ -17,6 +17,7 @@ extern "C" {
 
 void custom_init(lv_ui *ui);
 void scr1_screen_loaded_event_handler(lv_event_t *e);
+void setting_screen_loaded_event_handler(lv_event_t *e);
 void environment_screen_loaded_cb(lv_event_t *e);
 #ifdef __cplusplus
 }

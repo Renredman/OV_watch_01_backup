@@ -32,6 +32,13 @@ typedef enum {
     HR_CMD_START
 } hr_command_t;
 
+typedef struct {
+    bool WiFI_state;
+    uint8_t Bluetooth_state;
+    bool Light_value;
+    bool wrist_state;
+}CommonMessage;
+
 // extern  uint16_t heart;
 // extern uint16_t raw_ppg;
 // extern uint32_t current_time;

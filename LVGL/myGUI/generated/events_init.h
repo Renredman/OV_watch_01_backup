@@ -31,6 +31,8 @@ void events_init_about_watch(lv_ui *ui);
 void events_init_heart(lv_ui *ui);
 void events_init_game(lv_ui *ui);
 void events_init_game_2048(lv_ui *ui);
+void events_init_settings(lv_ui *ui);
+void events_init_story(lv_ui *ui);
 
 void heart_update_callback_from_data_task(HeartMessage *msg);
 #ifdef __cplusplus

@@ -5,6 +5,7 @@
 #include "stdio.h"
 #include "main.h"
 #include "events_init.h"
+#include "lcd_init.h"
 
 static osStatus_t queue_status;
 extern lv_ui  guider_ui;
@@ -30,7 +31,6 @@ static void environment_update_callback(void *data) {
        }
         vPortFree(envir_data);
     }
-
 }
 
 static void heart_update_callback(void *data) {
@@ -42,6 +42,45 @@ static void heart_update_callback(void *data) {
     }
 
 }
+
+/*
+        lv_obj_t * sw = guider_ui.settings_sw_1;
+        if (lv_obj_has_state(sw, LV_STATE_CHECKED)) {
+            lv_obj_clear_state(sw, LV_STATE_CHECKED);
+        } else {
+            lv_obj_add_state(sw, LV_STATE_CHECKED);
+        }
+        */
+// static void common_data_update_callback(void *data) {
+//     CommonMessage *msg = (CommonMessage*)data;
+//     if (msg != NULL) {
+//         if (lv_scr_act() == guider_ui.scr1) {
+//             lv_slider_set_value(guider_ui.scr1_slider_1, msg->Light_value, LV_ANIM_OFF);
+//             LCD_Set_Light(msg->Light_value);
+//             if (msg->WiFI_state) {
+//                 lv_obj_add_state(guider_ui.scr1_btn_4, LV_STATE_CHECKED);
+//             }
+//             else {
+//                 lv_obj_clear_state(guider_ui.scr1_btn_4, LV_STATE_CHECKED);
+//             }
+//             if (msg->Bluetooth_state) {
+//                 lv_obj_add_state(guider_ui.scr1_btn_2, LV_STATE_CHECKED);
+//             }
+//             else {
+//                 lv_obj_clear_state(guider_ui.scr1_btn_2, LV_STATE_CHECKED);
+//             }
+//         }
+//         else if(lv_scr_act() == guider_ui.settings) {
+//             if (msg->wrist_state) {
+//                 lv_obj_add_state(guider_ui.settings_sw_1, LV_STATE_CHECKED);
+//             }
+//             else {
+//                 lv_obj_clear_state(guider_ui.settings_sw_1, LV_STATE_CHECKED);
+//             }
+//         }
+//     }
+// }
+
 
 void SensorDataUpdateTask(void *argument) {
     for (;;) {
@@ -64,6 +103,14 @@ void SensorDataUpdateTask(void *argument) {
             }
             // vPortFree(heart_msg);
         }
+
+        // CommonMessage *com_msg = NULL;
+        // if (osMessageQueueGet(CommonQueueHandle, &com_msg ,NULL,10)==osOK) {
+        //     if (com_msg != NULL) {
+        //         lv_async_call(common_data_update_callback,com_msg);
+        //     }
+        // }
+
         osDelay(1);// 防止任务在无消息时空转，降低CPU占用
     }
 }

@@ -45,6 +45,7 @@ extern osMessageQueueId_t PageQueueHandle;
 extern osMessageQueueId_t EnvirQueueHandle;
 extern osMessageQueueId_t HeartQueueHandle;
 extern osMessageQueueId_t HrCmdQueueHandle;
+extern osMessageQueueId_t CommonQueueHandle;
 
 extern uint8_t Sensor_LSM303_Erro;
 extern uint8_t Sensor_AHT21_Erro;

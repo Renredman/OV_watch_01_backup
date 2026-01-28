@@ -87,6 +87,8 @@ void init_scr_del_flag(lv_ui *ui)
     ui->heart_del = true;
     ui->game_del = true;
     ui->game_2048_del = true;
+    ui->settings_del = true;
+    ui->story_del = true;
 }
 
 void setup_ui(lv_ui *ui)

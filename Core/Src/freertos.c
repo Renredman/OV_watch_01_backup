@@ -139,6 +139,11 @@ osMessageQueueId_t HrCmdQueueHandle;
 const osMessageQueueAttr_t HrCmdQueue_attributes = {
   .name = "HrCmdQueue"
 };
+/* Definitions for CommonQueue */
+osMessageQueueId_t CommonQueueHandle;
+const osMessageQueueAttr_t CommonQueue_attributes = {
+  .name = "CommonQueue"
+};
 
 /* Private function prototypes -----------------------------------------------*/
 /* USER CODE BEGIN FunctionPrototypes */
@@ -235,6 +240,9 @@ void MX_FREERTOS_Init(void) {
 
   /* creation of HrCmdQueue */
   HrCmdQueueHandle = osMessageQueueNew (16, sizeof(hr_command_t), &HrCmdQueue_attributes);
+
+  /* creation of CommonQueue */
+  CommonQueueHandle = osMessageQueueNew (16, sizeof(CommonMessage*), &CommonQueue_attributes);
 
   /* USER CODE BEGIN RTOS_QUEUES */
   /* add queues, ... */

@@ -13,7 +13,10 @@
 
 #include "custom.h"
 #include "lvgl.h"
+#include "lcd_init.h"
+#include "FreeRTOS.h"
 #include "Tasks/SensorDataTask.h"
+#include "Tasks/AppState.h"
 
 static  bool g_is_measuring = false;
 
@@ -227,12 +230,29 @@ static void scr1_event_handler (lv_event_t *e)
     }
 }
 
+static void scr1_slider_1_event_handler(lv_event_t *e) {
+    lv_event_code_t code = lv_event_get_code(e);
+
+    switch (code) {
+        case LV_EVENT_VALUE_CHANGED: {
+            lv_obj_t *slider = lv_event_get_target(e);
+            uint8_t new_value = (uint8_t)lv_slider_get_value(slider);
+            g_app_state.scr1_slider_value = new_value;
+
+            LCD_Set_Light(new_value);
+        }
+        default:
+            break;
+    }
+}
+
 static void scr1_btn_1_event_handler (lv_event_t *e)
 {
     lv_event_code_t code = lv_event_get_code(e);
     switch (code) {
     case LV_EVENT_CLICKED:
     {
+        ui_load_scr_animation(&guider_ui, &guider_ui.settings, guider_ui.settings_del, &guider_ui.scr1_del, setup_scr_settings, LV_SCR_LOAD_ANIM_NONE, 200, 0, true, true);
         break;
     }
     default:
@@ -240,11 +260,44 @@ static void scr1_btn_1_event_handler (lv_event_t *e)
     }
 }
 
+static void scr1_btn_2_event_handler (lv_event_t *e)
+{
+    lv_event_code_t code = lv_event_get_code(e);
+    switch (code) {
+        case LV_EVENT_VALUE_CHANGED:
+        {
+            bool is_checked = lv_obj_has_state(lv_event_get_target(e),LV_STATE_CHECKED);
+            g_app_state.scr1_btn_2_checked = is_checked;
+            break;
+        }
+        default:
+            break;
+    }
+}
+
+static void scr1_btn_4_event_handler (lv_event_t *e)
+{
+    lv_event_code_t code = lv_event_get_code(e);
+    switch (code) {
+        case LV_EVENT_VALUE_CHANGED:
+        {
+            bool is_checked = lv_obj_has_state(lv_event_get_target(e),LV_STATE_CHECKED);
+            g_app_state.scr1_btn_4_checked = is_checked;
+            break;
+        }
+        default:
+            break;
+    }
+}
+
 void events_init_scr1 (lv_ui *ui)
 {
     lv_obj_add_event_cb(ui->scr1, scr1_event_handler, LV_EVENT_ALL, ui);
+    lv_obj_add_event_cb(ui->scr1_slider_1, scr1_slider_1_event_handler, LV_EVENT_ALL, ui);
     lv_obj_add_event_cb(ui->scr1_btn_1, scr1_btn_1_event_handler, LV_EVENT_ALL, ui);
-    lv_obj_add_event_cb(ui->scr1,scr1_screen_loaded_event_handler, LV_EVENT_SCREEN_LOADED,NULL);
+    lv_obj_add_event_cb(ui->scr1_btn_2, scr1_btn_2_event_handler, LV_EVENT_ALL, ui);
+    lv_obj_add_event_cb(ui->scr1_btn_4, scr1_btn_4_event_handler, LV_EVENT_ALL, ui);
+    lv_obj_add_event_cb(ui->scr1,scr1_screen_loaded_event_handler, LV_EVENT_SCREEN_LOADED,ui);
 }
 
 static void menu_event_handler (lv_event_t *e)
@@ -750,6 +803,20 @@ static void menu2_btn_10_event_handler (lv_event_t *e)
     }
 }
 
+static void menu2_btn_11_event_handler (lv_event_t *e)
+{
+    lv_event_code_t code = lv_event_get_code(e);
+    switch (code) {
+        case LV_EVENT_CLICKED:
+        {
+            ui_load_scr_animation(&guider_ui, &guider_ui.settings, guider_ui.settings_del, &guider_ui.menu2_del, setup_scr_settings, LV_SCR_LOAD_ANIM_NONE, 200, 0, true, true);
+            break;
+        }
+        default:
+            break;
+    }
+}
+
 static void menu2_btn_12_event_handler (lv_event_t *e)
 {
     lv_event_code_t code = lv_event_get_code(e);
@@ -774,6 +841,7 @@ void events_init_menu2 (lv_ui *ui)
     lv_obj_add_event_cb(ui->menu2_btn_6, menu2_btn_6_event_handler, LV_EVENT_ALL, ui);
     lv_obj_add_event_cb(ui->menu2_btn_8, menu2_btn_8_event_handler, LV_EVENT_ALL, ui);
     lv_obj_add_event_cb(ui->menu2_btn_10, menu2_btn_10_event_handler, LV_EVENT_ALL, ui);
+    lv_obj_add_event_cb(ui->menu2_btn_11, menu2_btn_11_event_handler, LV_EVENT_ALL, ui);
     lv_obj_add_event_cb(ui->menu2_btn_12, menu2_btn_12_event_handler, LV_EVENT_ALL, ui);
 }
 
@@ -931,6 +999,20 @@ static void game_event_handler (lv_event_t *e)
     }
 }
 
+static void game_btn_4_event_handler (lv_event_t *e)
+{
+    lv_event_code_t code = lv_event_get_code(e);
+    switch (code) {
+        case LV_EVENT_CLICKED:
+        {
+            ui_load_scr_animation(&guider_ui, &guider_ui.story, guider_ui.story_del, &guider_ui.game_del, setup_scr_story, LV_SCR_LOAD_ANIM_NONE, 200, 50, true, true);
+            break;
+        }
+        default:
+            break;
+    }
+}
+
 static void game_btn_1_event_handler (lv_event_t *e)
 {
     lv_event_code_t code = lv_event_get_code(e);
@@ -948,6 +1030,7 @@ static void game_btn_1_event_handler (lv_event_t *e)
 void events_init_game (lv_ui *ui)
 {
     lv_obj_add_event_cb(ui->game, game_event_handler, LV_EVENT_ALL, ui);
+    lv_obj_add_event_cb(ui->game_btn_4, game_btn_4_event_handler, LV_EVENT_ALL, ui);
     lv_obj_add_event_cb(ui->game_btn_1, game_btn_1_event_handler, LV_EVENT_ALL, ui);
 }
 
@@ -997,6 +1080,112 @@ void events_init_game_2048 (lv_ui *ui)
 {
     lv_obj_add_event_cb(ui->game_2048, game_2048_event_handler, LV_EVENT_ALL, ui);
 }
+
+static void settings_event_handler (lv_event_t *e)
+{
+    lv_event_code_t code = lv_event_get_code(e);
+    switch (code) {
+        case LV_EVENT_GESTURE:
+        {
+            lv_dir_t dir = lv_indev_get_gesture_dir(lv_indev_get_act());
+            switch(dir) {
+                case LV_DIR_RIGHT:
+                {
+                    lv_indev_wait_release(lv_indev_get_act());
+                    ui_load_scr_animation(&guider_ui, &guider_ui.menu2, guider_ui.menu2_del, &guider_ui.settings_del, setup_scr_menu2, LV_SCR_LOAD_ANIM_OVER_RIGHT, 50, 10, true, true);
+                    break;
+                }
+                default:
+                    break;
+            }
+            break;
+        }
+        default:
+            break;
+    }
+}
+
+static void settings_sw_1_event_handler (lv_event_t *e) {
+    lv_event_code_t code = lv_event_get_code(e);
+    switch (code) {
+        case LV_EVENT_VALUE_CHANGED: {
+            bool is_on = lv_obj_has_state(lv_event_get_target(e),LV_STATE_CHECKED);
+            g_app_state.settings_sw_1_state = is_on;
+            break;
+        }
+        default:
+            break;
+    }
+
+}
+
+static void settings_btn_4_event_handler (lv_event_t *e)
+{
+    lv_event_code_t code = lv_event_get_code(e);
+    switch (code) {
+        case LV_EVENT_CLICKED:
+        {
+            lv_ui *ui = (lv_ui *)lv_event_get_user_data(e);
+            if (ui == NULL) {
+                return;
+            }
+            lv_obj_t * sw = ui->settings_sw_1;
+
+            bool is_currently_on = lv_obj_has_state(sw, LV_STATE_CHECKED);
+            // bool new_state = !is_currently_on;
+
+            if (is_currently_on) {
+                lv_obj_clear_state(sw, LV_STATE_CHECKED);
+            } else {
+                lv_obj_add_state(sw, LV_STATE_CHECKED);
+            }
+            // g_app_state.settings_sw_1_state = !is_currently_on;
+            //
+            lv_event_send(sw,LV_EVENT_VALUE_CHANGED,NULL);
+            break;
+        }
+        default:
+            break;
+    }
+}
+
+void events_init_settings (lv_ui *ui)
+{
+    lv_obj_add_event_cb(ui->settings, settings_event_handler, LV_EVENT_ALL, ui);
+    lv_obj_add_event_cb(ui->settings_sw_1, settings_sw_1_event_handler, LV_EVENT_VALUE_CHANGED, ui);
+    lv_obj_add_event_cb(ui->settings_btn_4, settings_btn_4_event_handler, LV_EVENT_CLICKED, ui);
+    lv_obj_add_event_cb(ui->settings,setting_screen_loaded_event_handler, LV_EVENT_SCREEN_LOADED,ui);
+}
+
+static void story_event_handler (lv_event_t *e)
+{
+    lv_event_code_t code = lv_event_get_code(e);
+    switch (code) {
+        case LV_EVENT_GESTURE:
+        {
+            lv_dir_t dir = lv_indev_get_gesture_dir(lv_indev_get_act());
+            switch(dir) {
+                case LV_DIR_RIGHT:
+                {
+                    lv_indev_wait_release(lv_indev_get_act());
+                    ui_load_scr_animation(&guider_ui, &guider_ui.game, guider_ui.game_del, &guider_ui.story_del, setup_scr_game, LV_SCR_LOAD_ANIM_OVER_RIGHT, 50, 10, true, true);
+                    break;
+                }
+                default:
+                    break;
+            }
+            break;
+        }
+        default:
+            break;
+    }
+}
+
+void events_init_story (lv_ui *ui)
+{
+    lv_obj_add_event_cb(ui->story, story_event_handler, LV_EVENT_ALL, ui);
+}
+
 
 void events_init(lv_ui *ui)
 {
