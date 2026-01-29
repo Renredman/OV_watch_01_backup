@@ -14,6 +14,7 @@ int key_state = 0;
 void StartKeyTask(void *argument) {
     for (;;) {
         if (Key1_Scan() == 1) {
+
             uint8_t break_msg = 0;
             osMessageQueuePut(IdleBreak_MessageQueueHandle, &break_msg, 0, osPriorityRealtime);
 

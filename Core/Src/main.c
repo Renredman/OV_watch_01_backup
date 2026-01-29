@@ -42,6 +42,7 @@
 #include "CST816.h"
 #include "iic_hal.h"
 #include "key.h"
+#include "KT6328.h"
 
 #include "lvgl.h"
 #include "lv_port_disp.h"
@@ -73,7 +74,22 @@ lv_ui  guider_ui;                     // 声明 界面对象
 /* Private variables ---------------------------------------------------------*/
 
 /* USER CODE BEGIN PV */
+#define BLUETOOTH_RX_BUFFER_SIZE 256
+uint8_t bluetooth_rx_buffer[BLUETOOTH_RX_BUFFER_SIZE];
 
+void HAL_UART_RxIdleCpltCallback(UART_HandleTypeDef *huart)
+{
+    if (huart->Instance == USART1) {
+        // 1. 计算接收到的数据长度
+        uint32_t data_length = BLUETOOTH_RX_BUFFER_SIZE - __HAL_DMA_GET_COUNTER(huart->hdmarx);
+
+        // 2. 【核心逻辑】将收到的数据原样发回去
+        HAL_UART_Transmit(&huart1, bluetooth_rx_buffer, data_length, HAL_MAX_DELAY);
+
+        // 3. 重新启动 DMA 接收，准备下一次数据
+        HAL_UART_DMAResume(&huart1);
+    }
+}
 /* USER CODE END PV */
 
 /* Private function prototypes -----------------------------------------------*/
@@ -102,6 +118,7 @@ uint8_t Sensor_AHT21_Erro=1;
 uint8_t Sensor_SPL_Erro=1;
 uint8_t Sensor_EM_Erro=1;
 uint8_t Sensor_MPU_Erro=1;
+
 /* USER CODE END 0 */
 
 /**
@@ -140,14 +157,19 @@ int main(void)
   MX_TIM3_Init();
   MX_USART1_UART_Init();
   /* USER CODE BEGIN 2 */
-  if(HAL_RTCEx_SetWakeUpTimer_IT(&hrtc, 2000, RTC_WAKEUPCLOCK_RTCCLK_DIV16) != HAL_OK)
-  {
-    Error_Handler();
-  }
+  // if(HAL_RTCEx_SetWakeUpTimer_IT(&hrtc, 2000, RTC_WAKEUPCLOCK_RTCCLK_DIV16) != HAL_OK)
+  // {
+  //   Error_Handler();
+  // }
   delay_init();
   delay_ms(1000);
 
   HAL_TIM_PWM_Start(&htim3,TIM_CHANNEL_3);
+
+  KT6328_GPIO_Init();
+  KT6328_Enable();
+
+  HAL_UART_Receive_DMA(&huart1, bluetooth_rx_buffer, BLUETOOTH_RX_BUFFER_SIZE);
 
   //touch
   CST816_GPIO_Init();
@@ -170,7 +192,6 @@ int main(void)
   if(!Sensor_EM_Erro)
     EM7028_hrs_DisEnable();
 
-
   LCD_Init();
   LCD_Fill(0,0,LCD_W,LCD_H,BLACK);
   delay_ms(10);
@@ -178,7 +199,6 @@ int main(void)
   LCD_ShowString(72,LCD_H/2,(uint8_t*)"Welcome!",WHITE,BLACK,24,0);
   LCD_ShowString(42,LCD_H/2+48,(uint8_t*)"OV-Watch V1.0",WHITE,BLACK,24,0);
   HAL_Delay(1000);
-
   // 在 main() 中初始化
 
   Appstate_Init();

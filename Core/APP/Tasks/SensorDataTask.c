@@ -87,7 +87,6 @@ void trigger_immediate_envir_update(void) {
             if (envir_msg!=NULL) {
                 envir_msg->humidity=humidity;
                 envir_msg->temperature=temperature;
-
                 if (osMessageQueuePut(EnvirQueueHandle,&envir_msg,0,0)!= osOK) {
                     vPortFree(envir_msg);
                 }

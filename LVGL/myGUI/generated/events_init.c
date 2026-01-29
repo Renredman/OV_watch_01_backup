@@ -14,6 +14,7 @@
 #include "custom.h"
 #include "lvgl.h"
 #include "lcd_init.h"
+#include "KT6328.h"
 #include "FreeRTOS.h"
 #include "Tasks/SensorDataTask.h"
 #include "Tasks/AppState.h"
@@ -268,6 +269,12 @@ static void scr1_btn_2_event_handler (lv_event_t *e)
         {
             bool is_checked = lv_obj_has_state(lv_event_get_target(e),LV_STATE_CHECKED);
             g_app_state.scr1_btn_2_checked = is_checked;
+            // if (is_checked) {
+            //     // KT6328_Enable();
+            // }
+            // else {
+            //     KT6328_Disable();
+            // }
             break;
         }
         default:

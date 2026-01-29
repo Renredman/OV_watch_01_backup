@@ -11,8 +11,8 @@ void delay_us(u32 nus)
 	for(i=0;i<temp;i++);
 }
 
-//延时nms
-//nms:要延时的ms数
+//???nms
+//nms:??????ms??
 void delay_ms(u16 nms)
 {
 	u32 i;
@@ -41,7 +41,7 @@ void delay_us(u32 nus)
 		tnow=SysTick->VAL;	
 		if(tnow!=told)
 		{	    
-			if(tnow<told)tcnt+=told-tnow;//这里注意一下SYSTICK是一个递减的计数器就可以了.	
+			if(tnow<told)tcnt+=told-tnow;//??????????SYSTICK??????????????????????.	
 			else tcnt+=reload-tnow+told;	    
 			told=tnow;
 			if(tcnt>=ticks)break;			

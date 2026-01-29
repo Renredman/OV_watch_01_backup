@@ -57,6 +57,7 @@ add_executable(${CMAKE_PROJECT_NAME}
         BSP/LCD/lcd_init.c
         BSP/LCD/pic.h
         BSP/KEY/key.c
+        BSP/KT6328/KT6328.c
         BSP/OWDG/WDOG.c
         BSP/AHT21/AHT21.c
         BSP/IIC/iic_hal.c

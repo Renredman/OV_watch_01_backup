@@ -13,8 +13,8 @@
 #include "gpio.h"
 
 uint16_t IdleTimerCount = 0;
-uint8_t ui_LTimeValue = 3;//10;
-uint8_t ui_TTimeValue = 5;//15;
+uint8_t ui_LTimeValue = 10;
+uint8_t ui_TTimeValue = 15;
 static volatile uint8_t g_exit_low_power = 0;
 
 
@@ -23,50 +23,6 @@ void HAL_RTC_AlarmAEventCallback(RTC_HandleTypeDef *hrtc)
     // 在这里不做任何事，只是让 WFI 指令退出
     // 实际的按键检查在主循环中进行
 }
-// user_PowerManager.c
-
-// 【修正】终极低功耗 GPIO 配置函数
-// 【修正】终极低功耗 GPIO 配置函数
-// user_PowerManager.c
-
-// 【终极简化版】低功耗准备函数
-// user_PowerManager.c
-
-static void Enter_LowPower_GPIO_Config(void)
-{
-    GPIO_InitTypeDef GPIO_InitStruct = {0};
-    __HAL_RCC_GPIOA_CLK_ENABLE();
-    __HAL_RCC_GPIOB_CLK_ENABLE();
-    __HAL_RCC_GPIOC_CLK_ENABLE();
-    __HAL_RCC_GPIOD_CLK_ENABLE();
-    __HAL_RCC_GPIOE_CLK_ENABLE();
-    __HAL_RCC_GPIOH_CLK_ENABLE();
-
-    GPIO_InitStruct.Mode = GPIO_MODE_ANALOG;
-    GPIO_InitStruct.Pull = GPIO_NOPULL;
-    GPIO_InitStruct.Pin = GPIO_PIN_All;
-    HAL_GPIO_Init(GPIOA, &GPIO_InitStruct);
-    HAL_GPIO_Init(GPIOB, &GPIO_InitStruct);
-    HAL_GPIO_Init(GPIOC, &GPIO_InitStruct);
-    HAL_GPIO_Init(GPIOD, &GPIO_InitStruct);
-    HAL_GPIO_Init(GPIOE, &GPIO_InitStruct);
-    HAL_GPIO_Init(GPIOH, &GPIO_InitStruct);
-
-    // 重新配置 KEY1 (PA5)
-    GPIO_InitStruct.Pin = GPIO_PIN_5;
-    GPIO_InitStruct.Mode = GPIO_MODE_INPUT;
-    GPIO_InitStruct.Pull = GPIO_PULLUP;
-    HAL_GPIO_Init(GPIOA, &GPIO_InitStruct);
-
-    // 配置 CST816_RST (PB0)
-    GPIO_InitStruct.Pin = GPIO_PIN_0;
-    GPIO_InitStruct.Mode = GPIO_MODE_OUTPUT_PP;
-    GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_LOW;
-    HAL_GPIO_Init(GPIOB, &GPIO_InitStruct);
-    HAL_GPIO_WritePin(GPIOB, GPIO_PIN_0, GPIO_PIN_RESET);
-}
-
-// user_PowerManager.c
 
 void StopEnterTask(void *argument)
 {
@@ -114,6 +70,10 @@ void StopEnterTask(void *argument)
             LCD_Init();
             LCD_Set_Light(g_app_state.scr1_slider_value);
             CST816_Wakeup(); // 让 CST816 自己完成唤醒
+
+            HAL_RTCEx_DeactivateWakeUpTimer(&hrtc);
+            HAL_RTCEx_SetWakeUpTimer_IT(&hrtc,2000,RTC_WAKEUPCLOCK_RTCCLK_DIV16);
+
             WDOG_Enable();
             WDOG_Feed();
             IdleTimerCount = 0;

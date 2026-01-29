@@ -10,7 +10,7 @@ void AppState_SyncToUI(lv_ui *ui);
 AppState g_app_state = {0};
 
 void Appstate_Init(void) {
-    g_app_state.scr1_btn_2_checked = false;
+    g_app_state.scr1_btn_2_checked = true;
     g_app_state.scr1_btn_4_checked = false;
     g_app_state.scr1_slider_value = 50;
     g_app_state.settings_sw_1_state = false;
@@ -43,7 +43,7 @@ void AppState_SyncToUI(lv_ui *ui) {
             lv_obj_add_state(ui->scr1_btn_2,LV_STATE_CHECKED);
         }
         else {
-            lv_obj_clear_state(ui->scr1_btn_4,LV_STATE_CHECKED);
+            lv_obj_clear_state(ui->scr1_btn_2,LV_STATE_CHECKED);
         }
 
         if (g_app_state.scr1_btn_4_checked) {
@@ -87,6 +87,7 @@ void AppState_SyncToScr1(lv_ui *ui)
 
     lv_slider_set_value(ui->scr1_slider_1, g_app_state.scr1_slider_value, LV_ANIM_OFF);
 } 
+
 
 // 【实现】同步 settings
 void AppState_SyncToSettings(lv_ui *ui)

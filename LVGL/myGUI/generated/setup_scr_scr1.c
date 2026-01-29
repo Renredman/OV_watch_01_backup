@@ -628,6 +628,8 @@ void setup_scr_scr1(lv_ui *ui)
     lv_obj_set_style_text_font(ui->scr1_btn_2, &lv_font_simsun_24, LV_PART_MAIN|LV_STATE_CHECKED);
     lv_obj_set_style_text_opa(ui->scr1_btn_2, 255, LV_PART_MAIN|LV_STATE_CHECKED);
 
+    lv_obj_add_state(ui->scr1_btn_2, LV_STATE_CHECKED);
+
     //Write codes scr1_btn_1
     ui->scr1_btn_1 = lv_btn_create(ui->scr1_cont_1);
     lv_obj_add_flag(ui->scr1_btn_1, LV_OBJ_FLAG_CHECKABLE);
