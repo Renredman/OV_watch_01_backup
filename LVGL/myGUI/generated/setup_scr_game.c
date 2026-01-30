@@ -212,6 +212,52 @@ void setup_scr_game(lv_ui *ui)
     lv_obj_set_style_pad_left(ui->game_label_4, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
     lv_obj_set_style_shadow_width(ui->game_label_4, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
 
+    //Write codes game_btn_5
+    ui->game_btn_5 = lv_btn_create(ui->game);
+    ui->game_btn_5_label = lv_label_create(ui->game_btn_5);
+    lv_label_set_text(ui->game_btn_5_label, "chat");
+    lv_label_set_long_mode(ui->game_btn_5_label, LV_LABEL_LONG_WRAP);
+    lv_obj_align(ui->game_btn_5_label, LV_ALIGN_CENTER, 0, 0);
+    lv_obj_set_style_pad_all(ui->game_btn_5, 0, LV_STATE_DEFAULT);
+    lv_obj_set_width(ui->game_btn_5_label, LV_PCT(100));
+    lv_obj_set_pos(ui->game_btn_5, 0, 200);
+    lv_obj_set_size(ui->game_btn_5, 240, 50);
+
+    //Write style for game_btn_5, Part: LV_PART_MAIN, State: LV_STATE_DEFAULT.
+    lv_obj_set_style_bg_opa(ui->game_btn_5, 255, LV_PART_MAIN|LV_STATE_DEFAULT);
+    lv_obj_set_style_bg_color(ui->game_btn_5, lv_color_hex(0xffffff), LV_PART_MAIN|LV_STATE_DEFAULT);
+    lv_obj_set_style_bg_grad_dir(ui->game_btn_5, LV_GRAD_DIR_NONE, LV_PART_MAIN|LV_STATE_DEFAULT);
+    lv_obj_set_style_border_width(ui->game_btn_5, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
+    lv_obj_set_style_radius(ui->game_btn_5, 5, LV_PART_MAIN|LV_STATE_DEFAULT);
+    lv_obj_set_style_shadow_width(ui->game_btn_5, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
+    lv_obj_set_style_text_color(ui->game_btn_5, lv_color_hex(0x000000), LV_PART_MAIN|LV_STATE_DEFAULT);
+    lv_obj_set_style_text_font(ui->game_btn_5, &lv_font_simsun_18, LV_PART_MAIN|LV_STATE_DEFAULT);
+    lv_obj_set_style_text_opa(ui->game_btn_5, 255, LV_PART_MAIN|LV_STATE_DEFAULT);
+    lv_obj_set_style_text_align(ui->game_btn_5, LV_TEXT_ALIGN_CENTER, LV_PART_MAIN|LV_STATE_DEFAULT);
+
+    //Write codes game_label_5
+    ui->game_label_5 = lv_label_create(ui->game);
+    lv_label_set_text(ui->game_label_5, "");
+    lv_label_set_long_mode(ui->game_label_5, LV_LABEL_LONG_WRAP);
+    lv_obj_set_pos(ui->game_label_5, 10, 209);
+    lv_obj_set_size(ui->game_label_5, 34, 30);
+
+    //Write style for game_label_5, Part: LV_PART_MAIN, State: LV_STATE_DEFAULT.
+    lv_obj_set_style_border_width(ui->game_label_5, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
+    lv_obj_set_style_radius(ui->game_label_5, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
+    lv_obj_set_style_text_color(ui->game_label_5, lv_color_hex(0x000000), LV_PART_MAIN|LV_STATE_DEFAULT);
+    lv_obj_set_style_text_font(ui->game_label_5, &lv_font_icomoon_32, LV_PART_MAIN|LV_STATE_DEFAULT);
+    lv_obj_set_style_text_opa(ui->game_label_5, 255, LV_PART_MAIN|LV_STATE_DEFAULT);
+    lv_obj_set_style_text_letter_space(ui->game_label_5, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
+    lv_obj_set_style_text_line_space(ui->game_label_5, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
+    lv_obj_set_style_text_align(ui->game_label_5, LV_TEXT_ALIGN_CENTER, LV_PART_MAIN|LV_STATE_DEFAULT);
+    lv_obj_set_style_bg_opa(ui->game_label_5, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
+    lv_obj_set_style_pad_top(ui->game_label_5, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
+    lv_obj_set_style_pad_right(ui->game_label_5, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
+    lv_obj_set_style_pad_bottom(ui->game_label_5, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
+    lv_obj_set_style_pad_left(ui->game_label_5, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
+    lv_obj_set_style_shadow_width(ui->game_label_5, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
+
     //The custom code of game.
 
 

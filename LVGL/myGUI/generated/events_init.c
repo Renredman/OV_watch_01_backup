@@ -16,6 +16,7 @@
 #include "lcd_init.h"
 #include "KT6328.h"
 #include "FreeRTOS.h"
+#include "usart.h"
 #include "Tasks/SensorDataTask.h"
 #include "Tasks/AppState.h"
 
@@ -1034,11 +1035,26 @@ static void game_btn_1_event_handler (lv_event_t *e)
     }
 }
 
+static void game_btn_5_event_handler (lv_event_t *e)
+{
+    lv_event_code_t code = lv_event_get_code(e);
+    switch (code) {
+        case LV_EVENT_CLICKED:
+        {
+            ui_load_scr_animation(&guider_ui, &guider_ui.chat, guider_ui.chat_del, &guider_ui.game_del, setup_scr_chat, LV_SCR_LOAD_ANIM_NONE, 200, 50, true, true);
+            break;
+        }
+        default:
+            break;
+    }
+}
+
 void events_init_game (lv_ui *ui)
 {
     lv_obj_add_event_cb(ui->game, game_event_handler, LV_EVENT_ALL, ui);
     lv_obj_add_event_cb(ui->game_btn_4, game_btn_4_event_handler, LV_EVENT_ALL, ui);
     lv_obj_add_event_cb(ui->game_btn_1, game_btn_1_event_handler, LV_EVENT_ALL, ui);
+    lv_obj_add_event_cb(ui->game_btn_5, game_btn_5_event_handler, LV_EVENT_ALL, ui);
 }
 
 static void game_2048_event_handler (lv_event_t *e)
@@ -1193,6 +1209,149 @@ void events_init_story (lv_ui *ui)
     lv_obj_add_event_cb(ui->story, story_event_handler, LV_EVENT_ALL, ui);
 }
 
+static void chat_event_handler (lv_event_t *e)
+{
+    lv_event_code_t code = lv_event_get_code(e);
+    switch (code) {
+        case LV_EVENT_GESTURE:
+        {
+            lv_dir_t dir = lv_indev_get_gesture_dir(lv_indev_get_act());
+            switch(dir) {
+                case LV_DIR_RIGHT:
+                {
+                    lv_indev_wait_release(lv_indev_get_act());
+                    ui_load_scr_animation(&guider_ui, &guider_ui.game, guider_ui.game_del, &guider_ui.chat_del, setup_scr_game, LV_SCR_LOAD_ANIM_OVER_RIGHT, 50, 10, true, true);
+                    break;
+                }
+                default:
+                    break;
+            }
+            break;
+        }
+        default:
+            break;
+    }
+}
+
+static void chat_screen_unload_start_handler(lv_event_t *e) {
+    // 隐藏全局键盘
+    lv_obj_add_flag(guider_ui.g_kb_top_layer, LV_OBJ_FLAG_HIDDEN);
+
+    // 解绑 textarea，防止后续操作访问野指针
+    lv_keyboard_set_textarea(guider_ui.g_kb_top_layer, NULL);
+}
+
+static void chat_ta_focused_handler(lv_event_t *e) {
+    lv_event_code_t code = lv_event_get_code(e);
+    lv_ui *ui = (lv_ui *)lv_event_get_user_data(e);
+
+    if (code == LV_EVENT_FOCUSED) {
+        // 键盘即将弹出：缩小聊天窗口，移动输入框和按钮
+        lv_obj_set_height(ui->chat_win_1, 97);
+        lv_obj_set_y(ui->chat_ta_1, 97);
+        lv_obj_set_y(ui->chat_btn_1, 97);
+        // 可选：确保键盘可见（如果未自动弹出）
+#if LV_USE_KEYBOARD
+        lv_keyboard_set_textarea(guider_ui.g_kb_top_layer, ui->chat_ta_1);
+        lv_obj_clear_flag(guider_ui.g_kb_top_layer, LV_OBJ_FLAG_HIDDEN);
+#endif
+    }
+    else if (code == LV_EVENT_DEFOCUSED) {
+        // 键盘已关闭：恢复原状
+        lv_obj_set_height(ui->chat_win_1, 240);
+        lv_obj_set_y(ui->chat_ta_1, 240);
+        lv_obj_set_y(ui->chat_btn_1, 240);
+        // 隐藏键盘（安全起见）
+#if LV_USE_KEYBOARD
+        lv_obj_add_flag(guider_ui.g_kb_top_layer, LV_OBJ_FLAG_HIDDEN);
+        lv_keyboard_set_textarea(guider_ui.g_kb_top_layer, NULL);
+#endif
+    }
+}
+
+#define MAX_CHAT_LINES 10
+#define MAX_LINE_LENGTH 64
+
+char chat_history[MAX_CHAT_LINES][MAX_LINE_LENGTH] = {0};
+uint8_t history_count = 0;
+
+static void chat_btn_send_handler(lv_event_t *e) {
+    lv_ui *ui = (lv_ui *)lv_event_get_user_data(e);
+    const char *input = lv_textarea_get_text(ui->chat_ta_1);
+    if (!input || strlen(input) == 0) return;
+
+    // 1. 发送蓝牙数据（非阻塞）
+    char msg[64];
+    strncpy(msg, input, sizeof(msg) - 1);
+    msg[sizeof(msg) - 1] = '\0';
+    osMessageQueuePut(BluetoothTxQueueHandle, msg, 0, 0);
+
+    // 2. 添加新消息到历史（格式："> 你好"）
+    char new_line[MAX_LINE_LENGTH];
+    snprintf(new_line, sizeof(new_line), "> %s", input);
+
+    if (history_count < MAX_CHAT_LINES) {
+        // 还有空间，直接添加
+        strcpy(chat_history[history_count], new_line);
+        history_count++;
+    } else {
+        // 已满，移除最旧的（第 0 条），其余上移
+        for (int i = 0; i < MAX_CHAT_LINES - 1; i++) {
+            strcpy(chat_history[i], chat_history[i + 1]);
+        }
+        strcpy(chat_history[MAX_CHAT_LINES - 1], new_line);
+    }
+
+    // 3. 拼接所有消息（用 \n 分隔）
+    static char full_text[1024] = {0}; // 10*64 + 10 个换行符 ≈ 650 字节
+    full_text[0] = '\0';
+    for (int i = 0; i < history_count; i++) {
+        strcat(full_text, chat_history[i]);
+        strcat(full_text, "\n");
+    }
+
+    // 4. 更新 label 文本
+    lv_label_set_text(ui->chat_win_1_label, full_text);
+
+    // 5. 【可选】滚动到底部（LVGL v8 兼容）
+    lv_obj_t *content = lv_win_get_content(ui->chat_win_1);
+    lv_coord_t content_h = lv_obj_get_content_height(content);
+    lv_coord_t win_h = lv_obj_get_height(ui->chat_win_1);
+    lv_coord_t scroll_y = (content_h > win_h) ? (content_h - win_h) : 0;
+    lv_obj_scroll_to_y(content, scroll_y, LV_ANIM_ON);
+
+    // 6. 清空输入框
+    lv_textarea_set_text(ui->chat_ta_1, "");
+}
+
+// static void chat_btn_send_handler(lv_event_t *e) {
+//     lv_ui *ui = (lv_ui *)lv_event_get_user_data(e);
+//     const char *input = lv_textarea_get_text(ui->chat_ta_1);
+//     if (!input || strlen(input) == 0) return;
+//
+//     // 1. 发送数据
+//     char msg[64];
+//     strncpy(msg, input, sizeof(msg)-1);
+//     msg[sizeof(msg)-1] = '\0';
+//     osMessageQueuePut(BluetoothTxQueueHandle, msg, 0, 0);
+//
+//     // 2. 【关键】只显示最新消息，不拼接历史！
+//     static char display_text[128];
+//     snprintf(display_text, sizeof(display_text), "> %s", input);
+//     lv_label_set_text(ui->chat_win_1_label, display_text);
+//
+//     // 3. 清空输入框
+//     lv_textarea_set_text(ui->chat_ta_1, "");
+// }
+
+
+void events_init_chat (lv_ui *ui)
+{
+    lv_obj_add_event_cb(ui->chat, chat_event_handler, LV_EVENT_ALL, ui);
+    lv_obj_add_event_cb(ui->chat, chat_screen_unload_start_handler, LV_EVENT_SCREEN_UNLOAD_START, NULL);
+    lv_obj_add_event_cb(ui->chat_ta_1, chat_ta_focused_handler, LV_EVENT_FOCUSED | LV_EVENT_DEFOCUSED, ui);
+    lv_obj_add_event_cb(ui->chat_btn_1, chat_btn_send_handler, LV_EVENT_CLICKED, ui);
+}
 
 void events_init(lv_ui *ui)
 {

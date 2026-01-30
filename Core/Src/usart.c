@@ -21,7 +21,8 @@
 #include "usart.h"
 
 /* USER CODE BEGIN 0 */
-
+#define RX_BUFFER_SIZE 256
+uint8_t rx_buffer[RX_BUFFER_SIZE] = {0};
 /* USER CODE END 0 */
 
 UART_HandleTypeDef huart1;

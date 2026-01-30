@@ -49,7 +49,11 @@ extern osMessageQueueId_t CommonQueueHandle;
 extern osMessageQueueId_t Idle_MessageQueueHandle;
 extern osMessageQueueId_t IdleBreak_MessageQueueHandle;
 extern osMessageQueueId_t Stop_MessageQueueHandle;
+extern osMessageQueueId_t BluetoothTxQueueHandle;
+extern osMessageQueueId_t BluetoothRxQueueHandle;
 extern osTimerId_t Idle_TimerHandle;
+
+extern osThreadId_t BluetoothRxtaskHandle;
 
 extern uint8_t Sensor_LSM303_Erro;
 extern uint8_t Sensor_AHT21_Erro;

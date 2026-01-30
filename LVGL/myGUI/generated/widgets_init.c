@@ -22,14 +22,22 @@ __attribute__((unused)) void kb_event_cb (lv_event_t *e) {
     }
 }
 
-__attribute__((unused)) void ta_event_cb (lv_event_t *e) {
+extern lv_ui guider_ui;  // 声明全局 UI 变量
+
+__attribute__((unused)) void ta_event_cb(lv_event_t *e) {
     lv_event_code_t code = lv_event_get_code(e);
 #if LV_USE_KEYBOARD || LV_USE_ZH_KEYBOARD
     lv_obj_t *ta = lv_event_get_target(e);
 #endif
     lv_obj_t *kb = lv_event_get_user_data(e);
-    if (code == LV_EVENT_FOCUSED || code == LV_EVENT_CLICKED)
-    {
+
+    // 防御：确保 ta 和 kb 有效
+    if (ta == NULL || kb == NULL) return;
+
+    // 【新增】获取 chat 页面的控件引用（假设你在 chat 页面）
+    lv_ui *ui = &guider_ui;
+
+    if (code == LV_EVENT_FOCUSED || code == LV_EVENT_CLICKED) {
 #if LV_USE_ZH_KEYBOARD != 0
         lv_zh_keyboard_set_textarea(kb, ta);
 #endif
@@ -38,18 +46,28 @@ __attribute__((unused)) void ta_event_cb (lv_event_t *e) {
 #endif
         lv_obj_move_foreground(kb);
         lv_obj_clear_flag(kb, LV_OBJ_FLAG_HIDDEN);
-    }
-    if (code == LV_EVENT_CANCEL || code == LV_EVENT_DEFOCUSED)
-    {
 
+        // === 【新增】调整布局：键盘弹出时 ===
+        // lv_obj_set_height(ui->chat_win_1, 97);
+        lv_obj_set_size(ui->chat_win_1, 237, 97);
+        lv_obj_set_y(ui->chat_ta_1, 97);
+        lv_obj_set_y(ui->chat_btn_1, 97);
+    }
+    if (code == LV_EVENT_CANCEL || code == LV_EVENT_DEFOCUSED) {
 #if LV_USE_ZH_KEYBOARD != 0
-        lv_zh_keyboard_set_textarea(kb, ta);
+        lv_zh_keyboard_set_textarea(kb, NULL);  // 注意：这里应该设为 NULL！
 #endif
 #if LV_USE_KEYBOARD != 0
-        lv_keyboard_set_textarea(kb, ta);
+        lv_keyboard_set_textarea(kb, NULL);     // 同上
 #endif
         lv_obj_move_background(kb);
         lv_obj_add_flag(kb, LV_OBJ_FLAG_HIDDEN);
+
+        // === 【新增】恢复布局：键盘关闭时 ===
+        // lv_obj_set_height(ui->chat_win_1, 240);
+        lv_obj_set_size(ui->chat_win_1, 237, 240);
+        lv_obj_set_y(ui->chat_ta_1, 240);
+        lv_obj_set_y(ui->chat_btn_1, 240);
     }
 }
 

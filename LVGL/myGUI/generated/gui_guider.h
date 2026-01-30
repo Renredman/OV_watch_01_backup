@@ -179,6 +179,9 @@ typedef struct
 	lv_obj_t *game_label_2;
 	lv_obj_t *game_label_3;
 	lv_obj_t *game_label_4;
+	lv_obj_t *game_btn_5;
+	lv_obj_t *game_btn_5_label;
+	lv_obj_t *game_label_5;
 	lv_obj_t *game_2048;
 	bool game_2048_del;
 	lv_obj_t *game_2048_btn_1;
@@ -264,6 +267,14 @@ typedef struct
 	lv_obj_t *story_list_3_item7;
 	lv_obj_t *story_list_3_item8;
 	lv_obj_t *story_list_3_item9;
+	lv_obj_t *chat;
+	bool chat_del;
+	lv_obj_t *chat_ta_1;
+	lv_obj_t *chat_btn_1;
+	lv_obj_t *chat_btn_1_label;
+	lv_obj_t *chat_win_1;
+	lv_obj_t *chat_win_1_label;
+	lv_obj_t *g_kb_top_layer;
 }lv_ui;
 
 typedef void (*ui_setup_scr_t)(lv_ui * ui);
@@ -301,6 +312,7 @@ void setup_scr_game(lv_ui *ui);
 void setup_scr_game_2048(lv_ui *ui);
 void setup_scr_settings(lv_ui *ui);
 void setup_scr_story(lv_ui *ui);
+void setup_scr_chat(lv_ui *ui);
 
 LV_FONT_DECLARE(lv_font_simsun_18)
 LV_FONT_DECLARE(lv_font_simsun_24)

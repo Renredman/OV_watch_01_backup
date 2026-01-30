@@ -74,21 +74,31 @@ lv_ui  guider_ui;                     // 声明 界面对象
 /* Private variables ---------------------------------------------------------*/
 
 /* USER CODE BEGIN PV */
-#define BLUETOOTH_RX_BUFFER_SIZE 256
-uint8_t bluetooth_rx_buffer[BLUETOOTH_RX_BUFFER_SIZE];
-
-void HAL_UART_RxIdleCpltCallback(UART_HandleTypeDef *huart)
-{
-    if (huart->Instance == USART1) {
-        // 1. 计算接收到的数据长度
-        uint32_t data_length = BLUETOOTH_RX_BUFFER_SIZE - __HAL_DMA_GET_COUNTER(huart->hdmarx);
-
-        // 2. 【核心逻辑】将收到的数据原样发回去
-        HAL_UART_Transmit(&huart1, bluetooth_rx_buffer, data_length, HAL_MAX_DELAY);
-
-        // 3. 重新启动 DMA 接收，准备下一次数据
-        HAL_UART_DMAResume(&huart1);
+void HAL_UART_RxIdleCpltCallback(UART_HandleTypeDef *huart) {
+  if (huart->Instance == USART1) {
+    // 【关键】使用正确的 DMA 句柄
+    uint32_t data_length = RX_BUFFER_SIZE - __HAL_DMA_GET_COUNTER(&hdma_usart1_rx);
+    LCD_Set_Light(5);
+    if (data_length > 0 && data_length < RX_BUFFER_SIZE) {
+      // 过滤回车换行
+      for (uint32_t i = 0; i < data_length; i++) {
+        if (rx_buffer[i] == '\r' || rx_buffer[i] == '\n') {
+          rx_buffer[i] = '\0';
+          data_length = i;
+          break;
+        }
+      }
+      rx_buffer[data_length] = '\0';
+      if (data_length > 0) {
+        // ISR 安全唤醒任务
+        BaseType_t xHigherPriorityTaskWoken = pdFALSE;
+        vTaskNotifyGiveFromISR(BluetoothRxtaskHandle, &xHigherPriorityTaskWoken);
+        portYIELD_FROM_ISR(xHigherPriorityTaskWoken);
+      }
     }
+    // 重新启动 DMA
+    HAL_UARTEx_ReceiveToIdle_DMA(&huart1, rx_buffer, RX_BUFFER_SIZE);
+  }
 }
 /* USER CODE END PV */
 
@@ -157,10 +167,10 @@ int main(void)
   MX_TIM3_Init();
   MX_USART1_UART_Init();
   /* USER CODE BEGIN 2 */
-  // if(HAL_RTCEx_SetWakeUpTimer_IT(&hrtc, 2000, RTC_WAKEUPCLOCK_RTCCLK_DIV16) != HAL_OK)
-  // {
-  //   Error_Handler();
-  // }
+  if(HAL_RTCEx_SetWakeUpTimer_IT(&hrtc, 2000, RTC_WAKEUPCLOCK_RTCCLK_DIV16) != HAL_OK)
+  {
+    Error_Handler();
+  }
   delay_init();
   delay_ms(1000);
 
@@ -169,7 +179,12 @@ int main(void)
   KT6328_GPIO_Init();
   KT6328_Enable();
 
-  HAL_UART_Receive_DMA(&huart1, bluetooth_rx_buffer, BLUETOOTH_RX_BUFFER_SIZE);
+  __HAL_UART_ENABLE_IT(&huart1, UART_IT_IDLE);
+  // HAL_UARTEx_ReceiveToIdle_DMA(&huart1, rx_buffer, RX_BUFFER_SIZE);
+  if (HAL_UARTEx_ReceiveToIdle_DMA(&huart1, rx_buffer, RX_BUFFER_SIZE) != HAL_OK) {
+    // 如果这里出错，说明 DMA 或 UART 状态异常
+    Error_Handler(); // 你可以让 LED 闪烁报错
+  }
 
   //touch
   CST816_GPIO_Init();

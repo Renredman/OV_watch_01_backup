@@ -29,7 +29,10 @@ extern "C" {
 #include "main.h"
 
 /* USER CODE BEGIN Includes */
-
+extern DMA_HandleTypeDef hdma_usart1_rx;
+extern DMA_HandleTypeDef hdma_usart1_tx;
+extern uint8_t rx_buffer[];
+#define RX_BUFFER_SIZE 256
 /* USER CODE END Includes */
 
 extern UART_HandleTypeDef huart1;

@@ -14,7 +14,7 @@
 
 uint16_t IdleTimerCount = 0;
 uint8_t ui_LTimeValue = 10;
-uint8_t ui_TTimeValue = 15;
+uint8_t ui_TTimeValue = 150;
 static volatile uint8_t g_exit_low_power = 0;
 
 

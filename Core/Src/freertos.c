@@ -120,6 +120,20 @@ const osThreadAttr_t HeartDataTask_attributes = {
   .stack_size = 128 * 4,
   .priority = (osPriority_t) osPriorityLow3,
 };
+/* Definitions for BluetoothTxtask */
+osThreadId_t BluetoothTxtaskHandle;
+const osThreadAttr_t BluetoothTxtask_attributes = {
+  .name = "BluetoothTxtask",
+  .stack_size = 128 * 4,
+  .priority = (osPriority_t) osPriorityLow3,
+};
+/* Definitions for BluetoothRxtask */
+osThreadId_t BluetoothRxtaskHandle;
+const osThreadAttr_t BluetoothRxtask_attributes = {
+  .name = "BluetoothRxtask",
+  .stack_size = 128 * 4,
+  .priority = (osPriority_t) osPriorityLow1,
+};
 /* Definitions for PageQueue */
 osMessageQueueId_t PageQueueHandle;
 const osMessageQueueAttr_t PageQueue_attributes = {
@@ -160,6 +174,16 @@ osMessageQueueId_t Stop_MessageQueueHandle;
 const osMessageQueueAttr_t Stop_MessageQueue_attributes = {
   .name = "Stop_MessageQueue"
 };
+/* Definitions for BluetoothTxQueue */
+osMessageQueueId_t BluetoothTxQueueHandle;
+const osMessageQueueAttr_t BluetoothTxQueue_attributes = {
+  .name = "BluetoothTxQueue"
+};
+/* Definitions for BluetoothRxQueue */
+osMessageQueueId_t BluetoothRxQueueHandle;
+const osMessageQueueAttr_t BluetoothRxQueue_attributes = {
+  .name = "BluetoothRxQueue"
+};
 /* Definitions for Idle_Timer */
 osTimerId_t Idle_TimerHandle;
 const osTimerAttr_t Idle_Timer_attributes = {
@@ -179,6 +203,8 @@ extern void SensorDataRenewTask(void *argument);
 extern void SensorDataUpdateTask(void *argument);
 extern void TimeUpdateTask(void *argument);
 extern void HeartDataRenewTask(void *argument);
+extern void BluetoothTxTask(void *argument);
+extern void BluetoothRxTask(void *argument);
 extern void IdleTimerCallback(void *argument);
 
 void MX_FREERTOS_Init(void); /* (MISRA C 2004 rule 8.1) */
@@ -280,6 +306,12 @@ void MX_FREERTOS_Init(void) {
   /* creation of Stop_MessageQueue */
   Stop_MessageQueueHandle = osMessageQueueNew (1, sizeof(uint8_t), &Stop_MessageQueue_attributes);
 
+  /* creation of BluetoothTxQueue */
+  BluetoothTxQueueHandle = osMessageQueueNew (8, 64, &BluetoothTxQueue_attributes);
+
+  /* creation of BluetoothRxQueue */
+  BluetoothRxQueueHandle = osMessageQueueNew (8, sizeof(char*), &BluetoothRxQueue_attributes);
+
   /* USER CODE BEGIN RTOS_QUEUES */
   /* add queues, ... */
   /* USER CODE END RTOS_QUEUES */
@@ -308,6 +340,12 @@ void MX_FREERTOS_Init(void) {
 
   /* creation of HeartDataTask */
   HeartDataTaskHandle = osThreadNew(HeartDataRenewTask, NULL, &HeartDataTask_attributes);
+
+  /* creation of BluetoothTxtask */
+  BluetoothTxtaskHandle = osThreadNew(BluetoothTxTask, NULL, &BluetoothTxtask_attributes);
+
+  /* creation of BluetoothRxtask */
+  BluetoothRxtaskHandle = osThreadNew(BluetoothRxTask, NULL, &BluetoothRxtask_attributes);
 
   /* USER CODE BEGIN RTOS_THREADS */
   osThreadNew(IdleEnterTask,NULL,NULL);
@@ -342,6 +380,7 @@ void StartLvglTask(void *argument)
   /* Infinite loop */
   for(;;)
   {
+
     uint32_t now = osKernelGetTickCount();
     if (now - last_tick > 0) {
       lv_tick_inc(now - last_tick);

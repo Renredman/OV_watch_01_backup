@@ -89,6 +89,7 @@ void init_scr_del_flag(lv_ui *ui)
     ui->game_2048_del = true;
     ui->settings_del = true;
     ui->story_del = true;
+    ui->chat_del = true;
 }
 
 void setup_ui(lv_ui *ui)
@@ -103,5 +104,9 @@ void setup_ui(lv_ui *ui)
 
 void init_keyboard(lv_ui *ui)
 {
-
+    ui->g_kb_top_layer = lv_keyboard_create(lv_layer_top());
+    lv_obj_add_event_cb(ui->g_kb_top_layer, kb_event_cb, LV_EVENT_ALL, NULL);
+    lv_obj_add_flag(ui->g_kb_top_layer, LV_OBJ_FLAG_HIDDEN);
+    lv_obj_set_style_text_font(ui->g_kb_top_layer, &lv_font_simsun_24, LV_PART_MAIN|LV_STATE_DEFAULT);
+    lv_obj_align(ui->g_kb_top_layer, LV_ALIGN_BOTTOM_MID, 0, -38);
 }
