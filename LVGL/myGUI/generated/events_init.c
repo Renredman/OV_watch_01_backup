@@ -1269,12 +1269,6 @@ static void chat_ta_focused_handler(lv_event_t *e) {
     }
 }
 
-#define MAX_CHAT_LINES 10
-#define MAX_LINE_LENGTH 64
-
-char chat_history[MAX_CHAT_LINES][MAX_LINE_LENGTH] = {0};
-uint8_t history_count = 0;
-
 static void chat_btn_send_handler(lv_event_t *e) {
     lv_ui *ui = (lv_ui *)lv_event_get_user_data(e);
     const char *input = lv_textarea_get_text(ui->chat_ta_1);
@@ -1351,6 +1345,7 @@ void events_init_chat (lv_ui *ui)
     lv_obj_add_event_cb(ui->chat, chat_screen_unload_start_handler, LV_EVENT_SCREEN_UNLOAD_START, NULL);
     lv_obj_add_event_cb(ui->chat_ta_1, chat_ta_focused_handler, LV_EVENT_FOCUSED | LV_EVENT_DEFOCUSED, ui);
     lv_obj_add_event_cb(ui->chat_btn_1, chat_btn_send_handler, LV_EVENT_CLICKED, ui);
+    lv_obj_add_event_cb(ui->chat, chat_screen_loaded_handler, LV_EVENT_SCREEN_LOADED, NULL);
 }
 
 void events_init(lv_ui *ui)

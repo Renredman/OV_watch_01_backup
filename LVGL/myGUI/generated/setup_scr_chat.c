@@ -97,7 +97,7 @@ void setup_scr_chat(lv_ui *ui)
     // lv_obj_t *chat_win_1_label = lv_label_create(lv_win_get_content(ui->chat_win_1));
     // lv_label_set_text(chat_win_1_label, "this is a \nlong text \nto show \nscrollbar. \nif \nit \nis not \nlong enough, \nadd more content\n123");
     ui->chat_win_1_label = lv_label_create(lv_win_get_content(ui->chat_win_1));
-    lv_label_set_text(ui->chat_win_1_label, "123");
+    // lv_label_set_text(ui->chat_win_1_label, "123");
     lv_obj_set_scrollbar_mode(lv_win_get_content(ui->chat_win_1), LV_SCROLLBAR_MODE_ACTIVE);
     lv_obj_set_pos(ui->chat_win_1, 0, 0);
     lv_obj_set_size(ui->chat_win_1, 237, 240);

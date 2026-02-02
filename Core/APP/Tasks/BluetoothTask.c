@@ -16,54 +16,73 @@ void BluetoothTxTask(void *argument) {
     char buffer[64];
     for (;;) {
         if (osMessageQueueGet(BluetoothTxQueueHandle, buffer, NULL, osWaitForever) == osOK) {
-            HAL_UART_Transmit(&huart1,(uint8_t *)buffer, strlen(buffer), 100);
+            HAL_UART_Transmit_DMA(&huart1,(uint8_t *)buffer, sizeof(buffer));
         }
     }
 }
 
-// 全局变量（接收缓冲区）
+void HAL_UARTEx_RxEventCallback(UART_HandleTypeDef *huart, uint16_t Size)
+{
+    if (huart->Instance == USART1)
+    {
+        uint32_t data_length = Size;
 
-// USART1 空闲中断回调
-// void HAL_UART_RxIdleCpltCallback(UART_HandleTypeDef *huart) {
-//     if (huart->Instance == USART1) {
-//         // 【关键】使用正确的 DMA 句柄
-//
-//         uint32_t data_length = RX_BUFFER_SIZE - __HAL_DMA_GET_COUNTER(&hdma_usart1_rx);
-//         LCD_Set_Light(5);
-//         if (data_length > 0 && data_length < RX_BUFFER_SIZE) {
-//             // 过滤回车换行
-//             for (uint32_t i = 0; i < data_length; i++) {
-//                 if (rx_buffer[i] == '\r' || rx_buffer[i] == '\n') {
-//                     rx_buffer[i] = '\0';
-//                     data_length = i;
-//                     break;
-//                 }
-//             }
-//             rx_buffer[data_length] = '\0';
-//
-//             if (data_length > 0) {
-//                 // ISR 安全唤醒任务
-//                 BaseType_t xHigherPriorityTaskWoken = pdFALSE;
-//                 vTaskNotifyGiveFromISR(BluetoothRxtaskHandle, &xHigherPriorityTaskWoken);
-//                 portYIELD_FROM_ISR(xHigherPriorityTaskWoken);
-//             }
-//         }
-//
-//         // 重新启动 DMA
-//         HAL_UARTEx_ReceiveToIdle_DMA(&huart1, rx_buffer, RX_BUFFER_SIZE);
-//     }
-// }
+        // 2. （可选但推荐）过滤掉回车换行符 '\r' '\n'
+        // 找到第一个控制字符并截断字符串
+        for (uint32_t i = 0; i < data_length; i++)
+        {
+            if (rx_buffer[i] == '\r' || rx_buffer[i] == '\n')
+            {
+                rx_buffer[i] = '\0';
+                data_length = i; // 更新有效数据长度
+                break;
+            }
+        }
 
-void BluetoothRxTask(void *argument) {
-    for (;;) {
+        // 3. 确保有有效数据
+        if (data_length > 0)
+        {
+            g_received_data_length = data_length;
+            // 4. 使用任务通知从 ISR 安全地唤醒 BluetoothRxTask
+            BaseType_t xHigherPriorityTaskWoken = pdFALSE;
+            vTaskNotifyGiveFromISR(BluetoothRxtaskHandle, &xHigherPriorityTaskWoken);
+            portYIELD_FROM_ISR(xHigherPriorityTaskWoken);
+        }
+
+        HAL_UARTEx_ReceiveToIdle_DMA(&huart1, rx_buffer, RX_BUFFER_SIZE);
+        __HAL_DMA_DISABLE_IT(&hdma_usart1_rx, DMA_IT_HT);
+    }
+}
+
+
+void BluetoothRxTask(void *argument)
+{
+    for (;;)
+    {
+        // 1. 等待来自 ISR 的任务通知
         ulTaskNotifyTake(pdTRUE, portMAX_DELAY);
 
-        // 【关键】使用正确的 DMA 句柄和缓冲区
-        uint32_t data_length = RX_BUFFER_SIZE - __HAL_DMA_GET_COUNTER(&hdma_usart1_rx);
-        if (data_length > 0 && data_length < RX_BUFFER_SIZE) {
+        // 2. 【关键】此时 rx_buffer 已被 ISR 填充
+        //    我们需要复制数据以供后续安全处理
+        uint32_t data_length = 0;
+        char local_buffer[RX_BUFFER_SIZE] = {0}; // 本地缓冲区用于复制
+
+        // 这里需要一种机制来获取 ISR 中计算出的 data_length
+        // extern volatile uint32_t g_received_data_length;
+        data_length = g_received_data_length;
+        g_received_data_length = 0; // 重置
+
+        if (data_length > 0 && data_length < RX_BUFFER_SIZE)
+        {
+            // 复制数据到本地缓冲区
+            memcpy(local_buffer, rx_buffer, data_length);
+            local_buffer[data_length] = '\0'; // 确保字符串结束
+
+            // 3. 分配内存并通过 lv_async_call 发送到 LVGL 任务
             char *msg_copy = pvPortMalloc(data_length + 1);
-            if (msg_copy != NULL) {
-                memcpy(msg_copy, rx_buffer, data_length);
+            if (msg_copy != NULL)
+            {
+                memcpy(msg_copy, local_buffer, data_length);
                 msg_copy[data_length] = '\0';
                 lv_async_call(chat_update_from_bluetooth, msg_copy);
             }

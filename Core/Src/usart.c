@@ -21,6 +21,7 @@
 #include "usart.h"
 
 /* USER CODE BEGIN 0 */
+volatile uint32_t g_received_data_length = 0;
 #define RX_BUFFER_SIZE 256
 uint8_t rx_buffer[RX_BUFFER_SIZE] = {0};
 /* USER CODE END 0 */
@@ -124,7 +125,7 @@ void HAL_UART_MspInit(UART_HandleTypeDef* uartHandle)
     HAL_NVIC_SetPriority(USART1_IRQn, 5, 0);
     HAL_NVIC_EnableIRQ(USART1_IRQn);
   /* USER CODE BEGIN USART1_MspInit 1 */
-
+  // __HAL_UART_ENABLE_IT(&huart1, UART_IT_IDLE);
   /* USER CODE END USART1_MspInit 1 */
   }
 }

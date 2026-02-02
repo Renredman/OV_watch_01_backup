@@ -15,9 +15,15 @@ extern "C" {
 
 #include "gui_guider.h"
 
+#define MAX_CHAT_LINES 10
+#define MAX_LINE_LENGTH 64
+extern char chat_history[MAX_CHAT_LINES][MAX_LINE_LENGTH];
+extern uint8_t history_count;
+
 void custom_init(lv_ui *ui);
 void scr1_screen_loaded_event_handler(lv_event_t *e);
 void setting_screen_loaded_event_handler(lv_event_t *e);
+void chat_screen_loaded_handler(lv_event_t *e);
 void environment_screen_loaded_cb(lv_event_t *e);
 #ifdef __cplusplus
 }
