@@ -189,6 +189,11 @@ osTimerId_t Idle_TimerHandle;
 const osTimerAttr_t Idle_Timer_attributes = {
   .name = "Idle_Timer"
 };
+/* Definitions for EnvRefreshReqSem */
+osSemaphoreId_t EnvRefreshReqSemHandle;
+const osSemaphoreAttr_t EnvRefreshReqSem_attributes = {
+  .name = "EnvRefreshReqSem"
+};
 
 /* Private function prototypes -----------------------------------------------*/
 /* USER CODE BEGIN FunctionPrototypes */
@@ -267,6 +272,10 @@ void MX_FREERTOS_Init(void) {
   /* USER CODE BEGIN RTOS_MUTEX */
   /* add mutexes, ... */
   /* USER CODE END RTOS_MUTEX */
+
+  /* Create the semaphores(s) */
+  /* creation of EnvRefreshReqSem */
+  EnvRefreshReqSemHandle = osSemaphoreNew(1, 0, &EnvRefreshReqSem_attributes);
 
   /* USER CODE BEGIN RTOS_SEMAPHORES */
   /* add semaphores, ... */

@@ -16,8 +16,7 @@
 #include "Types/Sensor.h"
 
 
-void setup_scr_scr1(lv_ui *ui)
-{
+void setup_scr_scr1(lv_ui *ui) {
     //Write codes scr1
     ui->scr1 = lv_obj_create(NULL);
     lv_obj_set_size(ui->scr1, 240, 320);
@@ -35,7 +34,7 @@ void setup_scr_scr1(lv_ui *ui)
     lv_arc_set_bg_angles(ui->scr1_arc_1, 120, 40);
     lv_arc_set_value(ui->scr1_arc_1, 34);
     lv_arc_set_rotation(ui->scr1_arc_1, 10);
-    lv_obj_set_pos(ui->scr1_arc_1, 8, 52);
+    lv_obj_set_pos(ui->scr1_arc_1, 8, 37);
     lv_obj_set_size(ui->scr1_arc_1, 74, 70);
 
     //Write style for scr1_arc_1, Part: LV_PART_MAIN, State: LV_STATE_DEFAULT.
@@ -83,7 +82,7 @@ void setup_scr_scr1(lv_ui *ui)
     ui->scr1_label_1 = lv_label_create(ui->scr1);
     lv_label_set_text(ui->scr1_label_1, "70%");
     lv_label_set_long_mode(ui->scr1_label_1, LV_LABEL_LONG_WRAP);
-    lv_obj_set_pos(ui->scr1_label_1, 17, 76);
+    lv_obj_set_pos(ui->scr1_label_1, 17, 61);
     lv_obj_set_size(ui->scr1_label_1, 56, 18);
 
     //Write style for scr1_label_1, Part: LV_PART_MAIN, State: LV_STATE_DEFAULT.
@@ -106,7 +105,7 @@ void setup_scr_scr1(lv_ui *ui)
     ui->scr1_label_2 = lv_label_create(ui->scr1);
     lv_label_set_text(ui->scr1_label_2, "11-08");//日期
     lv_label_set_long_mode(ui->scr1_label_2, LV_LABEL_LONG_WRAP);
-    lv_obj_set_pos(ui->scr1_label_2, 80, 20);
+    lv_obj_set_pos(ui->scr1_label_2, 80, 10);
     lv_obj_set_size(ui->scr1_label_2, 86, 32);
 
     //Write style for scr1_label_2, Part: LV_PART_MAIN, State: LV_STATE_DEFAULT.
@@ -129,7 +128,7 @@ void setup_scr_scr1(lv_ui *ui)
     ui->scr1_label_3 = lv_label_create(ui->scr1);
     lv_label_set_text(ui->scr1_label_3, "Sat.");//星期
     lv_label_set_long_mode(ui->scr1_label_3, LV_LABEL_LONG_WRAP);
-    lv_obj_set_pos(ui->scr1_label_3, 158, 20);
+    lv_obj_set_pos(ui->scr1_label_3, 158, 10);
     lv_obj_set_size(ui->scr1_label_3, 100, 32);
 
     //Write style for scr1_label_3, Part: LV_PART_MAIN, State: LV_STATE_DEFAULT.
@@ -152,7 +151,7 @@ void setup_scr_scr1(lv_ui *ui)
     ui->scr1_label_4 = lv_label_create(ui->scr1);
     lv_label_set_text(ui->scr1_label_4, "11:59");//时间
     lv_label_set_long_mode(ui->scr1_label_4, LV_LABEL_LONG_WRAP);
-    lv_obj_set_pos(ui->scr1_label_4, 93, 55);
+    lv_obj_set_pos(ui->scr1_label_4, 93, 45);
     lv_obj_set_size(ui->scr1_label_4, 136, 53);
 
     //Write style for scr1_label_4, Part: LV_PART_MAIN, State: LV_STATE_DEFAULT.
@@ -175,7 +174,7 @@ void setup_scr_scr1(lv_ui *ui)
     ui->scr1_label_5 = lv_label_create(ui->scr1);
     lv_label_set_text(ui->scr1_label_5, "今日步数");
     lv_label_set_long_mode(ui->scr1_label_5, LV_LABEL_LONG_WRAP);
-    lv_obj_set_pos(ui->scr1_label_5, 34, 153);
+    lv_obj_set_pos(ui->scr1_label_5, 34, 133);
     lv_obj_set_size(ui->scr1_label_5, 100, 32);
 
     //Write style for scr1_label_5, Part: LV_PART_MAIN, State: LV_STATE_DEFAULT.
@@ -199,7 +198,7 @@ void setup_scr_scr1(lv_ui *ui)
     ui->scr1_label_6 = lv_label_create(ui->scr1);
     lv_label_set_text(ui->scr1_label_6, "0");
     lv_label_set_long_mode(ui->scr1_label_6, LV_LABEL_LONG_WRAP);
-    lv_obj_set_pos(ui->scr1_label_6, 3, 175);
+    lv_obj_set_pos(ui->scr1_label_6, 3, 155);
     lv_obj_set_size(ui->scr1_label_6, 65+20, 23);
 
     //Write style for scr1_label_6, Part: LV_PART_MAIN, State: LV_STATE_DEFAULT.
@@ -222,7 +221,7 @@ void setup_scr_scr1(lv_ui *ui)
     ui->scr1_led_1 = lv_led_create(ui->scr1);
     lv_led_set_brightness(ui->scr1_led_1, 255);
     lv_led_set_color(ui->scr1_led_1, lv_color_hex(0xff0027));
-    lv_obj_set_pos(ui->scr1_led_1, 180, 143);
+    lv_obj_set_pos(ui->scr1_led_1, 180, 123);
     lv_obj_set_size(ui->scr1_led_1, 40, 40);
 
     //Write codes scr1_arc_2
@@ -234,7 +233,7 @@ void setup_scr_scr1(lv_ui *ui)
     lv_arc_set_rotation(ui->scr1_arc_2, 0);
     lv_obj_set_style_arc_rounded(ui->scr1_arc_2, 0,  LV_PART_INDICATOR|LV_STATE_DEFAULT);
     lv_obj_set_style_arc_rounded(ui->scr1_arc_2, 0, LV_STATE_DEFAULT);
-    lv_obj_set_pos(ui->scr1_arc_2, 13, 228);
+    lv_obj_set_pos(ui->scr1_arc_2, 13, 198);
     lv_obj_set_size(ui->scr1_arc_2, 66, 60);
 
     //Write style for scr1_arc_2, Part: LV_PART_MAIN, State: LV_STATE_DEFAULT.
@@ -267,7 +266,7 @@ void setup_scr_scr1(lv_ui *ui)
     ui->scr1_label_8 = lv_label_create(ui->scr1);
     lv_label_set_text(ui->scr1_label_8, "");
     lv_label_set_long_mode(ui->scr1_label_8, LV_LABEL_LONG_WRAP);
-    lv_obj_set_pos(ui->scr1_label_8, 23, 245);
+    lv_obj_set_pos(ui->scr1_label_8, 23, 214);
     lv_obj_set_size(ui->scr1_label_8, 39, 37);
 
     //Write style for scr1_label_8, Part: LV_PART_MAIN, State: LV_STATE_DEFAULT.
@@ -295,7 +294,7 @@ void setup_scr_scr1(lv_ui *ui)
     lv_arc_set_rotation(ui->scr1_arc_3, 0);
     lv_obj_set_style_arc_rounded(ui->scr1_arc_3, 0,  LV_PART_INDICATOR|LV_STATE_DEFAULT);
     lv_obj_set_style_arc_rounded(ui->scr1_arc_3, 0, LV_STATE_DEFAULT);
-    lv_obj_set_pos(ui->scr1_arc_3, 88, 228);
+    lv_obj_set_pos(ui->scr1_arc_3, 88, 198);
     lv_obj_set_size(ui->scr1_arc_3, 66, 60);
 
     //Write style for scr1_arc_3, Part: LV_PART_MAIN, State: LV_STATE_DEFAULT.
@@ -328,7 +327,7 @@ void setup_scr_scr1(lv_ui *ui)
     ui->scr1_label_9 = lv_label_create(ui->scr1);
     lv_label_set_text(ui->scr1_label_9, "");
     lv_label_set_long_mode(ui->scr1_label_9, LV_LABEL_LONG_WRAP);
-    lv_obj_set_pos(ui->scr1_label_9, 101, 244);
+    lv_obj_set_pos(ui->scr1_label_9, 101, 214);
     lv_obj_set_size(ui->scr1_label_9, 34, 32);
 
     //Write style for scr1_label_9, Part: LV_PART_MAIN, State: LV_STATE_DEFAULT.
@@ -356,7 +355,7 @@ void setup_scr_scr1(lv_ui *ui)
     lv_arc_set_rotation(ui->scr1_arc_4, 0);
     lv_obj_set_style_arc_rounded(ui->scr1_arc_4, 0,  LV_PART_INDICATOR|LV_STATE_DEFAULT);
     lv_obj_set_style_arc_rounded(ui->scr1_arc_4, 0, LV_STATE_DEFAULT);
-    lv_obj_set_pos(ui->scr1_arc_4, 162, 228);
+    lv_obj_set_pos(ui->scr1_arc_4, 162, 198);
     lv_obj_set_size(ui->scr1_arc_4, 66, 60);
 
     //Write style for scr1_arc_4, Part: LV_PART_MAIN, State: LV_STATE_DEFAULT.
@@ -389,7 +388,7 @@ void setup_scr_scr1(lv_ui *ui)
     ui->scr1_label_10 = lv_label_create(ui->scr1);
     lv_label_set_text(ui->scr1_label_10, "");
     lv_label_set_long_mode(ui->scr1_label_10, LV_LABEL_LONG_WRAP);
-    lv_obj_set_pos(ui->scr1_label_10, 173, 244);
+    lv_obj_set_pos(ui->scr1_label_10, 173, 214);
     lv_obj_set_size(ui->scr1_label_10, 38, 30);
 
     //Write style for scr1_label_10, Part: LV_PART_MAIN, State: LV_STATE_DEFAULT.
@@ -414,7 +413,7 @@ void setup_scr_scr1(lv_ui *ui)
     lv_bar_set_mode(ui->scr1_bar_1, LV_BAR_MODE_NORMAL);
     lv_bar_set_range(ui->scr1_bar_1, 0, 100);
     lv_bar_set_value(ui->scr1_bar_1, 50, LV_ANIM_OFF);
-    lv_obj_set_pos(ui->scr1_bar_1, 8, 204);
+    lv_obj_set_pos(ui->scr1_bar_1, 8, 179);
     lv_obj_set_size(ui->scr1_bar_1, 222, 11);
 
     //Write style for scr1_bar_1, Part: LV_PART_MAIN, State: LV_STATE_DEFAULT.
@@ -434,7 +433,7 @@ void setup_scr_scr1(lv_ui *ui)
     ui->scr1_label_7 = lv_label_create(ui->scr1);
     lv_label_set_text(ui->scr1_label_7, "");
     lv_label_set_long_mode(ui->scr1_label_7, LV_LABEL_LONG_WRAP);
-    lv_obj_set_pos(ui->scr1_label_7, 13, 143);
+    lv_obj_set_pos(ui->scr1_label_7, 13, 123);
     lv_obj_set_size(ui->scr1_label_7, 43, 29);
 
     //Write style for scr1_label_7, Part: LV_PART_MAIN, State: LV_STATE_DEFAULT.
@@ -457,7 +456,7 @@ void setup_scr_scr1(lv_ui *ui)
     ui->scr1_label_12 = lv_label_create(ui->scr1);
     lv_label_set_text(ui->scr1_label_12, "");
     lv_label_set_long_mode(ui->scr1_label_12, LV_LABEL_LONG_WRAP);
-    lv_obj_set_pos(ui->scr1_label_12, 31, 111);
+    lv_obj_set_pos(ui->scr1_label_12, 31, 96);
     lv_obj_set_size(ui->scr1_label_12, 22, 20);
 
     //Write style for scr1_label_12, Part: LV_PART_MAIN, State: LV_STATE_DEFAULT.
@@ -692,7 +691,7 @@ void setup_scr_scr1(lv_ui *ui)
     ui->scr1_label_13 = lv_label_create(ui->scr1);
     lv_label_set_text(ui->scr1_label_13, "25");
     lv_label_set_long_mode(ui->scr1_label_13, LV_LABEL_LONG_WRAP);
-    lv_obj_set_pos(ui->scr1_label_13, 26, 291);
+    lv_obj_set_pos(ui->scr1_label_13, 26, 260);
     lv_obj_set_size(ui->scr1_label_13, 30, 22);
 
     //Write style for scr1_label_13, Part: LV_PART_MAIN, State: LV_STATE_DEFAULT.
@@ -715,7 +714,7 @@ void setup_scr_scr1(lv_ui *ui)
     ui->scr1_label_14 = lv_label_create(ui->scr1);
     lv_label_set_text(ui->scr1_label_14, "67");
     lv_label_set_long_mode(ui->scr1_label_14, LV_LABEL_LONG_WRAP);
-    lv_obj_set_pos(ui->scr1_label_14, 104, 291);
+    lv_obj_set_pos(ui->scr1_label_14, 104, 260);
     lv_obj_set_size(ui->scr1_label_14, 30, 22);
 
     //Write style for scr1_label_14, Part: LV_PART_MAIN, State: LV_STATE_DEFAULT.
@@ -738,7 +737,7 @@ void setup_scr_scr1(lv_ui *ui)
     ui->scr1_label_15 = lv_label_create(ui->scr1);
     lv_label_set_text(ui->scr1_label_15, "0");
     lv_label_set_long_mode(ui->scr1_label_15, LV_LABEL_LONG_WRAP);
-    lv_obj_set_pos(ui->scr1_label_15, 177, 291);
+    lv_obj_set_pos(ui->scr1_label_15, 177, 260);
     lv_obj_set_size(ui->scr1_label_15, 30, 22);
 
     //Write style for scr1_label_15, Part: LV_PART_MAIN, State: LV_STATE_DEFAULT.
@@ -804,6 +803,17 @@ void setup_scr_scr1(lv_ui *ui)
     // extern  uint16_t heart;
     snprintf(text_buf,sizeof(text_buf),"%d",123);
     lv_label_set_text(guider_ui.scr1_label_6, text_buf);
+    snprintf(text_buf,sizeof(text_buf),"%d",(uint8_t)scr1_sensor_data.temperature);
+    lv_label_set_text(guider_ui.scr1_label_13,text_buf);
+    snprintf(text_buf,sizeof(text_buf),"%d",(uint8_t)scr1_sensor_data.humidity);
+    lv_label_set_text(guider_ui.scr1_label_14,text_buf);
+    if (scr1_sensor_data.heart_rate>0) {
+        snprintf(text_buf,sizeof(text_buf),"%d",scr1_sensor_data.heart_rate);
+    }
+    else {
+        strcpy(text_buf,"--");
+    }
+    lv_label_set_text(guider_ui.scr1_label_15,text_buf);
 
 
     //Update current screen layout.

@@ -39,6 +39,12 @@ typedef struct {
     bool wrist_state;
 }CommonMessage;
 
+typedef struct {
+    float humidity;
+    float temperature;
+    uint16_t heart_rate; // 0 表示无效或未测量
+} scr1_sensor_data_t;
+
 // extern  uint16_t heart;
 // extern uint16_t raw_ppg;
 // extern uint32_t current_time;

@@ -52,6 +52,7 @@ extern osMessageQueueId_t Stop_MessageQueueHandle;
 extern osMessageQueueId_t BluetoothTxQueueHandle;
 extern osMessageQueueId_t BluetoothRxQueueHandle;
 extern osTimerId_t Idle_TimerHandle;
+extern osSemaphoreId_t EnvRefreshReqSemHandle;
 
 extern osThreadId_t BluetoothRxtaskHandle;
 

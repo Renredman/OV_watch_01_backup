@@ -74,55 +74,7 @@ lv_ui  guider_ui;                     // 声明 界面对象
 /* Private variables ---------------------------------------------------------*/
 
 /* USER CODE BEGIN PV */
-// void HAL_UART_RxIdleCpltCallback(UART_HandleTypeDef *huart) {
-//   if (huart->Instance == USART1) {
-//     // 【关键】使用正确的 DMA 句柄
-//     uint32_t data_length = RX_BUFFER_SIZE - __HAL_DMA_GET_COUNTER(&hdma_usart1_rx);
-//     LCD_Set_Light(5);
-//     if (data_length > 0 && data_length < RX_BUFFER_SIZE) {
-//       // 过滤回车换行
-//       for (uint32_t i = 0; i < data_length; i++) {
-//         if (rx_buffer[i] == '\r' || rx_buffer[i] == '\n') {
-//           rx_buffer[i] = '\0';
-//           data_length = i;
-//           break;
-//         }
-//       }
-//       rx_buffer[data_length] = '\0';
-//       if (data_length > 0) {
-//         // ISR 安全唤醒任务
-//         BaseType_t xHigherPriorityTaskWoken = pdFALSE;
-//         vTaskNotifyGiveFromISR(BluetoothRxtaskHandle, &xHigherPriorityTaskWoken);
-//         portYIELD_FROM_ISR(xHigherPriorityTaskWoken);
-//       }
-//     }
-//     // 重新启动 DMA
-//     HAL_UARTEx_ReceiveToIdle_DMA(&huart1, rx_buffer, RX_BUFFER_SIZE);
-//   }
-// }
 
-// uint8_t rx_byte = 0;
-// void HAL_UART_RxCpltCallback(UART_HandleTypeDef *huart)
-// {
-//   if (huart->Instance == USART1)
-//   {
-//     // 【测试动作】每收到一个字节，就回发这个字节 + '!'
-//     // 例如：收到 'A'，就发送 "A!"
-//     uint8_t tx_buf[2] = {rx_byte, '!'};
-//     HAL_UART_Transmit(&huart1, tx_buf, 2, 100);
-//
-//     // 【关键】必须重新启动下一次接收！否则只收一次就停了
-//     HAL_UART_Receive_IT(&huart1, &rx_byte, 1);
-//   }
-// }
-
-// void HAL_UARTEx_RxEventCallback(UART_HandleTypeDef *huart, uint16_t Size) {
-//   if (huart->Instance == USART1) {
-//     HAL_UART_Transmit_DMA(&huart1, rx_buffer, Size);
-//   }
-//   HAL_UARTEx_ReceiveToIdle_DMA(&huart1, rx_buffer, RX_BUFFER_SIZE);
-//   __HAL_DMA_DISABLE_IT(&hdma_usart1_rx, DMA_IT_HT);
-// }
 /* USER CODE END PV */
 
 /* Private function prototypes -----------------------------------------------*/
@@ -195,7 +147,7 @@ int main(void)
     Error_Handler();
   }
   delay_init();
-  delay_ms(1000);
+  delay_ms(100);
 
   HAL_TIM_PWM_Start(&htim3,TIM_CHANNEL_3);
 
@@ -237,14 +189,14 @@ int main(void)
   LCD_Set_Light(50);
   LCD_ShowString(72,LCD_H/2,(uint8_t*)"Welcome!",WHITE,BLACK,24,0);
   LCD_ShowString(42,LCD_H/2+48,(uint8_t*)"OV-Watch V1.0",WHITE,BLACK,24,0);
-  HAL_Delay(1000);
+  HAL_Delay(500);
   // 在 main() 中初始化
 
   Appstate_Init();
   lv_init();
   lv_port_disp_init();
   lv_port_indev_init();
-  printf("sss");
+
   // while (1)
   // {
   //   // 每秒发送一个 "Alive!"，证明 STM32 能发，且蓝牙链路 OK

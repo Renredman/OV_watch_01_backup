@@ -50,7 +50,7 @@ void setup_scr_calendar(lv_ui *ui)
     lv_obj_add_event_cb(calendar_calendar_1->btnm, calendar_calendar_1_draw_part_begin_event_cb, LV_EVENT_DRAW_PART_BEGIN, NULL);
     lv_obj_add_event_cb(ui->calendar_calendar_1, calendar_calendar_1_event_handler, LV_EVENT_ALL, NULL);
     lv_obj_set_pos(ui->calendar_calendar_1, 0, 0);
-    lv_obj_set_size(ui->calendar_calendar_1, 240, 320);
+    lv_obj_set_size(ui->calendar_calendar_1, 240, 280);
 
     //Write style state: LV_STATE_DEFAULT for &style_calendar_calendar_1_main_main_default
     static lv_style_t style_calendar_calendar_1_main_main_default;

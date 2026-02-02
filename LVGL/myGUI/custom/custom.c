@@ -14,6 +14,7 @@
 // 声明自动生成的计算器屏幕初始化函数（必须添加，否则链接失败）
 extern void setup_scr_calculator(lv_ui *ui);
 
+scr1_sensor_data_t scr1_sensor_data ={0};
 void scr1_screen_loaded_event_handler(lv_event_t *e) {
     lv_event_code_t code = lv_event_get_code(e);
     if (code == LV_EVENT_SCREEN_LOADED) {

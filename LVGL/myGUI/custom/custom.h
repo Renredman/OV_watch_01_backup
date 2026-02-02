@@ -14,11 +14,13 @@ extern "C" {
 #endif
 
 #include "gui_guider.h"
+#include "Types/Sensor.h"
 
 #define MAX_CHAT_LINES 10
 #define MAX_LINE_LENGTH 64
 extern char chat_history[MAX_CHAT_LINES][MAX_LINE_LENGTH];
 extern uint8_t history_count;
+extern scr1_sensor_data_t scr1_sensor_data;
 
 void custom_init(lv_ui *ui);
 void scr1_screen_loaded_event_handler(lv_event_t *e);

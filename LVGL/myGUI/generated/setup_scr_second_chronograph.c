@@ -39,7 +39,7 @@ void setup_scr_second_chronograph(lv_ui *ui)
     // add needle line for ui->second_chronograph_meter_1_scale_0.
     ui->second_chronograph_meter_1_scale_0_ndline_0 = lv_meter_add_needle_line(ui->second_chronograph_meter_1, ui->second_chronograph_meter_1_scale_0, 5, lv_color_hex(0x000000), -18);
     lv_meter_set_indicator_value(ui->second_chronograph_meter_1, ui->second_chronograph_meter_1_scale_0_ndline_0, 0);
-    lv_obj_set_pos(ui->second_chronograph_meter_1, 1, 5);
+    lv_obj_set_pos(ui->second_chronograph_meter_1, 1, 2);
     lv_obj_set_size(ui->second_chronograph_meter_1, 234, 234);
 
     //Write style for second_chronograph_meter_1, Part: LV_PART_MAIN, State: LV_STATE_DEFAULT.
@@ -73,8 +73,8 @@ void setup_scr_second_chronograph(lv_ui *ui)
     lv_obj_align(ui->second_chronograph_btn_1_label, LV_ALIGN_CENTER, 0, 0);
     lv_obj_set_style_pad_all(ui->second_chronograph_btn_1, 0, LV_STATE_DEFAULT);
     lv_obj_set_width(ui->second_chronograph_btn_1_label, LV_PCT(100));
-    lv_obj_set_pos(ui->second_chronograph_btn_1, 145, 245);
-    lv_obj_set_size(ui->second_chronograph_btn_1, 66, 66);
+    lv_obj_set_pos(ui->second_chronograph_btn_1, 156, 227);
+    lv_obj_set_size(ui->second_chronograph_btn_1, 60, 60);
 
     //Write style for second_chronograph_btn_1, Part: LV_PART_MAIN, State: LV_STATE_DEFAULT.
     lv_obj_set_style_bg_opa(ui->second_chronograph_btn_1, 255, LV_PART_MAIN|LV_STATE_DEFAULT);
@@ -107,8 +107,8 @@ void setup_scr_second_chronograph(lv_ui *ui)
     lv_obj_align(ui->second_chronograph_btn_3_label, LV_ALIGN_CENTER, 0, 0);
     lv_obj_set_style_pad_all(ui->second_chronograph_btn_3, 0, LV_STATE_DEFAULT);
     lv_obj_set_width(ui->second_chronograph_btn_3_label, LV_PCT(100));
-    lv_obj_set_pos(ui->second_chronograph_btn_3, 26, 245);
-    lv_obj_set_size(ui->second_chronograph_btn_3, 66, 66);
+    lv_obj_set_pos(ui->second_chronograph_btn_3, 23, 227);
+    lv_obj_set_size(ui->second_chronograph_btn_3, 60, 60);
 
     //Write style for second_chronograph_btn_3, Part: LV_PART_MAIN, State: LV_STATE_DEFAULT.
     lv_obj_set_style_bg_opa(ui->second_chronograph_btn_3, 255, LV_PART_MAIN|LV_STATE_DEFAULT);
