@@ -90,6 +90,9 @@ void init_scr_del_flag(lv_ui *ui)
     ui->settings_del = true;
     ui->story_del = true;
     ui->chat_del = true;
+
+    ui->time_date_del = true;
+    ui->compass_del = true;
 }
 
 void setup_ui(lv_ui *ui)

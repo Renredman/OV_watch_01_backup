@@ -235,7 +235,7 @@ static void touchpad_get_xy(lv_coord_t * x, lv_coord_t * y)
     (*x) = CST816_Instance.X_Pos;
     (*y) = CST816_Instance.Y_Pos;
     //LCD_DrawPoint(*x, *y,BLACK);
-     LCD_ShowIntNum(0,0,*x,4,BLACK,WHITE,0x0C);
+     // LCD_ShowIntNum(0,0,*x,4,BLACK,WHITE,0x0C);
 }
 
 /*------------------

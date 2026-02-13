@@ -797,6 +797,20 @@ static void menu2_btn_8_event_handler (lv_event_t *e)
     }
 }
 
+static void menu2_btn_9_event_handler (lv_event_t *e)
+{
+    lv_event_code_t code = lv_event_get_code(e);
+    switch (code) {
+        case LV_EVENT_CLICKED:
+        {
+            ui_load_scr_animation(&guider_ui, &guider_ui.compass, guider_ui.compass_del, &guider_ui.menu2_del, setup_scr_compass, LV_SCR_LOAD_ANIM_NONE, 200, 50, true, true);
+            break;
+        }
+        default:
+            break;
+    }
+}
+
 static void menu2_btn_10_event_handler (lv_event_t *e)
 {
     lv_event_code_t code = lv_event_get_code(e);
@@ -848,6 +862,7 @@ void events_init_menu2 (lv_ui *ui)
     lv_obj_add_event_cb(ui->menu2_btn_4, menu2_btn_4_event_handler, LV_EVENT_ALL, ui);
     lv_obj_add_event_cb(ui->menu2_btn_6, menu2_btn_6_event_handler, LV_EVENT_ALL, ui);
     lv_obj_add_event_cb(ui->menu2_btn_8, menu2_btn_8_event_handler, LV_EVENT_ALL, ui);
+    lv_obj_add_event_cb(ui->menu2_btn_9, menu2_btn_9_event_handler, LV_EVENT_ALL, ui);
     lv_obj_add_event_cb(ui->menu2_btn_10, menu2_btn_10_event_handler, LV_EVENT_ALL, ui);
     lv_obj_add_event_cb(ui->menu2_btn_11, menu2_btn_11_event_handler, LV_EVENT_ALL, ui);
     lv_obj_add_event_cb(ui->menu2_btn_12, menu2_btn_12_event_handler, LV_EVENT_ALL, ui);
@@ -1172,11 +1187,26 @@ static void settings_btn_4_event_handler (lv_event_t *e)
     }
 }
 
+static void settings_btn_3_event_handler (lv_event_t *e)
+{
+    lv_event_code_t code = lv_event_get_code(e);
+    switch (code) {
+        case LV_EVENT_CLICKED:
+        {
+            ui_load_scr_animation(&guider_ui, &guider_ui.time_date, guider_ui.time_date_del, &guider_ui.settings_del, setup_scr_time_date, LV_SCR_LOAD_ANIM_NONE, 200, 50, true, true);
+            break;
+        }
+        default:
+            break;
+    }
+}
+
 void events_init_settings (lv_ui *ui)
 {
     lv_obj_add_event_cb(ui->settings, settings_event_handler, LV_EVENT_ALL, ui);
     lv_obj_add_event_cb(ui->settings_sw_1, settings_sw_1_event_handler, LV_EVENT_VALUE_CHANGED, ui);
     lv_obj_add_event_cb(ui->settings_btn_4, settings_btn_4_event_handler, LV_EVENT_CLICKED, ui);
+    lv_obj_add_event_cb(ui->settings_btn_3, settings_btn_3_event_handler, LV_EVENT_ALL, ui);
     lv_obj_add_event_cb(ui->settings,setting_screen_loaded_event_handler, LV_EVENT_SCREEN_LOADED,ui);
 }
 
@@ -1346,6 +1376,330 @@ void events_init_chat (lv_ui *ui)
     lv_obj_add_event_cb(ui->chat_ta_1, chat_ta_focused_handler, LV_EVENT_FOCUSED | LV_EVENT_DEFOCUSED, ui);
     lv_obj_add_event_cb(ui->chat_btn_1, chat_btn_send_handler, LV_EVENT_CLICKED, ui);
     lv_obj_add_event_cb(ui->chat, chat_screen_loaded_handler, LV_EVENT_SCREEN_LOADED, NULL);
+}
+
+static void compass_event_handler (lv_event_t *e)
+{
+    lv_event_code_t code = lv_event_get_code(e);
+    switch (code) {
+        case LV_EVENT_GESTURE:
+        {
+            lv_dir_t dir = lv_indev_get_gesture_dir(lv_indev_get_act());
+            switch(dir) {
+                case LV_DIR_RIGHT:
+                {
+                    lv_indev_wait_release(lv_indev_get_act());
+                    ui_load_scr_animation(&guider_ui, &guider_ui.menu2, guider_ui.menu2_del, &guider_ui.compass_del, setup_scr_menu2, LV_SCR_LOAD_ANIM_OVER_RIGHT, 50, 10, true, true);
+                    break;
+                }
+                default:
+                    break;
+            }
+            break;
+        }
+        default:
+            break;
+    }
+}
+
+void events_init_compass (lv_ui *ui)
+{
+    lv_obj_add_event_cb(ui->compass, compass_event_handler, LV_EVENT_ALL, ui);
+}
+
+static RTC_TimeTypeDef td_time_init;
+static RTC_DateTypeDef td_date_init;
+static RTC_TimeTypeDef td_time_edit;
+static RTC_DateTypeDef td_date_edit;
+static bool td_dirty = false;
+
+static uint8_t time_date_days_in_month(uint8_t year, uint8_t month)
+{
+    switch (month) {
+        case 1: case 3: case 5: case 7: case 8: case 10: case 12:
+            return 31;
+        case 4: case 6: case 9: case 11:
+            return 30;
+        case 2: {
+            bool leap = ((year % 4) == 0);
+            return leap ? 29 : 28;
+        }
+        default:
+            return 31;
+    }
+}
+
+static void time_date_sync_from_rtc(lv_ui *ui)
+{
+    HAL_RTC_GetTime(&hrtc, &td_time_init, RTC_FORMAT_BIN);
+    HAL_RTC_GetDate(&hrtc, &td_date_init, RTC_FORMAT_BIN);
+
+    td_time_edit = td_time_init;
+    td_date_edit = td_date_init;
+    td_dirty = false;
+
+    // 更新 label
+    lv_label_set_text_fmt(ui->time_date_label_2, "%04d", 2000 + td_date_edit.Year);
+    lv_label_set_text_fmt(ui->time_date_label_4, "%02d", td_date_edit.Month);
+    lv_label_set_text_fmt(ui->time_date_label_6, "%02d", td_date_edit.Date);
+    lv_label_set_text_fmt(ui->time_date_label_8, "%02d", td_time_edit.Hours);
+    lv_label_set_text_fmt(ui->time_date_label_10, "%02d", td_time_edit.Minutes);
+    lv_label_set_text_fmt(ui->time_date_label_12, "%02d", td_time_edit.Seconds);
+}
+
+static void time_date_screen_loaded_handler(lv_event_t *e)
+{
+    lv_ui *ui = (lv_ui *)lv_event_get_user_data(e);
+    if (ui == NULL) return;
+
+    time_date_sync_from_rtc(ui);
+    lv_obj_add_flag(ui->time_date_msgbox_1, LV_OBJ_FLAG_HIDDEN);
+}
+
+static void time_date_event_handler(lv_event_t *e)
+{
+    lv_event_code_t code = lv_event_get_code(e);
+    lv_ui *ui = lv_event_get_user_data(e);
+
+    if (code == LV_EVENT_GESTURE) {
+        lv_dir_t dir = lv_indev_get_gesture_dir(lv_indev_get_act());
+        if (dir == LV_DIR_RIGHT) {
+            lv_indev_wait_release(lv_indev_get_act());
+
+            if (td_dirty) {
+                lv_obj_clear_flag(ui->time_date_msgbox_1, LV_OBJ_FLAG_HIDDEN);
+            } else {
+                ui_load_scr_animation(&guider_ui, &guider_ui.settings, guider_ui.settings_del,
+                                      &guider_ui.time_date_del, setup_scr_settings,
+                                      LV_SCR_LOAD_ANIM_OVER_RIGHT, 50, 10, true, true);
+            }
+        }
+    }
+}
+
+static void time_date_apply_and_refresh(lv_ui *ui)
+{
+    // 更新 label
+    lv_label_set_text_fmt(ui->time_date_label_2, "%04d", 2000 + td_date_edit.Year);
+    lv_label_set_text_fmt(ui->time_date_label_4, "%02d", td_date_edit.Month);
+    lv_label_set_text_fmt(ui->time_date_label_6, "%02d", td_date_edit.Date);
+    lv_label_set_text_fmt(ui->time_date_label_8, "%02d", td_time_edit.Hours);
+    lv_label_set_text_fmt(ui->time_date_label_10, "%02d", td_time_edit.Minutes);
+    lv_label_set_text_fmt(ui->time_date_label_12, "%02d", td_time_edit.Seconds);
+
+    // 判断是否真正修改
+    td_dirty = (memcmp(&td_time_edit, &td_time_init, sizeof(td_time_init)) != 0) ||
+               (memcmp(&td_date_edit, &td_date_init, sizeof(td_date_init)) != 0);
+}
+
+static void time_date_btn_1_event_handler(lv_event_t *e)
+{
+    if (lv_event_get_code(e) == LV_EVENT_CLICKED) {
+        td_date_edit.Year = (td_date_edit.Year + 99) % 100; // 00-99
+        uint8_t max_day = time_date_days_in_month(td_date_edit.Year, td_date_edit.Month);
+        if (td_date_edit.Date > max_day) {
+            td_date_edit.Date = max_day;
+        }
+        time_date_apply_and_refresh(lv_event_get_user_data(e));
+    }
+}
+
+static void time_date_btn_2_event_handler(lv_event_t *e)
+{
+    if (lv_event_get_code(e) == LV_EVENT_CLICKED) {
+        td_date_edit.Year = (td_date_edit.Year + 1) % 100; // 00-99
+        uint8_t max_day = time_date_days_in_month(td_date_edit.Year, td_date_edit.Month);
+        if (td_date_edit.Date > max_day) {
+            td_date_edit.Date = max_day;
+        }
+        time_date_apply_and_refresh(lv_event_get_user_data(e));
+    }
+}
+
+static void time_date_btn_3_event_handler(lv_event_t *e)  // 月 +
+{
+    if (lv_event_get_code(e) == LV_EVENT_CLICKED) {
+        if (td_date_edit.Month < 12) {
+            td_date_edit.Month++;
+        } else {
+            td_date_edit.Month = 1;
+        }
+        uint8_t max_day = time_date_days_in_month(td_date_edit.Year, td_date_edit.Month);
+        if (td_date_edit.Date > max_day) {
+            td_date_edit.Date = max_day;
+        }
+        time_date_apply_and_refresh(lv_event_get_user_data(e));
+    }
+}
+
+static void time_date_btn_4_event_handler(lv_event_t *e)  // 月 -
+{
+    if (lv_event_get_code(e) == LV_EVENT_CLICKED) {
+        if (td_date_edit.Month > 1) {
+            td_date_edit.Month--;
+        } else {
+            td_date_edit.Month = 12;
+        }
+        uint8_t max_day = time_date_days_in_month(td_date_edit.Year, td_date_edit.Month);
+        if (td_date_edit.Date > max_day) {
+            td_date_edit.Date = max_day;
+        }
+        time_date_apply_and_refresh(lv_event_get_user_data(e));
+    }
+}
+
+static void time_date_btn_5_event_handler(lv_event_t *e)  // 日 +
+{
+    if (lv_event_get_code(e) == LV_EVENT_CLICKED) {
+        uint8_t max_day = time_date_days_in_month(td_date_edit.Year, td_date_edit.Month);
+        if (td_date_edit.Date < max_day) {
+            td_date_edit.Date++;
+        } else {
+            td_date_edit.Date = 1;
+        }
+        time_date_apply_and_refresh(lv_event_get_user_data(e));
+    }
+}
+
+static void time_date_btn_6_event_handler(lv_event_t *e)  // 日 -
+{
+    if (lv_event_get_code(e) == LV_EVENT_CLICKED) {
+        uint8_t max_day = time_date_days_in_month(td_date_edit.Year, td_date_edit.Month);
+        if (td_date_edit.Date > 1) {
+            td_date_edit.Date--;
+        } else {
+            td_date_edit.Date = max_day;
+        }
+        time_date_apply_and_refresh(lv_event_get_user_data(e));
+    }
+}
+
+static void time_date_btn_7_event_handler(lv_event_t *e)  // 时 +
+{
+    if (lv_event_get_code(e) == LV_EVENT_CLICKED) {
+        if (td_time_edit.Hours < 23) {
+            td_time_edit.Hours++;
+        } else {
+            td_time_edit.Hours = 0;
+        }
+        time_date_apply_and_refresh(lv_event_get_user_data(e));
+    }
+}
+
+static void time_date_btn_8_event_handler(lv_event_t *e)  // 时 -
+{
+    if (lv_event_get_code(e) == LV_EVENT_CLICKED) {
+        if (td_time_edit.Hours > 0) {
+            td_time_edit.Hours--;
+        } else {
+            td_time_edit.Hours = 23;
+        }
+        time_date_apply_and_refresh(lv_event_get_user_data(e));
+    }
+}
+
+static void time_date_btn_9_event_handler(lv_event_t *e)  // 分 +
+{
+    if (lv_event_get_code(e) == LV_EVENT_CLICKED) {
+        if (td_time_edit.Minutes < 59) {
+            td_time_edit.Minutes++;
+        } else {
+            td_time_edit.Minutes = 0;
+        }
+        time_date_apply_and_refresh(lv_event_get_user_data(e));
+    }
+}
+
+static void time_date_btn_10_event_handler(lv_event_t *e)  // 分 -
+{
+    if (lv_event_get_code(e) == LV_EVENT_CLICKED) {
+        if (td_time_edit.Minutes > 0) {
+            td_time_edit.Minutes--;
+        } else {
+            td_time_edit.Minutes = 59;
+        }
+        time_date_apply_and_refresh(lv_event_get_user_data(e));
+    }
+}
+
+static void time_date_btn_11_event_handler(lv_event_t *e)  // 秒 +
+{
+    if (lv_event_get_code(e) == LV_EVENT_CLICKED) {
+        if (td_time_edit.Seconds < 59) {
+            td_time_edit.Seconds++;
+        } else {
+            td_time_edit.Seconds = 0;
+        }
+        time_date_apply_and_refresh(lv_event_get_user_data(e));
+    }
+}
+
+static void time_date_btn_12_event_handler(lv_event_t *e)  // 秒 -
+{
+    if (lv_event_get_code(e) == LV_EVENT_CLICKED) {
+        if (td_time_edit.Seconds > 0) {
+            td_time_edit.Seconds--;
+        } else {
+            td_time_edit.Seconds = 59;
+        }
+        time_date_apply_and_refresh(lv_event_get_user_data(e));
+    }
+}
+
+static void time_date_msgbox_event_handler(lv_event_t *e)
+{
+    lv_event_code_t code = lv_event_get_code(e);
+    if (code == LV_EVENT_VALUE_CHANGED) {
+        lv_obj_t *btnm = lv_event_get_target(e);
+        uint16_t btn_id = lv_btnmatrix_get_selected_btn(btnm);
+        const char *btn_txt = lv_btnmatrix_get_btn_text(btnm, btn_id);
+        lv_ui *ui = (lv_ui *)lv_event_get_user_data(e);
+
+        if (btn_txt == NULL || ui == NULL) {
+            return;
+        }
+
+        if (strcmp(btn_txt, "Apply") == 0) {
+            HAL_RTC_SetTime(&hrtc, &td_time_edit, RTC_FORMAT_BIN);
+            HAL_RTC_SetDate(&hrtc, &td_date_edit, RTC_FORMAT_BIN);
+
+            ui_load_scr_animation(&guider_ui, &guider_ui.settings, guider_ui.settings_del,
+                                  &guider_ui.time_date_del, setup_scr_settings,
+                                  LV_SCR_LOAD_ANIM_OVER_RIGHT, 50, 10, true, true);
+        } else if (strcmp(btn_txt, "Close") == 0) {
+            td_time_edit = td_time_init;
+            td_date_edit = td_date_init;
+            td_dirty = false;
+            time_date_apply_and_refresh(ui);
+
+            ui_load_scr_animation(&guider_ui, &guider_ui.settings, guider_ui.settings_del,
+                                  &guider_ui.time_date_del, setup_scr_settings,
+                                  LV_SCR_LOAD_ANIM_OVER_RIGHT, 50, 10, true, true);
+        }
+    }
+}
+
+void events_init_time_date(lv_ui *ui)
+{
+    lv_obj_add_event_cb(ui->time_date, time_date_screen_loaded_handler, LV_EVENT_SCREEN_LOADED, ui);
+    lv_obj_add_event_cb(ui->time_date, time_date_event_handler, LV_EVENT_ALL, ui);
+    lv_obj_add_event_cb(lv_msgbox_get_btns(ui->time_date_msgbox_1), time_date_msgbox_event_handler, LV_EVENT_VALUE_CHANGED, ui);
+
+    lv_obj_add_event_cb(ui->time_date_btn_1, time_date_btn_1_event_handler, LV_EVENT_ALL, ui);
+    lv_obj_add_event_cb(ui->time_date_btn_2, time_date_btn_2_event_handler, LV_EVENT_ALL, ui);
+    lv_obj_add_event_cb(ui->time_date_btn_3, time_date_btn_3_event_handler, LV_EVENT_ALL, ui);
+    lv_obj_add_event_cb(ui->time_date_btn_4, time_date_btn_4_event_handler, LV_EVENT_ALL, ui);
+    lv_obj_add_event_cb(ui->time_date_btn_5, time_date_btn_5_event_handler, LV_EVENT_ALL, ui);
+    lv_obj_add_event_cb(ui->time_date_btn_6, time_date_btn_6_event_handler, LV_EVENT_ALL, ui);
+    lv_obj_add_event_cb(ui->time_date_btn_7, time_date_btn_7_event_handler, LV_EVENT_ALL, ui);
+    lv_obj_add_event_cb(ui->time_date_btn_8, time_date_btn_8_event_handler, LV_EVENT_ALL, ui);
+    lv_obj_add_event_cb(ui->time_date_btn_9, time_date_btn_9_event_handler, LV_EVENT_ALL, ui);
+    lv_obj_add_event_cb(ui->time_date_btn_10, time_date_btn_10_event_handler, LV_EVENT_ALL, ui);
+    lv_obj_add_event_cb(ui->time_date_btn_11, time_date_btn_11_event_handler, LV_EVENT_ALL, ui);
+    lv_obj_add_event_cb(ui->time_date_btn_12, time_date_btn_12_event_handler, LV_EVENT_ALL, ui);
+
+    // 页面加载时同步 RTC
+    time_date_sync_from_rtc(ui);
 }
 
 void events_init(lv_ui *ui)

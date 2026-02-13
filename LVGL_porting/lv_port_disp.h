@@ -22,6 +22,7 @@ extern "C" {
 #include "lvgl.h"
 #endif
 
+// extern lv_disp_drv_t *s_disp_drv = NULL;
 /*********************
  *      DEFINES
  *********************/

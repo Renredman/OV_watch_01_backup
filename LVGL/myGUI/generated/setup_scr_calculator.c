@@ -33,7 +33,7 @@ void setup_scr_calculator(lv_ui *ui)
     lv_label_set_text(ui->calculator_label_1, "0");
     lv_label_set_long_mode(ui->calculator_label_1, LV_LABEL_LONG_WRAP);
     lv_obj_set_pos(ui->calculator_label_1, 0, 15);
-    lv_obj_set_size(ui->calculator_label_1, 240, 60);
+    lv_obj_set_size(ui->calculator_label_1, 236, 60);
 
     //Write style for calculator_label_1, Part: LV_PART_MAIN, State: LV_STATE_DEFAULT.
     lv_obj_set_style_border_width(ui->calculator_label_1, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
@@ -55,7 +55,7 @@ void setup_scr_calculator(lv_ui *ui)
     ui->calculator_btnm_1 = lv_btnmatrix_create(ui->calculator);
     static const char *calculator_btnm_1_text_map[] = {"1", "2", "3", "add", "\n", "4", "5", "6", "sub", "\n", "7", "8", "9", "mult", "\n", "clean", "0", "equl", "div", "",};
     lv_btnmatrix_set_map(ui->calculator_btnm_1, calculator_btnm_1_text_map);
-    lv_obj_set_pos(ui->calculator_btnm_1, 0, 75);
+    lv_obj_set_pos(ui->calculator_btnm_1, 0, 70);
     lv_obj_set_size(ui->calculator_btnm_1, 240, 230);
 
     //Write style for calculator_btnm_1, Part: LV_PART_MAIN, State: LV_STATE_DEFAULT.

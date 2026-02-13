@@ -8,6 +8,7 @@
     <file url="file://$PROJECT_DIR$/BSP/LCD/lcd_init.h" charset="GBK" />
     <file url="file://$PROJECT_DIR$/BSP/LCD/lcdfont.h" charset="GBK" />
     <file url="file://$PROJECT_DIR$/BSP/MPU6050/eMPL/inv_mpu.c" charset="GBK" />
+    <file url="file://$PROJECT_DIR$/BSP/MPU6050/mpu6050.h" charset="GBK" />
     <file url="file://$PROJECT_DIR$/SYSTEM/delay.c" charset="GBK" />
   </component>
 </project>

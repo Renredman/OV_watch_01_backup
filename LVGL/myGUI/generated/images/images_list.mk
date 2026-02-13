@@ -1,1 +1,1 @@
-GEN_CSRCS += 
+GEN_CSRCS += _pic_compass_pointer_alpha_90x150.c

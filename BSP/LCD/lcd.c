@@ -4,6 +4,7 @@
 #include "delay.h"
 #include "spi.h"
 #include "cmsis_os.h"
+#include "lv_port_disp.h"
 
 #define OFFSET_Y 20
 
@@ -35,23 +36,57 @@ void LCD_Fill(u16 xsta,u16 ysta,u16 xend,u16 yend,u16 color)
 								color       要填充的颜色
       返回值：  无
 ******************************************************************************/
-void LCD_Color_Fill(u16 xsta,u16 ysta,u16 xend,u16 yend,u16 *color_p)
+// void LCD_Color_Fill(u16 xsta,u16 ysta,u16 xend,u16 yend,u16 *color_p)
+// {
+// 	u16 i,j,width,height;
+// 	width = xend-xsta+1;
+// 	height = yend-ysta+1;
+// 	uint32_t size = width * height;
+//
+// 	LCD_Address_Set(xsta,ysta+OFFSET_Y,xend,yend+OFFSET_Y);
+//
+// 	hspi1.Init.DataSize = SPI_DATASIZE_16BIT;
+// 	hspi1.Instance->CR1|=SPI_CR1_DFF;
+// 	HAL_SPI_Transmit_DMA(&hspi1,(uint8_t*)color_p,size);
+//	while(__HAL_DMA_GET_COUNTER(&hdma_spi1_tx)!=0);
+//
+// 	hspi1.Init.DataSize = SPI_DATASIZE_8BIT;
+// 	hspi1.Instance->CR1&=~SPI_CR1_DFF;
+//
+// }
+
+// HAL_StatusTypeDef LCD_Color_Fill(u16 xsta,u16 ysta,u16 xend,u16 yend,u16 *color_p);
+
+HAL_StatusTypeDef LCD_Color_Fill(u16 xsta,u16 ysta,u16 xend,u16 yend,u16 *color_p)
 {
-	u16 i,j,width,height; 
-	width = xend-xsta+1;
-	height = yend-ysta+1;
+	u16 width = xend - xsta + 1;
+	u16 height = yend - ysta + 1;
 	uint32_t size = width * height;
-	
-	LCD_Address_Set(xsta,ysta+OFFSET_Y,xend,yend+OFFSET_Y);
-	
-	hspi1.Init.DataSize = SPI_DATASIZE_16BIT;
-	hspi1.Instance->CR1|=SPI_CR1_DFF;
-	HAL_SPI_Transmit_DMA(&hspi1,(uint8_t*)color_p,size);
-	while(__HAL_DMA_GET_COUNTER(&hdma_spi1_tx)!=0);
-	
-	hspi1.Init.DataSize = SPI_DATASIZE_8BIT;
-	hspi1.Instance->CR1&=~SPI_CR1_DFF;
-	
+
+	LCD_Address_Set(xsta, ysta + OFFSET_Y, xend, yend + OFFSET_Y);
+
+	// 等待 SPI 空闲（避免在 DMA 过程中切 DFF）
+	if (hspi1.State != HAL_SPI_STATE_READY) {
+		return HAL_BUSY;
+	}
+	while (__HAL_SPI_GET_FLAG(&hspi1, SPI_FLAG_BSY) != RESET) {}
+
+	hspi1.Instance->CR1 |= SPI_CR1_DFF; // 切到 16-bit
+	return HAL_SPI_Transmit_DMA(&hspi1, (uint8_t *)color_p, size);
+}
+
+extern lv_disp_drv_t *s_disp_drv;
+
+void HAL_SPI_TxCpltCallback(SPI_HandleTypeDef *hspi)
+{
+	if (hspi == &hspi1) {
+		hspi1.Instance->CR1 &= ~SPI_CR1_DFF; // 回 8-bit
+
+		if (s_disp_drv != NULL) {
+			lv_disp_flush_ready(s_disp_drv);
+			s_disp_drv = NULL;
+		}
+	}
 }
 
 /******************************************************************************
@@ -65,7 +100,6 @@ void LCD_DrawPoint(u16 x,u16 y,u16 color)
 	LCD_Address_Set(x,y,x,y);//设置光标位置 
 	LCD_WR_DATA(color);
 } 
-
 
 /******************************************************************************
       函数说明：画线

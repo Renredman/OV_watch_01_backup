@@ -35,7 +35,7 @@ void setup_scr_environment(lv_ui *ui)
     lv_bar_set_mode(ui->environment_bar_1, LV_BAR_MODE_NORMAL);
     lv_bar_set_range(ui->environment_bar_1, 0, 50);
     lv_bar_set_value(ui->environment_bar_1, 25, LV_ANIM_OFF);
-    lv_obj_set_pos(ui->environment_bar_1, 49, 111);
+    lv_obj_set_pos(ui->environment_bar_1, 49, 101);
     lv_obj_set_size(ui->environment_bar_1, 24, 125);
 
     //Write style for environment_bar_1, Part: LV_PART_MAIN, State: LV_STATE_DEFAULT.
@@ -55,7 +55,7 @@ void setup_scr_environment(lv_ui *ui)
     ui->environment_label_1 = lv_label_create(ui->environment);
     lv_label_set_text(ui->environment_label_1, "25\n");
     lv_label_set_long_mode(ui->environment_label_1, LV_LABEL_LONG_WRAP);
-    lv_obj_set_pos(ui->environment_label_1, 44, 246);
+    lv_obj_set_pos(ui->environment_label_1, 44, 236);
     lv_obj_set_size(ui->environment_label_1, 29, 23);
 
     //Write style for environment_label_1, Part: LV_PART_MAIN, State: LV_STATE_DEFAULT.
@@ -78,7 +78,7 @@ void setup_scr_environment(lv_ui *ui)
     ui->environment_label_2 = lv_label_create(ui->environment);
     lv_label_set_text(ui->environment_label_2, "C");
     lv_label_set_long_mode(ui->environment_label_2, LV_LABEL_LONG_WRAP);
-    lv_obj_set_pos(ui->environment_label_2, 70, 246);
+    lv_obj_set_pos(ui->environment_label_2, 70, 236);
     lv_obj_set_size(ui->environment_label_2, 22, 21);
 
     //Write style for environment_label_2, Part: LV_PART_MAIN, State: LV_STATE_DEFAULT.
@@ -101,7 +101,7 @@ void setup_scr_environment(lv_ui *ui)
     ui->environment_label_4 = lv_label_create(ui->environment);
     lv_label_set_text(ui->environment_label_4, "%");
     lv_label_set_long_mode(ui->environment_label_4, LV_LABEL_LONG_WRAP);
-    lv_obj_set_pos(ui->environment_label_4, 180, 246);
+    lv_obj_set_pos(ui->environment_label_4, 180, 236);
     lv_obj_set_size(ui->environment_label_4, 21, 21);
 
     //Write style for environment_label_4, Part: LV_PART_MAIN, State: LV_STATE_DEFAULT.
@@ -124,7 +124,7 @@ void setup_scr_environment(lv_ui *ui)
     ui->environment_label_3 = lv_label_create(ui->environment);
     lv_label_set_text(ui->environment_label_3, "67\n\n");
     lv_label_set_long_mode(ui->environment_label_3, LV_LABEL_LONG_WRAP);
-    lv_obj_set_pos(ui->environment_label_3, 155, 246);
+    lv_obj_set_pos(ui->environment_label_3, 155, 236);
     lv_obj_set_size(ui->environment_label_3, 29, 25);
 
     //Write style for environment_label_3, Part: LV_PART_MAIN, State: LV_STATE_DEFAULT.
@@ -149,7 +149,7 @@ void setup_scr_environment(lv_ui *ui)
     lv_bar_set_mode(ui->environment_bar_2, LV_BAR_MODE_NORMAL);
     lv_bar_set_range(ui->environment_bar_2, 0, 100);
     lv_bar_set_value(ui->environment_bar_2, 50, LV_ANIM_OFF);
-    lv_obj_set_pos(ui->environment_bar_2, 158, 111);
+    lv_obj_set_pos(ui->environment_bar_2, 158, 101);
     lv_obj_set_size(ui->environment_bar_2, 24, 125);
 
     //Write style for environment_bar_2, Part: LV_PART_MAIN, State: LV_STATE_DEFAULT.
@@ -169,7 +169,7 @@ void setup_scr_environment(lv_ui *ui)
     ui->environment_label_5 = lv_label_create(ui->environment);
     lv_label_set_text(ui->environment_label_5, "" LV_SYMBOL_TINT "");
     lv_label_set_long_mode(ui->environment_label_5, LV_LABEL_LONG_WRAP);
-    lv_obj_set_pos(ui->environment_label_5, 151, 51);
+    lv_obj_set_pos(ui->environment_label_5, 151, 41);
     lv_obj_set_size(ui->environment_label_5, 42, 35);
 
     //Write style for environment_label_5, Part: LV_PART_MAIN, State: LV_STATE_DEFAULT.
@@ -192,7 +192,7 @@ void setup_scr_environment(lv_ui *ui)
     ui->environment_label_6 = lv_label_create(ui->environment);
     lv_label_set_text(ui->environment_label_6, "");
     lv_label_set_long_mode(ui->environment_label_6, LV_LABEL_LONG_WRAP);
-    lv_obj_set_pos(ui->environment_label_6, 44, 51);
+    lv_obj_set_pos(ui->environment_label_6, 44, 41);
     lv_obj_set_size(ui->environment_label_6, 37, 34);
 
     //Write style for environment_label_6, Part: LV_PART_MAIN, State: LV_STATE_DEFAULT.
