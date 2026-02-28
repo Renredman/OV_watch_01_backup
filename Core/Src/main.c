@@ -43,6 +43,8 @@
 #include "iic_hal.h"
 #include "key.h"
 #include "KT6328.h"
+#include "SPL06_001.h"
+#include "LSM303.h"
 
 #include "lvgl.h"
 #include "lv_port_disp.h"
@@ -174,6 +176,22 @@ int main(void)
     num--;
     Sensor_AHT21_Erro = AHT_Init();
   }
+
+  num = 3;
+	while(num && Sensor_LSM303_Erro)
+	{
+		num--;
+		Sensor_LSM303_Erro = LSM303DLH_Init();
+	}
+	if(!Sensor_LSM303_Erro)
+		LSM303DLH_Sleep();
+
+  num = 3;
+	while(num && Sensor_SPL_Erro)
+	{
+		num--;
+		Sensor_SPL_Erro = SPL_init();
+	}
 
   num = 3;
   while(num && Sensor_EM_Erro){

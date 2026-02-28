@@ -93,8 +93,8 @@ void setup_scr_compass(lv_ui *ui)
     ui->compass_label_2 = lv_label_create(ui->compass);
     lv_label_set_text(ui->compass_label_2, " ");
     lv_label_set_long_mode(ui->compass_label_2, LV_LABEL_LONG_WRAP);
-    lv_obj_set_pos(ui->compass_label_2, 144, 205);
-    lv_obj_set_size(ui->compass_label_2, 81, 28);
+    lv_obj_set_pos(ui->compass_label_2, 140, 205);
+    lv_obj_set_size(ui->compass_label_2, 90, 28);
 
     //Write style for compass_label_2, Part: LV_PART_MAIN, State: LV_STATE_DEFAULT.
     lv_obj_set_style_border_width(ui->compass_label_2, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
@@ -143,8 +143,8 @@ void setup_scr_compass(lv_ui *ui)
     ui->compass_label_4 = lv_label_create(ui->compass);
     lv_label_set_text(ui->compass_label_4, ":0m");
     lv_label_set_long_mode(ui->compass_label_4, LV_LABEL_LONG_WRAP);
-    lv_obj_set_pos(ui->compass_label_4, 182, 209);
-    lv_obj_set_size(ui->compass_label_4, 39, 20);
+    lv_obj_set_pos(ui->compass_label_4, 175, 209);
+    lv_obj_set_size(ui->compass_label_4, 60, 20);
 
     //Write style for compass_label_4, Part: LV_PART_MAIN, State: LV_STATE_DEFAULT.
     lv_obj_set_style_border_width(ui->compass_label_4, 0, LV_PART_MAIN|LV_STATE_DEFAULT);

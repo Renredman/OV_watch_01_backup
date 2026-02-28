@@ -65,6 +65,8 @@ add_executable(${CMAKE_PROJECT_NAME}
         BSP/EM7028/HrAlgorythm.c
         BSP/EM7028/user_Queue.c
         BSP/POWER/power.c
+        BSP/SPL06_001/spl06_001.c
+        BSP/LSM303DLH/LSM303.c
         LVGL_porting/lv_port_disp.c
         LVGL_porting/lv_port_indev.c
         LVGL_porting/lv_port_indev.h

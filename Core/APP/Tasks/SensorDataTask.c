@@ -6,6 +6,8 @@
 #include "FreeRTOS.h"
 #include "gui_guider.h"
 #include "Types/Sensor.h"
+#include "SPL06_001.h"
+#include "LSM303.h"
 
 // RTC_DateTypeDef nowdate;
 // RTC_TimeTypeDef nowtime;
@@ -80,17 +82,38 @@ void HeartDataRenewTask(void *argument)
 }
 
 void trigger_immediate_envir_update(void) {
+    float humidity=0, temperature=0, altitude=0, azimuth=0;
+    int16_t Xa, Ya, Za, Xm, Ym, Zm;
+    
+    // 获取温湿度数据
     if (!Sensor_AHT21_Erro) {
-        float humidity,temperature;
-        if (AHT_Read(&humidity, &temperature)==0) {
-            EnvirMessage *envir_msg=(EnvirMessage*)pvPortMalloc(sizeof(EnvirMessage));
-            if (envir_msg!=NULL) {
-                envir_msg->humidity=humidity;
-                envir_msg->temperature=temperature;
-                if (osMessageQueuePut(EnvirQueueHandle,&envir_msg,0,0)!= osOK) {
-                    vPortFree(envir_msg);
-                }
-            }
+        if (AHT_Read(&humidity, &temperature)!=0) {
+            humidity = 0;
+            temperature = 0;
+        }
+    }
+    
+    // 获取高度数据
+    if (!Sensor_SPL_Erro) {
+        altitude = Altitude_Calculate();
+    }
+    
+    // 获取方位数据
+    if (!Sensor_LSM303_Erro) {
+        LSM303_ReadAcceleration(&Xa, &Ya, &Za);
+        LSM303_ReadMagnetic(&Xm, &Ym, &Zm);
+        azimuth = Azimuth_Calculate(Xa, Ya, Za, Xm, Ym, Zm);
+    }
+    
+    // 发送环境数据消息
+    EnvirMessage *envir_msg=(EnvirMessage*)pvPortMalloc(sizeof(EnvirMessage));
+    if (envir_msg!=NULL) {
+        envir_msg->humidity=humidity;
+        envir_msg->temperature=temperature;
+        envir_msg->altitude=altitude;
+        envir_msg->azimuth=azimuth;
+        if (osMessageQueuePut(EnvirQueueHandle,&envir_msg,0,0)!= osOK) {
+            vPortFree(envir_msg);
         }
     }
 }

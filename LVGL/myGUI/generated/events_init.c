@@ -171,7 +171,7 @@ static void rotate_timer_cb(lv_timer_t *timer) {
     );
 }
 
-// btn_1（启动按钮）事件处理函数（核心逻辑）
+// btn_1（启动/停止按钮）事件处理函数（核心逻辑）
 static void my_second_chronograph_btn_1_event_handler(lv_event_t *e) {
     lv_event_code_t code = lv_event_get_code(e);
     if (code != LV_EVENT_CLICKED) return;  // 只处理点击事件
@@ -180,10 +180,14 @@ static void my_second_chronograph_btn_1_event_handler(lv_event_t *e) {
     lv_ui *ui = (lv_ui *)lv_event_get_user_data(e);
     if (ui == NULL) return;
 
-    // 启动定时器（避免重复创建）
+    // 切换定时器状态：如果未运行则启动，已运行则停止
     if (rotate_timer == NULL) {
-        // 创建1000ms定时器，传递ui作为用户数据（供回调函数使用）
+        // 启动定时器
         rotate_timer = lv_timer_create(rotate_timer_cb, 1000, ui);
+    } else {
+        // 停止定时器
+        lv_timer_del(rotate_timer);
+        rotate_timer = NULL;
     }
 }
 static void my_second_chronograph_btn_3_event_handler(lv_event_t *e) {
@@ -298,12 +302,29 @@ static void scr1_btn_4_event_handler (lv_event_t *e)
     }
 }
 
+static void scr1_btn_3_event_handler (lv_event_t *e)
+{
+    lv_event_code_t code = lv_event_get_code(e);
+    switch (code) {
+        case LV_EVENT_CLICKED:
+        {
+            // 发送进入停止模式的消息
+            uint8_t msg = 0;
+            osMessageQueuePut(Stop_MessageQueueHandle, &msg, 0, 0);
+            break;
+        }
+        default:
+            break;
+    }
+}
+
 void events_init_scr1 (lv_ui *ui)
 {
     lv_obj_add_event_cb(ui->scr1, scr1_event_handler, LV_EVENT_ALL, ui);
     lv_obj_add_event_cb(ui->scr1_slider_1, scr1_slider_1_event_handler, LV_EVENT_ALL, ui);
     lv_obj_add_event_cb(ui->scr1_btn_1, scr1_btn_1_event_handler, LV_EVENT_ALL, ui);
     lv_obj_add_event_cb(ui->scr1_btn_2, scr1_btn_2_event_handler, LV_EVENT_ALL, ui);
+    lv_obj_add_event_cb(ui->scr1_btn_3, scr1_btn_3_event_handler, LV_EVENT_ALL, ui);
     lv_obj_add_event_cb(ui->scr1_btn_4, scr1_btn_4_event_handler, LV_EVENT_ALL, ui);
     lv_obj_add_event_cb(ui->scr1,scr1_screen_loaded_event_handler, LV_EVENT_SCREEN_LOADED,ui);
 }
@@ -1402,9 +1423,16 @@ static void compass_event_handler (lv_event_t *e)
     }
 }
 
+static void compass_screen_loaded_handler(lv_event_t *e)
+{
+    // 进入compass页面时立即更新环境数据（包括高度）
+    trigger_immediate_envir_update();
+}
+
 void events_init_compass (lv_ui *ui)
 {
     lv_obj_add_event_cb(ui->compass, compass_event_handler, LV_EVENT_ALL, ui);
+    lv_obj_add_event_cb(ui->compass, compass_screen_loaded_handler, LV_EVENT_SCREEN_LOADED, NULL);
 }
 
 static RTC_TimeTypeDef td_time_init;

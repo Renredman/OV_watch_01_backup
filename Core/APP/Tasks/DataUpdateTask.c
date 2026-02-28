@@ -14,6 +14,8 @@ extern lv_ui  guider_ui;
 typedef struct {
     float humidity;
     float temperature;
+    float altitude;
+    float azimuth;
 }envir_update_data_t;
 
 
@@ -30,7 +32,23 @@ static void environment_update_callback(void *data) {
 
             lv_bar_set_value(guider_ui.environment_bar_2, (uint8_t)envir_data->humidity, LV_ANIM_OFF);
             lv_bar_set_value(guider_ui.environment_bar_1, (uint8_t)envir_data->temperature, LV_ANIM_OFF);
-       }
+        }
+        
+        // 更新指南针页面的高度和方位显示
+        if (lv_scr_act() == guider_ui.compass) {
+            // 更新高度显示
+            char altitude_str[10];
+            snprintf(altitude_str, sizeof(altitude_str), ":%dm", (int)envir_data->altitude);
+            lv_label_set_text(guider_ui.compass_label_4, altitude_str);
+            
+            // 更新方位显示
+            char azimuth_str[10];
+            snprintf(azimuth_str, sizeof(azimuth_str), ":%d", (int)envir_data->azimuth);
+            lv_label_set_text(guider_ui.compass_label_3, azimuth_str);
+            
+            // 更新指南针指针指向
+            lv_meter_set_indicator_value(guider_ui.compass_meter_1, guider_ui.compass_meter_1_scale_0_ndline_0, (int)envir_data->azimuth);
+        }
         vPortFree(envir_data);
     }
 }
@@ -54,8 +72,12 @@ void SensorDataUpdateTask(void *argument) {
             if (p_async_data != NULL) {
                 p_async_data->humidity = envir_msg->humidity;
                 p_async_data->temperature = envir_msg->temperature;
+                p_async_data->altitude = envir_msg->altitude;
+                p_async_data->azimuth = envir_msg->azimuth;
                 scr1_sensor_data.humidity=envir_msg->humidity;
                 scr1_sensor_data.temperature=envir_msg->temperature;
+                scr1_sensor_data.altitude=envir_msg->altitude;
+                scr1_sensor_data.azimuth=envir_msg->azimuth;
                 lv_async_call(environment_update_callback,p_async_data);
             }
             vPortFree(envir_msg);

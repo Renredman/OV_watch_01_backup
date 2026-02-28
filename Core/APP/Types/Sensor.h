@@ -20,6 +20,8 @@ typedef struct {
 typedef struct {
     float humidity;
     float temperature;
+    float altitude;
+    float azimuth;
 }EnvirMessage;
 
 typedef struct {
@@ -42,6 +44,8 @@ typedef struct {
 typedef struct {
     float humidity;
     float temperature;
+    float altitude;
+    float azimuth;
     uint16_t heart_rate; // 0 表示无效或未测量
 } scr1_sensor_data_t;
 
