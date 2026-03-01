@@ -285,6 +285,8 @@ add_executable(${CMAKE_PROJECT_NAME}
         Core/APP/Tasks/BluetoothTask.c
         LVGL/myGUI/generated/setup_scr_compass.c
         LVGL/myGUI/generated/setup_scr_time_date.c
+        LVGL/myGUI/generated/setup_scr_secret.c
+        LVGL/myGUI/generated/setup_scr_secret_change.c
 )
 
 # Add STM32CubeMX generated sources

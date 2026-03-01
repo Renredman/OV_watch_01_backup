@@ -3,6 +3,7 @@
 #include "FreeRTOS.h"
 #include "gui_guider.h"
 #include "Types/PageType.h"
+#include "Tasks/AppState.h"
 
 extern int key_state;
 static osStatus_t queue_status;
@@ -14,10 +15,25 @@ static void page_switch_callback(void *user_data) {
     PageMessage *data = (PageMessage *)user_data;
     if (!data)return;
 
+    // 检查是否是从scr1切换到menu2
+    lv_obj_t *current_scr = lv_scr_act();
+    if (current_scr == ui->scr1 && data->new_screen == &ui->menu2) {
+        // 检查密码状态
+        if (g_app_state.password_set && !g_app_state.password_verified) {
+            // 需要密码验证，切换到secret页面
+            ui_load_scr_animation(
+                ui, &ui->secret, ui->secret_del, &ui->scr1_del,
+                setup_scr_secret,
+                data->anim, 100, 10, true, true
+            );
+            return;
+        }
+    }
+
     ui_load_scr_animation(
     ui,data->new_screen,data->new_scr_del,data->old_scr_del,
     data->setup_cb,
-    data->anim,200,10,true,true
+    data->anim,100,10,true,true
     );
 }
 

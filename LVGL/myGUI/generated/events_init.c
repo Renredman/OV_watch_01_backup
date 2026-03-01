@@ -31,6 +31,8 @@ static lv_point_t touch_start;
 static int32_t panel_start_y;
 static bool is_touch_start = false;
 
+void navigate_to_menu2(void);
+
 void my_ui_event_DropDownGesture(lv_event_t *e) {
     lv_event_code_t code = lv_event_get_code(e);
     lv_ui *ui = (lv_ui *)lv_event_get_user_data(e);
@@ -52,7 +54,7 @@ void my_ui_event_DropDownGesture(lv_event_t *e) {
         // ===== 右滑切换页面逻辑（替代 GESTURE）=====
         if (dx > 50 && dx > abs(dy) * 2) { // 右滑：x变化大，y变化小
             is_touch_start = false;
-            ui_load_scr_animation(&guider_ui, &guider_ui.menu2, guider_ui.menu2_del, &guider_ui.scr1_del, setup_scr_menu2, LV_SCR_LOAD_ANIM_OVER_RIGHT, 200, 10, true, true);
+            navigate_to_menu2();
             return;
         }
 
@@ -263,6 +265,18 @@ static void scr1_btn_1_event_handler (lv_event_t *e)
     }
     default:
         break;
+    }
+}
+
+// 跳转到menu2页面的函数，根据密码状态决定是否先进入secret页面
+void navigate_to_menu2(void)
+{
+    if (g_app_state.password_set && !g_app_state.password_verified) {
+        // 需要密码验证，先进入secret页面
+        ui_load_scr_animation(&guider_ui, &guider_ui.secret, guider_ui.secret_del, NULL, setup_scr_secret, LV_SCR_LOAD_ANIM_NONE, 200, 50, true, true);
+    } else {
+        // 不需要密码验证，直接进入menu2页面
+        ui_load_scr_animation(&guider_ui, &guider_ui.menu2, guider_ui.menu2_del, NULL, setup_scr_menu2, LV_SCR_LOAD_ANIM_NONE, 200, 50, true, true);
     }
 }
 
@@ -1178,6 +1192,20 @@ static void settings_sw_1_event_handler (lv_event_t *e) {
 
 }
 
+static void settings_btn_5_event_handler (lv_event_t *e)
+{
+    lv_event_code_t code = lv_event_get_code(e);
+    switch (code) {
+        case LV_EVENT_CLICKED:
+        {
+            ui_load_scr_animation(&guider_ui, &guider_ui.secret_change, guider_ui.secret_change_del, &guider_ui.settings_del, setup_scr_secret_change, LV_SCR_LOAD_ANIM_NONE, 200, 50, true, true);
+            break;
+        }
+        default:
+            break;
+    }
+}
+
 static void settings_btn_4_event_handler (lv_event_t *e)
 {
     lv_event_code_t code = lv_event_get_code(e);
@@ -1226,6 +1254,7 @@ void events_init_settings (lv_ui *ui)
 {
     lv_obj_add_event_cb(ui->settings, settings_event_handler, LV_EVENT_ALL, ui);
     lv_obj_add_event_cb(ui->settings_sw_1, settings_sw_1_event_handler, LV_EVENT_VALUE_CHANGED, ui);
+    lv_obj_add_event_cb(ui->settings_btn_5, settings_btn_5_event_handler, LV_EVENT_ALL, ui);
     lv_obj_add_event_cb(ui->settings_btn_4, settings_btn_4_event_handler, LV_EVENT_CLICKED, ui);
     lv_obj_add_event_cb(ui->settings_btn_3, settings_btn_3_event_handler, LV_EVENT_ALL, ui);
     lv_obj_add_event_cb(ui->settings,setting_screen_loaded_event_handler, LV_EVENT_SCREEN_LOADED,ui);
@@ -1397,6 +1426,243 @@ void events_init_chat (lv_ui *ui)
     lv_obj_add_event_cb(ui->chat_ta_1, chat_ta_focused_handler, LV_EVENT_FOCUSED | LV_EVENT_DEFOCUSED, ui);
     lv_obj_add_event_cb(ui->chat_btn_1, chat_btn_send_handler, LV_EVENT_CLICKED, ui);
     lv_obj_add_event_cb(ui->chat, chat_screen_loaded_handler, LV_EVENT_SCREEN_LOADED, NULL);
+}
+
+static void secret_change_btn_1_event_handler (lv_event_t *e)
+{
+    lv_event_code_t code = lv_event_get_code(e);
+    switch (code) {
+        case LV_EVENT_CLICKED:
+        {
+            ui_load_scr_animation(&guider_ui, &guider_ui.settings, guider_ui.settings_del, &guider_ui.secret_change_del, setup_scr_settings, LV_SCR_LOAD_ANIM_NONE, 200, 50, true, true);
+            break;
+        }
+        default:
+            break;
+    }
+}
+
+static void secret_change_btn_2_event_handler (lv_event_t *e)
+{
+    lv_event_code_t code = lv_event_get_code(e);
+    switch (code) {
+        case LV_EVENT_CLICKED:
+        {
+            lv_ui *ui = (lv_ui *)lv_event_get_user_data(e);
+            if (ui != NULL) {
+                lv_obj_clear_flag(ui->secret_change_msgbox_1, LV_OBJ_FLAG_HIDDEN);
+            }
+            break;
+        }
+        default:
+            break;
+    }
+}
+
+static void secret_change_btn_3_event_handler (lv_event_t *e)
+{
+    lv_event_code_t code = lv_event_get_code(e);
+    switch (code) {
+        case LV_EVENT_CLICKED:
+        {
+            lv_ui *ui = (lv_ui *)lv_event_get_user_data(e);
+            if (ui != NULL) {
+                lv_obj_clear_flag(ui->secret_change_msgbox_2, LV_OBJ_FLAG_HIDDEN);
+            }
+            break;
+        }
+        default:
+            break;
+    }
+}
+
+static void secret_change_msgbox_1_event_handler (lv_event_t *e)
+{
+    lv_event_code_t code = lv_event_get_code(e);
+    if (code == LV_EVENT_VALUE_CHANGED) {
+        // 获取事件参数中的按钮ID
+        uint32_t *btn_id_ptr = lv_event_get_param(e);
+        if (btn_id_ptr != NULL) {
+            uint32_t btn_id = *btn_id_ptr;
+            if (btn_id == 0) { // Apply
+                // 读取roller值并保存密码
+                char pwd[5] = {0};
+                lv_roller_get_selected_str(guider_ui.secret_change_roller_1, pwd, 2);
+                lv_roller_get_selected_str(guider_ui.secret_change_roller_2, &pwd[1], 2);
+                lv_roller_get_selected_str(guider_ui.secret_change_roller_3, &pwd[2], 2);
+                lv_roller_get_selected_str(guider_ui.secret_change_roller_4, &pwd[3], 2);
+                
+                // 保存密码到全局变量或存储
+                g_app_state.password[0] = pwd[0] - '0';
+                g_app_state.password[1] = pwd[1] - '0';
+                g_app_state.password[2] = pwd[2] - '0';
+                g_app_state.password[3] = pwd[3] - '0';
+                g_app_state.password_set = true;
+                
+                // 跳转到settings页面
+                ui_load_scr_animation(&guider_ui, &guider_ui.settings, guider_ui.settings_del, &guider_ui.secret_change_del, setup_scr_settings, LV_SCR_LOAD_ANIM_NONE, 200, 50, true, true);
+            } else if (btn_id == 1) { // Close
+                lv_obj_add_flag(guider_ui.secret_change_msgbox_1, LV_OBJ_FLAG_HIDDEN);
+            }
+        }
+    }
+}
+
+static void secret_change_msgbox_2_event_handler (lv_event_t *e)
+{
+    lv_event_code_t code = lv_event_get_code(e);
+    if (code == LV_EVENT_VALUE_CHANGED) {
+        // 获取事件参数中的按钮ID
+        uint32_t *btn_id_ptr = lv_event_get_param(e);
+        if (btn_id_ptr != NULL) {
+            uint32_t btn_id = *btn_id_ptr;
+            if (btn_id == 0) { // Apply
+                // 取消密码
+                g_app_state.password_set = false;
+                
+                // 跳转到settings页面
+                ui_load_scr_animation(&guider_ui, &guider_ui.settings, guider_ui.settings_del, &guider_ui.secret_change_del, setup_scr_settings, LV_SCR_LOAD_ANIM_NONE, 200, 50, true, true);
+            } else if (btn_id == 1) { // Close
+                lv_obj_add_flag(guider_ui.secret_change_msgbox_2, LV_OBJ_FLAG_HIDDEN);
+            }
+        }
+    }
+}
+
+void events_init_secret_change (lv_ui *ui)
+{
+    lv_obj_add_event_cb(ui->secret_change_btn_1, secret_change_btn_1_event_handler, LV_EVENT_ALL, ui);
+    lv_obj_add_event_cb(ui->secret_change_btn_2, secret_change_btn_2_event_handler, LV_EVENT_ALL, ui);
+    lv_obj_add_event_cb(ui->secret_change_btn_3, secret_change_btn_3_event_handler, LV_EVENT_ALL, ui);
+    lv_obj_add_event_cb(ui->secret_change_msgbox_1, secret_change_msgbox_1_event_handler, LV_EVENT_ALL, ui);
+    lv_obj_add_event_cb(ui->secret_change_msgbox_2, secret_change_msgbox_2_event_handler, LV_EVENT_ALL, ui);
+}
+
+// 密码输入相关变量
+static uint8_t password_input[4] = {0};
+static uint8_t password_input_index = 0;
+
+// 数字按钮事件处理函数
+static void secret_num_btn_event_handler (lv_event_t *e)
+{
+    lv_event_code_t code = lv_event_get_code(e);
+    if (code == LV_EVENT_CLICKED) {
+        if (password_input_index < 4) {
+            // 获取按钮文本
+            lv_obj_t *btn = lv_event_get_target(e);
+            lv_obj_t *label = lv_obj_get_child(btn, 0);
+            const char *text = lv_label_get_text(label);
+            
+            // 保存输入的数字
+            password_input[password_input_index] = text[0] - '0';
+            
+            // 更新对应label的背景颜色
+            lv_ui *ui = (lv_ui *)lv_event_get_user_data(e);
+            if (ui != NULL) {
+                switch (password_input_index) {
+                    case 0:
+                        lv_obj_set_style_bg_color(ui->secret_label_13, lv_color_hex(0x0093ff), LV_PART_MAIN|LV_STATE_DEFAULT);
+                        break;
+                    case 1:
+                        lv_obj_set_style_bg_color(ui->secret_label_14, lv_color_hex(0x0093ff), LV_PART_MAIN|LV_STATE_DEFAULT);
+                        break;
+                    case 2:
+                        lv_obj_set_style_bg_color(ui->secret_label_15, lv_color_hex(0x0093ff), LV_PART_MAIN|LV_STATE_DEFAULT);
+                        break;
+                    case 3:
+                        lv_obj_set_style_bg_color(ui->secret_label_16, lv_color_hex(0x0093ff), LV_PART_MAIN|LV_STATE_DEFAULT);
+                        break;
+                }
+            }
+            
+            password_input_index++;
+            
+            // 输入完成，验证密码
+            if (password_input_index == 4) {
+                bool password_correct = true;
+                for (int i = 0; i < 4; i++) {
+                    if (password_input[i] != g_app_state.password[i]) {
+                        password_correct = false;
+                        break;
+                    }
+                }
+                
+                if (password_correct) {
+                    // 密码正确，跳转到menu2页面
+                    g_app_state.password_verified = true;
+                    ui_load_scr_animation(&guider_ui, &guider_ui.menu2, guider_ui.menu2_del, &guider_ui.secret_del, setup_scr_menu2, LV_SCR_LOAD_ANIM_NONE, 200, 50, true, true);
+                } else {
+                    // 密码错误，重新开始输入
+                    password_input_index = 0;
+                    // 重置label背景颜色
+                    lv_ui *ui = (lv_ui *)lv_event_get_user_data(e);
+                    if (ui != NULL) {
+                        lv_obj_set_style_bg_color(ui->secret_label_13, lv_color_hex(0xffffff), LV_PART_MAIN|LV_STATE_DEFAULT);
+                        lv_obj_set_style_bg_color(ui->secret_label_14, lv_color_hex(0xffffff), LV_PART_MAIN|LV_STATE_DEFAULT);
+                        lv_obj_set_style_bg_color(ui->secret_label_15, lv_color_hex(0xffffff), LV_PART_MAIN|LV_STATE_DEFAULT);
+                        lv_obj_set_style_bg_color(ui->secret_label_16, lv_color_hex(0xffffff), LV_PART_MAIN|LV_STATE_DEFAULT);
+                    }
+                }
+            }
+        }
+    }
+}
+
+// 删除按钮事件处理函数
+static void secret_delete_btn_event_handler (lv_event_t *e)
+{
+    lv_event_code_t code = lv_event_get_code(e);
+    if (code == LV_EVENT_CLICKED) {
+        if (password_input_index > 0) {
+            password_input_index--;
+            
+            // 重置对应label的背景颜色
+            lv_ui *ui = (lv_ui *)lv_event_get_user_data(e);
+            if (ui != NULL) {
+                switch (password_input_index) {
+                    case 0:
+                        lv_obj_set_style_bg_color(ui->secret_label_13, lv_color_hex(0xffffff), LV_PART_MAIN|LV_STATE_DEFAULT);
+                        break;
+                    case 1:
+                        lv_obj_set_style_bg_color(ui->secret_label_14, lv_color_hex(0xffffff), LV_PART_MAIN|LV_STATE_DEFAULT);
+                        break;
+                    case 2:
+                        lv_obj_set_style_bg_color(ui->secret_label_15, lv_color_hex(0xffffff), LV_PART_MAIN|LV_STATE_DEFAULT);
+                        break;
+                    case 3:
+                        lv_obj_set_style_bg_color(ui->secret_label_16, lv_color_hex(0xffffff), LV_PART_MAIN|LV_STATE_DEFAULT);
+                        break;
+                }
+            }
+        }
+    }
+}
+
+// secret页面事件初始化
+void events_init_secret (lv_ui *ui)
+{
+    // 为数字按钮添加事件处理
+    lv_obj_add_event_cb(ui->secret_btn_1, secret_num_btn_event_handler, LV_EVENT_ALL, ui);
+    lv_obj_add_event_cb(ui->secret_btn_2, secret_num_btn_event_handler, LV_EVENT_ALL, ui);
+    lv_obj_add_event_cb(ui->secret_btn_3, secret_num_btn_event_handler, LV_EVENT_ALL, ui);
+    lv_obj_add_event_cb(ui->secret_btn_4, secret_num_btn_event_handler, LV_EVENT_ALL, ui);
+    lv_obj_add_event_cb(ui->secret_btn_5, secret_num_btn_event_handler, LV_EVENT_ALL, ui);
+    lv_obj_add_event_cb(ui->secret_btn_6, secret_num_btn_event_handler, LV_EVENT_ALL, ui);
+    lv_obj_add_event_cb(ui->secret_btn_7, secret_num_btn_event_handler, LV_EVENT_ALL, ui);
+    lv_obj_add_event_cb(ui->secret_btn_8, secret_num_btn_event_handler, LV_EVENT_ALL, ui);
+    lv_obj_add_event_cb(ui->secret_btn_9, secret_num_btn_event_handler, LV_EVENT_ALL, ui);
+    lv_obj_add_event_cb(ui->secret_btn_10, secret_num_btn_event_handler, LV_EVENT_ALL, ui);
+    
+    // 为删除按钮添加事件处理
+    lv_obj_add_event_cb(ui->secret_btn_11, secret_delete_btn_event_handler, LV_EVENT_ALL, ui);
+    
+    // 重置密码输入状态
+    password_input_index = 0;
+    // 重置label背景颜色
+    lv_obj_set_style_bg_color(ui->secret_label_13, lv_color_hex(0xffffff), LV_PART_MAIN|LV_STATE_DEFAULT);
+    lv_obj_set_style_bg_color(ui->secret_label_14, lv_color_hex(0xffffff), LV_PART_MAIN|LV_STATE_DEFAULT);
+    lv_obj_set_style_bg_color(ui->secret_label_15, lv_color_hex(0xffffff), LV_PART_MAIN|LV_STATE_DEFAULT);
+    lv_obj_set_style_bg_color(ui->secret_label_16, lv_color_hex(0xffffff), LV_PART_MAIN|LV_STATE_DEFAULT);
 }
 
 static void compass_event_handler (lv_event_t *e)

@@ -1,0 +1,4 @@
+D:/stm32_hal_program/FreeRtos/OV_watch_01/build/CMakeFiles/OV_watch_01.dir
+D:/stm32_hal_program/FreeRtos/OV_watch_01/build/CMakeFiles/ALL_BUILD.dir
+D:/stm32_hal_program/FreeRtos/OV_watch_01/build/CMakeFiles/ZERO_CHECK.dir
+D:/stm32_hal_program/FreeRtos/OV_watch_01/build/cmake/stm32cubemx/CMakeFiles/ALL_BUILD.dir

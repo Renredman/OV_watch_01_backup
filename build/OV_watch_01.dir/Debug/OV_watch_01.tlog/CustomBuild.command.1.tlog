@@ -1,0 +1,10 @@
+^D:\STM32_HAL_PROGRAM\FREERTOS\OV_WATCH_01\CMAKELISTS.TXT
+setlocal
+D:\STM32CubeCLT\STM32CubeCLT\STM32CubeCLT_1.19.0\CMake\bin\cmake.exe -SD:/stm32_hal_program/FreeRtos/OV_watch_01 -BD:/stm32_hal_program/FreeRtos/OV_watch_01/build --check-stamp-file D:/stm32_hal_program/FreeRtos/OV_watch_01/build/CMakeFiles/generate.stamp
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal & call :cmErrorLevel %errorlevel% & goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd

@@ -34,6 +34,8 @@ void events_init_game_2048(lv_ui *ui);
 void events_init_settings(lv_ui *ui);
 void events_init_story(lv_ui *ui);
 void events_init_chat(lv_ui *ui);
+void events_init_secret(lv_ui *ui);
+void events_init_secret_change(lv_ui *ui);
 void events_init_compass(lv_ui *ui);
 void events_init_time_date(lv_ui *ui);
 void heart_update_callback_from_data_task(HeartMessage *msg);

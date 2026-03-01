@@ -71,6 +71,9 @@ void StopEnterTask(void *argument)
             LCD_Set_Light(g_app_state.scr1_slider_value);
             CST816_Wakeup(); // 让 CST816 自己完成唤醒
 
+            // 重置密码验证状态，确保唤醒后需要重新输入密码
+            g_app_state.password_verified = false;
+
             HAL_RTCEx_DeactivateWakeUpTimer(&hrtc);
             HAL_RTCEx_SetWakeUpTimer_IT(&hrtc,2000,RTC_WAKEUPCLOCK_RTCCLK_DIV16);
 

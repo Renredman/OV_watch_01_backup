@@ -1,0 +1,954 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="17.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <ClCompile Include="D:\stm32_hal_program\FreeRtos\OV_watch_01\BSP\MPU6050\eMPL\inv_mpu.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\stm32_hal_program\FreeRtos\OV_watch_01\SYSTEM\delay.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\stm32_hal_program\FreeRtos\OV_watch_01\BSP\LCD\lcd.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\stm32_hal_program\FreeRtos\OV_watch_01\BSP\LCD\lcd_init.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\stm32_hal_program\FreeRtos\OV_watch_01\BSP\KEY\key.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\stm32_hal_program\FreeRtos\OV_watch_01\BSP\KT6328\KT6328.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\stm32_hal_program\FreeRtos\OV_watch_01\BSP\OWDG\WDOG.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\stm32_hal_program\FreeRtos\OV_watch_01\BSP\AHT21\AHT21.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\stm32_hal_program\FreeRtos\OV_watch_01\BSP\IIC\iic_hal.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\stm32_hal_program\FreeRtos\OV_watch_01\BSP\EM7028\em70x8.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\stm32_hal_program\FreeRtos\OV_watch_01\BSP\EM7028\HrAlgorythm.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\stm32_hal_program\FreeRtos\OV_watch_01\BSP\EM7028\user_Queue.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\stm32_hal_program\FreeRtos\OV_watch_01\BSP\POWER\power.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\stm32_hal_program\FreeRtos\OV_watch_01\BSP\SPL06_001\SPL06_001.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\stm32_hal_program\FreeRtos\OV_watch_01\BSP\LSM303DLH\LSM303.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\stm32_hal_program\FreeRtos\OV_watch_01\LVGL_porting\lv_port_disp.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\stm32_hal_program\FreeRtos\OV_watch_01\LVGL_porting\lv_port_indev.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\stm32_hal_program\FreeRtos\OV_watch_01\LVGL_src\lv_hal_disp.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\stm32_hal_program\FreeRtos\OV_watch_01\LVGL_src\lv_hal_indev.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\stm32_hal_program\FreeRtos\OV_watch_01\LVGL_src\gifdec.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\stm32_hal_program\FreeRtos\OV_watch_01\LVGL_src\lodepng.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\stm32_hal_program\FreeRtos\OV_watch_01\LVGL_src\lv_anim.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\stm32_hal_program\FreeRtos\OV_watch_01\LVGL_src\lv_anim_timeline.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\stm32_hal_program\FreeRtos\OV_watch_01\LVGL_src\lv_animimg.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\stm32_hal_program\FreeRtos\OV_watch_01\LVGL_src\lv_arc.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\stm32_hal_program\FreeRtos\OV_watch_01\LVGL_src\lv_font_loader.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\stm32_hal_program\FreeRtos\OV_watch_01\LVGL_src\lv_area.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\stm32_hal_program\FreeRtos\OV_watch_01\LVGL_src\lv_async.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\stm32_hal_program\FreeRtos\OV_watch_01\LVGL_src\lv_mem.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\stm32_hal_program\FreeRtos\OV_watch_01\LVGL_src\lv_bar.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\stm32_hal_program\FreeRtos\OV_watch_01\LVGL_src\lv_bidi.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\stm32_hal_program\FreeRtos\OV_watch_01\LVGL_src\lv_bmp.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\stm32_hal_program\FreeRtos\OV_watch_01\LVGL_src\lv_btn.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\stm32_hal_program\FreeRtos\OV_watch_01\LVGL_src\lv_btnmatrix.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\stm32_hal_program\FreeRtos\OV_watch_01\LVGL_src\lv_calendar.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\stm32_hal_program\FreeRtos\OV_watch_01\LVGL_src\lv_calendar_header_arrow.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\stm32_hal_program\FreeRtos\OV_watch_01\LVGL_src\lv_chart.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\stm32_hal_program\FreeRtos\OV_watch_01\LVGL_src\lv_calendar_header_dropdown.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\stm32_hal_program\FreeRtos\OV_watch_01\LVGL_src\lv_canvas.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\stm32_hal_program\FreeRtos\OV_watch_01\LVGL_src\lv_checkbox.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\stm32_hal_program\FreeRtos\OV_watch_01\LVGL_src\lv_color.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\stm32_hal_program\FreeRtos\OV_watch_01\LVGL_src\lv_colorwheel.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\stm32_hal_program\FreeRtos\OV_watch_01\LVGL_src\lv_disp.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\stm32_hal_program\FreeRtos\OV_watch_01\LVGL_src\lv_draw.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\stm32_hal_program\FreeRtos\OV_watch_01\LVGL_src\lv_draw_arc.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\stm32_hal_program\FreeRtos\OV_watch_01\LVGL_src\lv_draw_img.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\stm32_hal_program\FreeRtos\OV_watch_01\LVGL_src\lv_draw_label.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\stm32_hal_program\FreeRtos\OV_watch_01\LVGL_src\lv_draw_layer.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\stm32_hal_program\FreeRtos\OV_watch_01\LVGL_src\lv_draw_line.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\stm32_hal_program\FreeRtos\OV_watch_01\LVGL_src\lv_draw_mask.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\stm32_hal_program\FreeRtos\OV_watch_01\LVGL_src\lv_draw_pxp.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\stm32_hal_program\FreeRtos\OV_watch_01\LVGL_src\lv_draw_pxp_blend.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\stm32_hal_program\FreeRtos\OV_watch_01\LVGL_src\lv_draw_rect.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\stm32_hal_program\FreeRtos\OV_watch_01\LVGL_src\lv_draw_sdl.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\stm32_hal_program\FreeRtos\OV_watch_01\LVGL_src\lv_draw_sdl_arc.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\stm32_hal_program\FreeRtos\OV_watch_01\LVGL_src\lv_draw_sdl_bg.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\stm32_hal_program\FreeRtos\OV_watch_01\LVGL_src\lv_draw_sdl_composite.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\stm32_hal_program\FreeRtos\OV_watch_01\LVGL_src\lv_draw_sdl_label.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\stm32_hal_program\FreeRtos\OV_watch_01\LVGL_src\lv_draw_sdl_img.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\stm32_hal_program\FreeRtos\OV_watch_01\LVGL_src\lv_draw_sdl_layer.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\stm32_hal_program\FreeRtos\OV_watch_01\LVGL_src\lv_draw_sdl_line.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\stm32_hal_program\FreeRtos\OV_watch_01\LVGL_src\lv_draw_sdl_mask.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\stm32_hal_program\FreeRtos\OV_watch_01\LVGL_src\lv_draw_sdl_polygon.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\stm32_hal_program\FreeRtos\OV_watch_01\LVGL_src\lv_draw_sdl_rect.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\stm32_hal_program\FreeRtos\OV_watch_01\LVGL_src\lv_draw_sdl_stack_blur.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\stm32_hal_program\FreeRtos\OV_watch_01\LVGL_src\lv_draw_sdl_texture_cache.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\stm32_hal_program\FreeRtos\OV_watch_01\LVGL_src\lv_draw_sdl_utils.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\stm32_hal_program\FreeRtos\OV_watch_01\LVGL_src\lv_draw_sw_blend.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\stm32_hal_program\FreeRtos\OV_watch_01\LVGL_src\lv_draw_sw.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\stm32_hal_program\FreeRtos\OV_watch_01\LVGL_src\lv_draw_sw_arc.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\stm32_hal_program\FreeRtos\OV_watch_01\LVGL_src\lv_draw_sw_dither.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\stm32_hal_program\FreeRtos\OV_watch_01\LVGL_src\lv_draw_sw_gradient.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\stm32_hal_program\FreeRtos\OV_watch_01\LVGL_src\lv_draw_sw_img.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\stm32_hal_program\FreeRtos\OV_watch_01\LVGL_src\lv_draw_sw_layer.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\stm32_hal_program\FreeRtos\OV_watch_01\LVGL_src\lv_draw_sw_letter.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\stm32_hal_program\FreeRtos\OV_watch_01\LVGL_src\lv_draw_sw_line.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\stm32_hal_program\FreeRtos\OV_watch_01\LVGL_src\lv_draw_sw_polygon.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\stm32_hal_program\FreeRtos\OV_watch_01\LVGL_src\lv_draw_sw_rect.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\stm32_hal_program\FreeRtos\OV_watch_01\LVGL_src\lv_draw_sw_transform.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\stm32_hal_program\FreeRtos\OV_watch_01\LVGL_src\lv_draw_vglite_arc.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\stm32_hal_program\FreeRtos\OV_watch_01\LVGL_src\lv_draw_triangle.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\stm32_hal_program\FreeRtos\OV_watch_01\LVGL_src\lv_draw_transform.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\stm32_hal_program\FreeRtos\OV_watch_01\LVGL_src\lv_draw_vglite.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\stm32_hal_program\FreeRtos\OV_watch_01\LVGL_src\lv_draw_vglite_rect.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\stm32_hal_program\FreeRtos\OV_watch_01\LVGL_src\lv_draw_vglite_line.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\stm32_hal_program\FreeRtos\OV_watch_01\LVGL_src\lv_draw_vglite_blend.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\stm32_hal_program\FreeRtos\OV_watch_01\LVGL_src\lv_event.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\stm32_hal_program\FreeRtos\OV_watch_01\LVGL_src\lv_flex.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\stm32_hal_program\FreeRtos\OV_watch_01\LVGL_src\lv_dropdown.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\stm32_hal_program\FreeRtos\OV_watch_01\LVGL_src\lv_extra.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\stm32_hal_program\FreeRtos\OV_watch_01\LVGL_src\lv_ffmpeg.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\stm32_hal_program\FreeRtos\OV_watch_01\LVGL_src\lv_font.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\stm32_hal_program\FreeRtos\OV_watch_01\LVGL_src\lv_font_fmt_txt.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\stm32_hal_program\FreeRtos\OV_watch_01\LVGL_src\lv_font_dejavu_16_persian_hebrew.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\stm32_hal_program\FreeRtos\OV_watch_01\LVGL_src\lv_font_montserrat_30.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\stm32_hal_program\FreeRtos\OV_watch_01\LVGL_src\lv_font_montserrat_36.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\stm32_hal_program\FreeRtos\OV_watch_01\LVGL_src\lv_font_montserrat_8.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\stm32_hal_program\FreeRtos\OV_watch_01\LVGL_src\lv_font_montserrat_32.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\stm32_hal_program\FreeRtos\OV_watch_01\LVGL_src\lv_font_montserrat_28.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\stm32_hal_program\FreeRtos\OV_watch_01\LVGL_src\lv_font_montserrat_34.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\stm32_hal_program\FreeRtos\OV_watch_01\LVGL_src\lv_font_montserrat_20.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\stm32_hal_program\FreeRtos\OV_watch_01\LVGL_src\lv_font_montserrat_12.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\stm32_hal_program\FreeRtos\OV_watch_01\LVGL_src\lv_font_montserrat_18.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\stm32_hal_program\FreeRtos\OV_watch_01\LVGL_src\lv_font_montserrat_12_subpx.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\stm32_hal_program\FreeRtos\OV_watch_01\LVGL_src\lv_font_montserrat_16.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\stm32_hal_program\FreeRtos\OV_watch_01\LVGL_src\lv_font_montserrat_26.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\stm32_hal_program\FreeRtos\OV_watch_01\LVGL_src\lv_font_montserrat_24.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\stm32_hal_program\FreeRtos\OV_watch_01\LVGL_src\lv_font_montserrat_22.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\stm32_hal_program\FreeRtos\OV_watch_01\LVGL_src\lv_font_montserrat_28_compressed.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\stm32_hal_program\FreeRtos\OV_watch_01\LVGL_src\lv_font_montserrat_10.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\stm32_hal_program\FreeRtos\OV_watch_01\LVGL_src\lv_font_montserrat_14.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\stm32_hal_program\FreeRtos\OV_watch_01\LVGL_src\lv_png.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\stm32_hal_program\FreeRtos\OV_watch_01\LVGL_src\lv_gpu_d2_ra6m3.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\stm32_hal_program\FreeRtos\OV_watch_01\LVGL_src\lv_math.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\stm32_hal_program\FreeRtos\OV_watch_01\LVGL_src\lv_gpu_d2_draw_label.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\stm32_hal_program\FreeRtos\OV_watch_01\LVGL_src\lv_gpu_stm32_dma2d.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\stm32_hal_program\FreeRtos\OV_watch_01\LVGL_src\lv_win.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\stm32_hal_program\FreeRtos\OV_watch_01\LVGL_src\lv_led.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\stm32_hal_program\FreeRtos\OV_watch_01\LVGL_src\lv_menu.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\stm32_hal_program\FreeRtos\OV_watch_01\LVGL_src\lv_gpu_nxp_pxp.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\stm32_hal_program\FreeRtos\OV_watch_01\LVGL_src\lv_printf.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\stm32_hal_program\FreeRtos\OV_watch_01\LVGL_src\lv_rlottie.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\stm32_hal_program\FreeRtos\OV_watch_01\LVGL_src\lv_textarea.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\stm32_hal_program\FreeRtos\OV_watch_01\LVGL_src\lv_list.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\stm32_hal_program\FreeRtos\OV_watch_01\LVGL_src\lv_gpu_swm341_dma2d.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\stm32_hal_program\FreeRtos\OV_watch_01\LVGL_src\lv_img.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\stm32_hal_program\FreeRtos\OV_watch_01\LVGL_src\tjpgd.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\stm32_hal_program\FreeRtos\OV_watch_01\LVGL_src\lv_obj_scroll.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\stm32_hal_program\FreeRtos\OV_watch_01\LVGL_src\lv_grid.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\stm32_hal_program\FreeRtos\OV_watch_01\LVGL_src\lv_timer.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\stm32_hal_program\FreeRtos\OV_watch_01\LVGL_src\lv_theme_default.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\stm32_hal_program\FreeRtos\OV_watch_01\LVGL_src\lv_group.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\stm32_hal_program\FreeRtos\OV_watch_01\LVGL_src\lv_obj_class.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\stm32_hal_program\FreeRtos\OV_watch_01\LVGL_src\lv_slider.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\stm32_hal_program\FreeRtos\OV_watch_01\LVGL_src\lv_fragment.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\stm32_hal_program\FreeRtos\OV_watch_01\LVGL_src\lv_sjpg.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\stm32_hal_program\FreeRtos\OV_watch_01\LVGL_src\lv_obj.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\stm32_hal_program\FreeRtos\OV_watch_01\LVGL_src\lv_tiny_ttf.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\stm32_hal_program\FreeRtos\OV_watch_01\LVGL_src\lv_obj_style.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\stm32_hal_program\FreeRtos\OV_watch_01\LVGL_src\lv_gif.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\stm32_hal_program\FreeRtos\OV_watch_01\LVGL_src\lv_font_montserrat_46.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\stm32_hal_program\FreeRtos\OV_watch_01\LVGL_src\lv_templ.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\stm32_hal_program\FreeRtos\OV_watch_01\LVGL_src\lv_refr.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\stm32_hal_program\FreeRtos\OV_watch_01\LVGL_src\lv_font_simsun_16_cjk.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\stm32_hal_program\FreeRtos\OV_watch_01\LVGL_src\lv_indev_scroll.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\stm32_hal_program\FreeRtos\OV_watch_01\LVGL_src\lv_switch.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\stm32_hal_program\FreeRtos\OV_watch_01\LVGL_src\lv_fs_littlefs.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\stm32_hal_program\FreeRtos\OV_watch_01\LVGL_src\lv_qrcode.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\stm32_hal_program\FreeRtos\OV_watch_01\LVGL_src\lv_obj_draw.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\stm32_hal_program\FreeRtos\OV_watch_01\LVGL_src\lv_span.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\stm32_hal_program\FreeRtos\OV_watch_01\LVGL_src\lv_theme_basic.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\stm32_hal_program\FreeRtos\OV_watch_01\LVGL_src\lv_monkey.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\stm32_hal_program\FreeRtos\OV_watch_01\LVGL_src\lv_txt.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\stm32_hal_program\FreeRtos\OV_watch_01\LVGL_src\lv_objx_templ.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\stm32_hal_program\FreeRtos\OV_watch_01\LVGL_src\lv_indev.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\stm32_hal_program\FreeRtos\OV_watch_01\LVGL_src\lv_spinbox.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\stm32_hal_program\FreeRtos\OV_watch_01\LVGL_src\lv_theme.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\stm32_hal_program\FreeRtos\OV_watch_01\LVGL_src\lv_imgbtn.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\stm32_hal_program\FreeRtos\OV_watch_01\LVGL_src\lv_msg.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\stm32_hal_program\FreeRtos\OV_watch_01\LVGL_src\lv_log.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\stm32_hal_program\FreeRtos\OV_watch_01\LVGL_src\lv_freetype.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\stm32_hal_program\FreeRtos\OV_watch_01\LVGL_src\lv_obj_tree.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\stm32_hal_program\FreeRtos\OV_watch_01\LVGL_src\lv_fs_win32.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\stm32_hal_program\FreeRtos\OV_watch_01\LVGL_src\lv_fragment_manager.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\stm32_hal_program\FreeRtos\OV_watch_01\LVGL_src\lv_ll.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\stm32_hal_program\FreeRtos\OV_watch_01\LVGL_src\lv_gridnav.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\stm32_hal_program\FreeRtos\OV_watch_01\LVGL_src\lv_meter.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\stm32_hal_program\FreeRtos\OV_watch_01\LVGL_src\lv_lru.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\stm32_hal_program\FreeRtos\OV_watch_01\LVGL_src\qrcodegen.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\stm32_hal_program\FreeRtos\OV_watch_01\LVGL_src\lv_fs_fatfs.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\stm32_hal_program\FreeRtos\OV_watch_01\LVGL_src\lv_img_cache.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\stm32_hal_program\FreeRtos\OV_watch_01\LVGL_src\lv_img_buf.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\stm32_hal_program\FreeRtos\OV_watch_01\LVGL_src\lv_ime_pinyin.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\stm32_hal_program\FreeRtos\OV_watch_01\LVGL_src\lv_msgbox.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\stm32_hal_program\FreeRtos\OV_watch_01\LVGL_src\lv_utils.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\stm32_hal_program\FreeRtos\OV_watch_01\LVGL_src\lv_vglite_utils.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\stm32_hal_program\FreeRtos\OV_watch_01\LVGL_src\lv_table.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\stm32_hal_program\FreeRtos\OV_watch_01\LVGL_src\lv_txt_ap.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\stm32_hal_program\FreeRtos\OV_watch_01\LVGL_src\lv_theme_mono.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\stm32_hal_program\FreeRtos\OV_watch_01\LVGL_src\lv_hal_tick.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\stm32_hal_program\FreeRtos\OV_watch_01\LVGL_src\lv_imgfont.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\stm32_hal_program\FreeRtos\OV_watch_01\LVGL_src\lv_gc.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\stm32_hal_program\FreeRtos\OV_watch_01\LVGL_src\lv_vglite_buf.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\stm32_hal_program\FreeRtos\OV_watch_01\LVGL_src\lv_gpu_arm2d.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\stm32_hal_program\FreeRtos\OV_watch_01\LVGL_src\lv_fs.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\stm32_hal_program\FreeRtos\OV_watch_01\LVGL_src\lv_snapshot.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\stm32_hal_program\FreeRtos\OV_watch_01\LVGL_src\lv_img_decoder.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\stm32_hal_program\FreeRtos\OV_watch_01\LVGL_src\lv_font_unscii_16.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\stm32_hal_program\FreeRtos\OV_watch_01\LVGL_src\lv_spinner.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\stm32_hal_program\FreeRtos\OV_watch_01\LVGL_src\lv_font_montserrat_48.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\stm32_hal_program\FreeRtos\OV_watch_01\LVGL_src\lv_tileview.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\stm32_hal_program\FreeRtos\OV_watch_01\LVGL_src\lv_line.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\stm32_hal_program\FreeRtos\OV_watch_01\LVGL_src\lv_keyboard.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\stm32_hal_program\FreeRtos\OV_watch_01\LVGL_src\lv_style_gen.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\stm32_hal_program\FreeRtos\OV_watch_01\LVGL_src\lv_fs_posix.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\stm32_hal_program\FreeRtos\OV_watch_01\LVGL_src\lv_style.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\stm32_hal_program\FreeRtos\OV_watch_01\LVGL_src\lv_roller.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\stm32_hal_program\FreeRtos\OV_watch_01\LVGL_src\lv_font_montserrat_38.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\stm32_hal_program\FreeRtos\OV_watch_01\LVGL_src\lv_font_unscii_8.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\stm32_hal_program\FreeRtos\OV_watch_01\LVGL_src\lv_tlsf.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\stm32_hal_program\FreeRtos\OV_watch_01\LVGL_src\lv_label.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\stm32_hal_program\FreeRtos\OV_watch_01\LVGL_src\lv_obj_pos.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\stm32_hal_program\FreeRtos\OV_watch_01\LVGL_src\lv_gpu_nxp_pxp_osa.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\stm32_hal_program\FreeRtos\OV_watch_01\LVGL_src\lv_fs_stdio.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\stm32_hal_program\FreeRtos\OV_watch_01\LVGL_src\lv_obj_style_gen.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\stm32_hal_program\FreeRtos\OV_watch_01\LVGL_src\lv_font_montserrat_40.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\stm32_hal_program\FreeRtos\OV_watch_01\LVGL_src\lv_tabview.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\stm32_hal_program\FreeRtos\OV_watch_01\Core\APP\Tasks\KeyTask.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\stm32_hal_program\FreeRtos\OV_watch_01\Core\APP\Tasks\PageTask.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\stm32_hal_program\FreeRtos\OV_watch_01\Core\APP\Tasks\WdogFeedTask.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\stm32_hal_program\FreeRtos\OV_watch_01\Core\APP\Tasks\SensorDataTask.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\stm32_hal_program\FreeRtos\OV_watch_01\Core\APP\Tasks\DataUpdateTask.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\stm32_hal_program\FreeRtos\OV_watch_01\Core\APP\Tasks\TimeUpdateTask.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\stm32_hal_program\FreeRtos\OV_watch_01\LVGL\myGUI\generated\setup_scr_about_watch.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\stm32_hal_program\FreeRtos\OV_watch_01\LVGL\myGUI\generated\setup_scr_heart.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\stm32_hal_program\FreeRtos\OV_watch_01\LVGL\myGUI\generated\setup_scr_game.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\stm32_hal_program\FreeRtos\OV_watch_01\LVGL\myGUI\generated\setup_scr_game_2048.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\stm32_hal_program\FreeRtos\OV_watch_01\LVGL\myGUI\generated\setup_scr_story.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\stm32_hal_program\FreeRtos\OV_watch_01\Core\APP\Tasks\AppState.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\stm32_hal_program\FreeRtos\OV_watch_01\Core\APP\Tasks\user_PowerManager.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\stm32_hal_program\FreeRtos\OV_watch_01\LVGL\myGUI\generated\setup_scr_chat.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\stm32_hal_program\FreeRtos\OV_watch_01\Core\APP\Tasks\BluetoothTask.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\stm32_hal_program\FreeRtos\OV_watch_01\LVGL\myGUI\generated\setup_scr_compass.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\stm32_hal_program\FreeRtos\OV_watch_01\LVGL\myGUI\generated\setup_scr_time_date.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\stm32_hal_program\FreeRtos\OV_watch_01\LVGL\myGUI\generated\setup_scr_secret.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\stm32_hal_program\FreeRtos\OV_watch_01\LVGL\myGUI\generated\setup_scr_secret_change.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\stm32_hal_program\FreeRtos\OV_watch_01\BSP\MPU6050\eMPL\inv_mpu_dmp_motion_driver.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\stm32_hal_program\FreeRtos\OV_watch_01\BSP\TOUCH\CST816.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\stm32_hal_program\FreeRtos\OV_watch_01\LVGL\myGUI\custom\custom.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\stm32_hal_program\FreeRtos\OV_watch_01\LVGL\myGUI\generated\events_init.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\stm32_hal_program\FreeRtos\OV_watch_01\LVGL\myGUI\generated\gui_guider.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\stm32_hal_program\FreeRtos\OV_watch_01\LVGL\myGUI\generated\guider_fonts\lv_font_icomoon_18.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\stm32_hal_program\FreeRtos\OV_watch_01\LVGL\myGUI\generated\guider_fonts\lv_font_icomoon_24.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\stm32_hal_program\FreeRtos\OV_watch_01\LVGL\myGUI\generated\guider_fonts\lv_font_icomoon_32.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\stm32_hal_program\FreeRtos\OV_watch_01\LVGL\myGUI\generated\guider_fonts\lv_font_simsun_12.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\stm32_hal_program\FreeRtos\OV_watch_01\LVGL\myGUI\generated\guider_fonts\lv_font_simsun_18.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\stm32_hal_program\FreeRtos\OV_watch_01\LVGL\myGUI\generated\guider_fonts\lv_font_simsun_24.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\stm32_hal_program\FreeRtos\OV_watch_01\LVGL\myGUI\generated\guider_fonts\lv_font_simsun_32.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\stm32_hal_program\FreeRtos\OV_watch_01\LVGL\myGUI\generated\guider_fonts\lv_font_simsun_48.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\stm32_hal_program\FreeRtos\OV_watch_01\LVGL\myGUI\generated\images\_pic_compass_pointer_alpha_90x150.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\stm32_hal_program\FreeRtos\OV_watch_01\LVGL\myGUI\generated\setup_scr_calculator.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\stm32_hal_program\FreeRtos\OV_watch_01\LVGL\myGUI\generated\setup_scr_calendar.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\stm32_hal_program\FreeRtos\OV_watch_01\LVGL\myGUI\generated\setup_scr_card_bag.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\stm32_hal_program\FreeRtos\OV_watch_01\LVGL\myGUI\generated\setup_scr_environment.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\stm32_hal_program\FreeRtos\OV_watch_01\LVGL\myGUI\generated\setup_scr_menu2.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\stm32_hal_program\FreeRtos\OV_watch_01\LVGL\myGUI\generated\setup_scr_scr1.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\stm32_hal_program\FreeRtos\OV_watch_01\LVGL\myGUI\generated\setup_scr_second_chronograph.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\stm32_hal_program\FreeRtos\OV_watch_01\LVGL\myGUI\generated\setup_scr_settings.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\stm32_hal_program\FreeRtos\OV_watch_01\LVGL\myGUI\generated\widgets_init.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\stm32_hal_program\FreeRtos\OV_watch_01\Core\Src\main.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\stm32_hal_program\FreeRtos\OV_watch_01\Core\Src\gpio.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\stm32_hal_program\FreeRtos\OV_watch_01\Core\Src\freertos.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\stm32_hal_program\FreeRtos\OV_watch_01\Core\Src\adc.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\stm32_hal_program\FreeRtos\OV_watch_01\Core\Src\dma.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\stm32_hal_program\FreeRtos\OV_watch_01\Core\Src\rtc.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\stm32_hal_program\FreeRtos\OV_watch_01\Core\Src\spi.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\stm32_hal_program\FreeRtos\OV_watch_01\Core\Src\tim.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\stm32_hal_program\FreeRtos\OV_watch_01\Core\Src\usart.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\stm32_hal_program\FreeRtos\OV_watch_01\Core\Src\stm32f4xx_it.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\stm32_hal_program\FreeRtos\OV_watch_01\Core\Src\stm32f4xx_hal_msp.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\stm32_hal_program\FreeRtos\OV_watch_01\Core\Src\stm32f4xx_hal_timebase_tim.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\stm32_hal_program\FreeRtos\OV_watch_01\Drivers\STM32F4xx_HAL_Driver\Src\stm32f4xx_hal_tim.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\stm32_hal_program\FreeRtos\OV_watch_01\Drivers\STM32F4xx_HAL_Driver\Src\stm32f4xx_hal_tim_ex.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\stm32_hal_program\FreeRtos\OV_watch_01\Drivers\STM32F4xx_HAL_Driver\Src\stm32f4xx_hal_adc.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\stm32_hal_program\FreeRtos\OV_watch_01\Drivers\STM32F4xx_HAL_Driver\Src\stm32f4xx_hal_adc_ex.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\stm32_hal_program\FreeRtos\OV_watch_01\Drivers\STM32F4xx_HAL_Driver\Src\stm32f4xx_ll_adc.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\stm32_hal_program\FreeRtos\OV_watch_01\Drivers\STM32F4xx_HAL_Driver\Src\stm32f4xx_hal_rcc.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\stm32_hal_program\FreeRtos\OV_watch_01\Drivers\STM32F4xx_HAL_Driver\Src\stm32f4xx_hal_rcc_ex.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\stm32_hal_program\FreeRtos\OV_watch_01\Drivers\STM32F4xx_HAL_Driver\Src\stm32f4xx_hal_flash.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\stm32_hal_program\FreeRtos\OV_watch_01\Drivers\STM32F4xx_HAL_Driver\Src\stm32f4xx_hal_flash_ex.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\stm32_hal_program\FreeRtos\OV_watch_01\Drivers\STM32F4xx_HAL_Driver\Src\stm32f4xx_hal_flash_ramfunc.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\stm32_hal_program\FreeRtos\OV_watch_01\Drivers\STM32F4xx_HAL_Driver\Src\stm32f4xx_hal_gpio.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\stm32_hal_program\FreeRtos\OV_watch_01\Drivers\STM32F4xx_HAL_Driver\Src\stm32f4xx_hal_dma_ex.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\stm32_hal_program\FreeRtos\OV_watch_01\Drivers\STM32F4xx_HAL_Driver\Src\stm32f4xx_hal_dma.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\stm32_hal_program\FreeRtos\OV_watch_01\Drivers\STM32F4xx_HAL_Driver\Src\stm32f4xx_hal_pwr.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\stm32_hal_program\FreeRtos\OV_watch_01\Drivers\STM32F4xx_HAL_Driver\Src\stm32f4xx_hal_pwr_ex.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\stm32_hal_program\FreeRtos\OV_watch_01\Drivers\STM32F4xx_HAL_Driver\Src\stm32f4xx_hal_cortex.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\stm32_hal_program\FreeRtos\OV_watch_01\Drivers\STM32F4xx_HAL_Driver\Src\stm32f4xx_hal.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\stm32_hal_program\FreeRtos\OV_watch_01\Drivers\STM32F4xx_HAL_Driver\Src\stm32f4xx_hal_exti.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\stm32_hal_program\FreeRtos\OV_watch_01\Drivers\STM32F4xx_HAL_Driver\Src\stm32f4xx_hal_rtc.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\stm32_hal_program\FreeRtos\OV_watch_01\Drivers\STM32F4xx_HAL_Driver\Src\stm32f4xx_hal_rtc_ex.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\stm32_hal_program\FreeRtos\OV_watch_01\Drivers\STM32F4xx_HAL_Driver\Src\stm32f4xx_hal_spi.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\stm32_hal_program\FreeRtos\OV_watch_01\Drivers\STM32F4xx_HAL_Driver\Src\stm32f4xx_hal_uart.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\stm32_hal_program\FreeRtos\OV_watch_01\Core\Src\system_stm32f4xx.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\stm32_hal_program\FreeRtos\OV_watch_01\Middlewares\Third_Party\FreeRTOS\Source\croutine.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\stm32_hal_program\FreeRtos\OV_watch_01\Middlewares\Third_Party\FreeRTOS\Source\event_groups.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\stm32_hal_program\FreeRtos\OV_watch_01\Middlewares\Third_Party\FreeRTOS\Source\list.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\stm32_hal_program\FreeRtos\OV_watch_01\Middlewares\Third_Party\FreeRTOS\Source\queue.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\stm32_hal_program\FreeRtos\OV_watch_01\Middlewares\Third_Party\FreeRTOS\Source\stream_buffer.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\stm32_hal_program\FreeRtos\OV_watch_01\Middlewares\Third_Party\FreeRTOS\Source\tasks.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\stm32_hal_program\FreeRtos\OV_watch_01\Middlewares\Third_Party\FreeRTOS\Source\timers.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\stm32_hal_program\FreeRtos\OV_watch_01\Middlewares\Third_Party\FreeRTOS\Source\CMSIS_RTOS_V2\cmsis_os2.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\stm32_hal_program\FreeRtos\OV_watch_01\Middlewares\Third_Party\FreeRTOS\Source\portable\MemMang\heap_4.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\stm32_hal_program\FreeRtos\OV_watch_01\Middlewares\Third_Party\FreeRTOS\Source\portable\GCC\ARM_CM4F\port.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\stm32_hal_program\FreeRtos\OV_watch_01\Core\Src\sysmem.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\stm32_hal_program\FreeRtos\OV_watch_01\Core\Src\syscalls.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="D:\stm32_hal_program\FreeRtos\OV_watch_01\BSP\LCD\lcd.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\stm32_hal_program\FreeRtos\OV_watch_01\BSP\LCD\pic.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\stm32_hal_program\FreeRtos\OV_watch_01\LVGL_porting\lv_port_indev.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\stm32_hal_program\FreeRtos\OV_watch_01\LVGL_conf\lv_conf.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\stm32_hal_program\FreeRtos\OV_watch_01\LVGL_conf\lvgl.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\stm32_hal_program\FreeRtos\OV_watch_01\Core\APP\Tasks\TimeUpdateTask.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\stm32_hal_program\FreeRtos\OV_watch_01\Core\APP\Tasks\SensorDataTask.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\stm32_hal_program\FreeRtos\OV_watch_01\Core\APP\Tasks\AppState.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\stm32_hal_program\FreeRtos\OV_watch_01\Core\APP\Tasks\user_PowerManager.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\stm32_hal_program\FreeRtos\OV_watch_01\LVGL\myGUI\custom\custom.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\stm32_hal_program\FreeRtos\OV_watch_01\LVGL\myGUI\custom\lv_conf_ext.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\stm32_hal_program\FreeRtos\OV_watch_01\LVGL\myGUI\generated\events_init.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\stm32_hal_program\FreeRtos\OV_watch_01\LVGL\myGUI\generated\gui_guider.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\stm32_hal_program\FreeRtos\OV_watch_01\LVGL\myGUI\generated\guider_customer_fonts\guider_customer_fonts.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\stm32_hal_program\FreeRtos\OV_watch_01\LVGL\myGUI\generated\widgets_init.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <CustomBuild Include="D:\stm32_hal_program\FreeRtos\OV_watch_01\CMakeLists.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="D:\stm32_hal_program\FreeRtos\OV_watch_01\startup_stm32f411xe.s" />
+  </ItemGroup>
+  <ItemGroup>
+    <Filter Include="Header Files">
+      <UniqueIdentifier>{8732E0C4-5015-31E8-91C8-29746F4A21C9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files">
+      <UniqueIdentifier>{2B9B657A-DE03-38E1-B703-24320B772F26}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+</Project>

@@ -90,7 +90,8 @@ void init_scr_del_flag(lv_ui *ui)
     ui->settings_del = true;
     ui->story_del = true;
     ui->chat_del = true;
-
+    ui->secret_del = true;
+    ui->secret_change_del = true;
     ui->time_date_del = true;
     ui->compass_del = true;
 }
@@ -111,5 +112,5 @@ void init_keyboard(lv_ui *ui)
     lv_obj_add_event_cb(ui->g_kb_top_layer, kb_event_cb, LV_EVENT_ALL, NULL);
     lv_obj_add_flag(ui->g_kb_top_layer, LV_OBJ_FLAG_HIDDEN);
     lv_obj_set_style_text_font(ui->g_kb_top_layer, &lv_font_simsun_24, LV_PART_MAIN|LV_STATE_DEFAULT);
-    lv_obj_align(ui->g_kb_top_layer, LV_ALIGN_BOTTOM_MID, 0, -38);
+    lv_obj_align(ui->g_kb_top_layer, LV_ALIGN_BOTTOM_MID, 0, -20);
 }

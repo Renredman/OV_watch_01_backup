@@ -14,6 +14,10 @@ typedef struct {
     uint8_t scr1_slider_value;
 
     bool settings_sw_1_state;
+    
+    bool password_set; // 密码是否设置
+    uint8_t password[4]; // 4位密码
+    bool password_verified; // 密码是否已验证
 }AppState;
 
 typedef struct {
