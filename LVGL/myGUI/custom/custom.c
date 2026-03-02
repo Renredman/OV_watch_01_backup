@@ -11,6 +11,8 @@
 #include "Tasks/SensorDataTask.h"
 #include "Tasks/user_PowerManager.h"
 
+
+
 // 声明自动生成的计算器屏幕初始化函数（必须添加，否则链接失败）
 extern void setup_scr_calculator(lv_ui *ui);
 

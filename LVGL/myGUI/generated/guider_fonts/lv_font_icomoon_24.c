@@ -1,14 +1,21 @@
 /*******************************************************************************
  * Size: 24 px
  * Bpp: 1
- * Opts: --bpp 1 --size 24 --stride 1 --align 1 --font icomoon.ttf --symbols  --format lvgl -o lv_font_icomoon_24.c
+ * Opts: --bpp 1 --size 24 --no-compress --stride 1 --align 1 --font icomoon.ttf --symbols  --format lvgl -o lv_font_icomoon_24.c
  ******************************************************************************/
 
+#ifdef __has_include
+    #if __has_include("lvgl.h")
+        #ifndef LV_LVGL_H_INCLUDE_SIMPLE
+            #define LV_LVGL_H_INCLUDE_SIMPLE
+        #endif
+    #endif
+#endif
 
 #ifdef LV_LVGL_H_INCLUDE_SIMPLE
-#include "lvgl.h"
+    #include "lvgl.h"
 #else
-#include "lvgl.h"
+    #include "lvgl/lvgl.h"
 #endif
 
 
@@ -48,7 +55,27 @@ static LV_ATTRIBUTE_LARGE_CONST const uint8_t glyph_bitmap[] = {
     0x16, 0x80, 0xb, 0x40, 0x9, 0xb0, 0x8, 0xc4,
     0x8, 0xe3, 0x4, 0xf8, 0x82, 0x7c, 0x41, 0x3e,
     0x20, 0xce, 0x30, 0x20, 0x10, 0xc, 0x30, 0x1,
-    0xf0
+    0xf0,
+
+    /* U+E927 "" */
+    0x0, 0x0, 0x0, 0x0, 0x3, 0x0, 0x0, 0xf,
+    0x0, 0x0, 0x3e, 0x0, 0x0, 0xee, 0x0, 0x1,
+    0x8c, 0x0, 0x6, 0x1c, 0x4, 0x1c, 0x18, 0x1c,
+    0x70, 0x30, 0x3d, 0xc0, 0x70, 0xff, 0x0, 0x61,
+    0x9c, 0x0, 0xe7, 0x18, 0x0, 0xcc, 0x18, 0x1,
+    0xb8, 0x38, 0x3, 0xff, 0xff, 0xff, 0xff, 0xff,
+    0xfe, 0x0, 0x0, 0x0, 0x0, 0x0, 0x3, 0xff,
+    0xff, 0xe7, 0xff, 0xff, 0xc0, 0x0, 0x0, 0x7,
+    0xff, 0xfc, 0xf, 0xff, 0xf8,
+
+    /* U+E928 "" */
+    0x1, 0xfc, 0x0, 0x3f, 0xf8, 0x3, 0xc1, 0xe0,
+    0x38, 0x3, 0x83, 0x0, 0x6, 0x38, 0x0, 0x39,
+    0x80, 0x38, 0xdc, 0x7, 0xc7, 0xc0, 0xe6, 0x1e,
+    0x6, 0x20, 0xf0, 0x6b, 0x7, 0x82, 0x30, 0x3c,
+    0x33, 0x81, 0xf1, 0xf0, 0x1d, 0x9e, 0x0, 0xce,
+    0xc0, 0xe, 0x30, 0x0, 0x60, 0xe0, 0xe, 0x3,
+    0xc1, 0xe0, 0xf, 0xfe, 0x0, 0x1f, 0xc0, 0x0
 };
 
 
@@ -60,7 +87,9 @@ static const lv_font_fmt_txt_glyph_dsc_t glyph_dsc[] = {
     {.bitmap_index = 0, .adv_w = 0, .box_w = 0, .box_h = 0, .ofs_x = 0, .ofs_y = 0} /* id = 0 reserved */,
     {.bitmap_index = 0, .adv_w = 384, .box_w = 19, .box_h = 21, .ofs_x = 3, .ofs_y = 0},
     {.bitmap_index = 50, .adv_w = 384, .box_w = 13, .box_h = 21, .ofs_x = 6, .ofs_y = 0},
-    {.bitmap_index = 85, .adv_w = 384, .box_w = 17, .box_h = 23, .ofs_x = 3, .ofs_y = -1}
+    {.bitmap_index = 85, .adv_w = 384, .box_w = 17, .box_h = 23, .ofs_x = 3, .ofs_y = -1},
+    {.bitmap_index = 134, .adv_w = 384, .box_w = 23, .box_h = 24, .ofs_x = 0, .ofs_y = -1},
+    {.bitmap_index = 203, .adv_w = 384, .box_w = 21, .box_h = 21, .ofs_x = 1, .ofs_y = 0}
 };
 
 /*---------------------
@@ -68,15 +97,15 @@ static const lv_font_fmt_txt_glyph_dsc_t glyph_dsc[] = {
  *--------------------*/
 
 static const uint16_t unicode_list_0[] = {
-    0x0, 0x3, 0x7
+    0x0, 0x3, 0x7, 0x25, 0x26
 };
 
 /*Collect the unicode lists and glyph_id offsets*/
 static const lv_font_fmt_txt_cmap_t cmaps[] =
 {
     {
-        .range_start = 59650, .range_length = 8, .glyph_id_start = 1,
-        .unicode_list = unicode_list_0, .glyph_id_ofs_list = NULL, .list_length = 3, .type = LV_FONT_FMT_TXT_CMAP_SPARSE_TINY
+        .range_start = 59650, .range_length = 39, .glyph_id_start = 1,
+        .unicode_list = unicode_list_0, .glyph_id_ofs_list = NULL, .list_length = 5, .type = LV_FONT_FMT_TXT_CMAP_SPARSE_TINY
     }
 };
 
@@ -125,7 +154,7 @@ lv_font_t lv_font_icomoon_24 = {
 #endif
     .get_glyph_dsc = lv_font_get_glyph_dsc_fmt_txt,    /*Function pointer to get glyph's data*/
     .get_glyph_bitmap = lv_font_get_bitmap_fmt_txt,    /*Function pointer to get glyph's bitmap*/
-    .line_height = 23,          /*The maximum line height required by the font*/
+    .line_height = 24,          /*The maximum line height required by the font*/
     .base_line = 1,             /*Baseline measured from the bottom of the line*/
 #if !(LVGL_VERSION_MAJOR == 6 && LVGL_VERSION_MINOR == 0)
     .subpx = LV_FONT_SUBPX_NONE,

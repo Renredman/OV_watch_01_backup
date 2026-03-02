@@ -56,13 +56,25 @@ void StartKeyTask(void *argument) {
                 msg->setup_cb = setup_scr_game;
                 msg->anim = LV_SCR_LOAD_ANIM_MOVE_RIGHT;
             }
-            else if (current_scr == guider_ui.time_date) {
+            else if (current_scr == guider_ui.time_date || current_scr ==guider_ui.secret_change) {
                 // 从时间日期页面切换到设置页面
                 msg->new_screen = &guider_ui.settings;
                 msg->new_scr_del = guider_ui.settings_del;
-                msg->old_scr_del = &guider_ui.time_date_del;
+                if (current_scr == guider_ui.time_date) {
+                    msg->old_scr_del = &guider_ui.time_date_del;
+                }
+                else {
+                    msg->old_scr_del = &guider_ui.secret_change_del;
+                }
                 msg->setup_cb = setup_scr_settings;
                 msg->anim = LV_SCR_LOAD_ANIM_MOVE_RIGHT;
+            }
+            else if (current_scr == guider_ui.secret) {
+                msg->new_screen = &guider_ui.scr1;
+                msg->new_scr_del = guider_ui.scr1_del;
+                msg->old_scr_del = &guider_ui.secret_del;
+                msg->setup_cb = setup_scr_scr1;
+                msg->anim = LV_SCR_LOAD_ANIM_MOVE_LEFT;
             }
             else {
                 // 其他页面都切换到菜单2
@@ -102,4 +114,3 @@ void StartKeyTask(void *argument) {
         osDelay(5);
     }
 }
-

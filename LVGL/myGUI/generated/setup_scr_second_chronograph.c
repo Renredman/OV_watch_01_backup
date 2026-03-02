@@ -68,7 +68,7 @@ void setup_scr_second_chronograph(lv_ui *ui)
     ui->second_chronograph_btn_1 = lv_btn_create(ui->second_chronograph);
     lv_obj_add_flag(ui->second_chronograph_btn_1, LV_OBJ_FLAG_CHECKABLE);
     ui->second_chronograph_btn_1_label = lv_label_create(ui->second_chronograph_btn_1);
-    lv_label_set_text(ui->second_chronograph_btn_1_label, "" LV_SYMBOL_PLAY "");
+    lv_label_set_text(ui->second_chronograph_btn_1_label, "");
     lv_label_set_long_mode(ui->second_chronograph_btn_1_label, LV_LABEL_LONG_CLIP);
     lv_obj_align(ui->second_chronograph_btn_1_label, LV_ALIGN_CENTER, 0, 0);
     lv_obj_set_style_pad_all(ui->second_chronograph_btn_1, 0, LV_STATE_DEFAULT);
@@ -84,7 +84,7 @@ void setup_scr_second_chronograph(lv_ui *ui)
     lv_obj_set_style_radius(ui->second_chronograph_btn_1, 62, LV_PART_MAIN|LV_STATE_DEFAULT);
     lv_obj_set_style_shadow_width(ui->second_chronograph_btn_1, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
     lv_obj_set_style_text_color(ui->second_chronograph_btn_1, lv_color_hex(0xffffff), LV_PART_MAIN|LV_STATE_DEFAULT);
-    lv_obj_set_style_text_font(ui->second_chronograph_btn_1, &lv_font_simsun_32, LV_PART_MAIN|LV_STATE_DEFAULT);
+    lv_obj_set_style_text_font(ui->second_chronograph_btn_1, &lv_font_icomoon_48, LV_PART_MAIN|LV_STATE_DEFAULT);
     lv_obj_set_style_text_opa(ui->second_chronograph_btn_1, 255, LV_PART_MAIN|LV_STATE_DEFAULT);
     lv_obj_set_style_text_align(ui->second_chronograph_btn_1, LV_TEXT_ALIGN_CENTER, LV_PART_MAIN|LV_STATE_DEFAULT);
 
@@ -96,13 +96,13 @@ void setup_scr_second_chronograph(lv_ui *ui)
     lv_obj_set_style_radius(ui->second_chronograph_btn_1, 40, LV_PART_MAIN|LV_STATE_CHECKED);
     lv_obj_set_style_shadow_width(ui->second_chronograph_btn_1, 0, LV_PART_MAIN|LV_STATE_CHECKED);
     lv_obj_set_style_text_color(ui->second_chronograph_btn_1, lv_color_hex(0xffffff), LV_PART_MAIN|LV_STATE_CHECKED);
-    lv_obj_set_style_text_font(ui->second_chronograph_btn_1, &lv_font_simsun_32, LV_PART_MAIN|LV_STATE_CHECKED);
+    lv_obj_set_style_text_font(ui->second_chronograph_btn_1, &lv_font_icomoon_48, LV_PART_MAIN|LV_STATE_CHECKED);
     lv_obj_set_style_text_opa(ui->second_chronograph_btn_1, 255, LV_PART_MAIN|LV_STATE_CHECKED);
 
     //Write codes second_chronograph_btn_3
     ui->second_chronograph_btn_3 = lv_btn_create(ui->second_chronograph);
     ui->second_chronograph_btn_3_label = lv_label_create(ui->second_chronograph_btn_3);
-    lv_label_set_text(ui->second_chronograph_btn_3_label, "" LV_SYMBOL_REFRESH "");
+    lv_label_set_text(ui->second_chronograph_btn_3_label, "");
     lv_label_set_long_mode(ui->second_chronograph_btn_3_label, LV_LABEL_LONG_CLIP);
     lv_obj_align(ui->second_chronograph_btn_3_label, LV_ALIGN_CENTER, 0, 0);
     lv_obj_set_style_pad_all(ui->second_chronograph_btn_3, 0, LV_STATE_DEFAULT);
@@ -118,7 +118,7 @@ void setup_scr_second_chronograph(lv_ui *ui)
     lv_obj_set_style_radius(ui->second_chronograph_btn_3, 50, LV_PART_MAIN|LV_STATE_DEFAULT);
     lv_obj_set_style_shadow_width(ui->second_chronograph_btn_3, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
     lv_obj_set_style_text_color(ui->second_chronograph_btn_3, lv_color_hex(0xffffff), LV_PART_MAIN|LV_STATE_DEFAULT);
-    lv_obj_set_style_text_font(ui->second_chronograph_btn_3, &lv_font_simsun_32, LV_PART_MAIN|LV_STATE_DEFAULT);
+    lv_obj_set_style_text_font(ui->second_chronograph_btn_3, &lv_font_icomoon_48, LV_PART_MAIN|LV_STATE_DEFAULT);
     lv_obj_set_style_text_opa(ui->second_chronograph_btn_3, 255, LV_PART_MAIN|LV_STATE_DEFAULT);
     lv_obj_set_style_text_align(ui->second_chronograph_btn_3, LV_TEXT_ALIGN_CENTER, LV_PART_MAIN|LV_STATE_DEFAULT);
 

@@ -32,6 +32,11 @@ if(NOT DEFINED CMAKE_CROSSCOMPILING)
   set(CMAKE_CROSSCOMPILING "TRUE")
 endif()
 
+# Set default install directory permissions.
+if(NOT DEFINED CMAKE_OBJDUMP)
+  set(CMAKE_OBJDUMP "D:/STM32CubeCLT/STM32CubeCLT/STM32CubeCLT_1.19.0/GNU-tools-for-STM32/bin/arm-none-eabi-objdump.exe")
+endif()
+
 if(NOT CMAKE_INSTALL_LOCAL_ONLY)
   # Include the install script for the subdirectory.
   include("D:/stm32_hal_program/FreeRtos/OV_watch_01/build/cmake/stm32cubemx/cmake_install.cmake")

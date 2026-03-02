@@ -167,16 +167,16 @@ void setup_scr_environment(lv_ui *ui)
 
     //Write codes environment_label_5
     ui->environment_label_5 = lv_label_create(ui->environment);
-    lv_label_set_text(ui->environment_label_5, "" LV_SYMBOL_TINT "");
+    lv_label_set_text(ui->environment_label_5, "");
     lv_label_set_long_mode(ui->environment_label_5, LV_LABEL_LONG_WRAP);
-    lv_obj_set_pos(ui->environment_label_5, 151, 41);
+    lv_obj_set_pos(ui->environment_label_5, 151, 39);
     lv_obj_set_size(ui->environment_label_5, 42, 35);
 
     //Write style for environment_label_5, Part: LV_PART_MAIN, State: LV_STATE_DEFAULT.
     lv_obj_set_style_border_width(ui->environment_label_5, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
     lv_obj_set_style_radius(ui->environment_label_5, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
     lv_obj_set_style_text_color(ui->environment_label_5, lv_color_hex(0x004eff), LV_PART_MAIN|LV_STATE_DEFAULT);
-    lv_obj_set_style_text_font(ui->environment_label_5, &lv_font_simsun_32, LV_PART_MAIN|LV_STATE_DEFAULT);
+    lv_obj_set_style_text_font(ui->environment_label_5, &lv_font_icomoon_32, LV_PART_MAIN|LV_STATE_DEFAULT);
     lv_obj_set_style_text_opa(ui->environment_label_5, 255, LV_PART_MAIN|LV_STATE_DEFAULT);
     lv_obj_set_style_text_letter_space(ui->environment_label_5, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
     lv_obj_set_style_text_line_space(ui->environment_label_5, 0, LV_PART_MAIN|LV_STATE_DEFAULT);

@@ -122,15 +122,15 @@ void setup_scr_game(lv_ui *ui)
 
     //Write codes game_label_1
     ui->game_label_1 = lv_label_create(ui->game);
-    lv_label_set_text(ui->game_label_1, "");
+    lv_label_set_text(ui->game_label_1, "");
     lv_label_set_long_mode(ui->game_label_1, LV_LABEL_LONG_WRAP);
     lv_obj_set_pos(ui->game_label_1, 10, 9);
-    lv_obj_set_size(ui->game_label_1, 34, 30);
+    lv_obj_set_size(ui->game_label_1, 36, 32);
 
     //Write style for game_label_1, Part: LV_PART_MAIN, State: LV_STATE_DEFAULT.
     lv_obj_set_style_border_width(ui->game_label_1, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
     lv_obj_set_style_radius(ui->game_label_1, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
-    lv_obj_set_style_text_color(ui->game_label_1, lv_color_hex(0x000000), LV_PART_MAIN|LV_STATE_DEFAULT);
+    lv_obj_set_style_text_color(ui->game_label_1, lv_color_hex(0xfaadad), LV_PART_MAIN|LV_STATE_DEFAULT);
     lv_obj_set_style_text_font(ui->game_label_1, &lv_font_icomoon_32, LV_PART_MAIN|LV_STATE_DEFAULT);
     lv_obj_set_style_text_opa(ui->game_label_1, 255, LV_PART_MAIN|LV_STATE_DEFAULT);
     lv_obj_set_style_text_letter_space(ui->game_label_1, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
@@ -145,21 +145,23 @@ void setup_scr_game(lv_ui *ui)
 
     //Write codes game_label_2
     ui->game_label_2 = lv_label_create(ui->game);
-    lv_label_set_text(ui->game_label_2, "");
+    lv_label_set_text(ui->game_label_2, "");
     lv_label_set_long_mode(ui->game_label_2, LV_LABEL_LONG_WRAP);
     lv_obj_set_pos(ui->game_label_2, 10, 59);
-    lv_obj_set_size(ui->game_label_2, 34, 30);
+    lv_obj_set_size(ui->game_label_2, 36, 36);
 
     //Write style for game_label_2, Part: LV_PART_MAIN, State: LV_STATE_DEFAULT.
     lv_obj_set_style_border_width(ui->game_label_2, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
-    lv_obj_set_style_radius(ui->game_label_2, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
+    lv_obj_set_style_radius(ui->game_label_2, 36, LV_PART_MAIN|LV_STATE_DEFAULT);
     lv_obj_set_style_text_color(ui->game_label_2, lv_color_hex(0x000000), LV_PART_MAIN|LV_STATE_DEFAULT);
     lv_obj_set_style_text_font(ui->game_label_2, &lv_font_icomoon_32, LV_PART_MAIN|LV_STATE_DEFAULT);
     lv_obj_set_style_text_opa(ui->game_label_2, 255, LV_PART_MAIN|LV_STATE_DEFAULT);
     lv_obj_set_style_text_letter_space(ui->game_label_2, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
     lv_obj_set_style_text_line_space(ui->game_label_2, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
-    lv_obj_set_style_text_align(ui->game_label_2, LV_TEXT_ALIGN_CENTER, LV_PART_MAIN|LV_STATE_DEFAULT);
-    lv_obj_set_style_bg_opa(ui->game_label_2, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
+    lv_obj_set_style_text_align(ui->game_label_2, LV_TEXT_ALIGN_RIGHT, LV_PART_MAIN|LV_STATE_DEFAULT);
+    lv_obj_set_style_bg_opa(ui->game_label_2, 255, LV_PART_MAIN|LV_STATE_DEFAULT);
+    lv_obj_set_style_bg_color(ui->game_label_2, lv_color_hex(0x30ff00), LV_PART_MAIN|LV_STATE_DEFAULT);
+    lv_obj_set_style_bg_grad_dir(ui->game_label_2, LV_GRAD_DIR_NONE, LV_PART_MAIN|LV_STATE_DEFAULT);
     lv_obj_set_style_pad_top(ui->game_label_2, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
     lv_obj_set_style_pad_right(ui->game_label_2, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
     lv_obj_set_style_pad_bottom(ui->game_label_2, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
@@ -168,21 +170,23 @@ void setup_scr_game(lv_ui *ui)
 
     //Write codes game_label_3
     ui->game_label_3 = lv_label_create(ui->game);
-    lv_label_set_text(ui->game_label_3, "");
+    lv_label_set_text(ui->game_label_3, "");
     lv_label_set_long_mode(ui->game_label_3, LV_LABEL_LONG_WRAP);
     lv_obj_set_pos(ui->game_label_3, 10, 109);
-    lv_obj_set_size(ui->game_label_3, 34, 30);
+    lv_obj_set_size(ui->game_label_3, 36, 36);
 
     //Write style for game_label_3, Part: LV_PART_MAIN, State: LV_STATE_DEFAULT.
     lv_obj_set_style_border_width(ui->game_label_3, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
-    lv_obj_set_style_radius(ui->game_label_3, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
+    lv_obj_set_style_radius(ui->game_label_3, 36, LV_PART_MAIN|LV_STATE_DEFAULT);
     lv_obj_set_style_text_color(ui->game_label_3, lv_color_hex(0x000000), LV_PART_MAIN|LV_STATE_DEFAULT);
     lv_obj_set_style_text_font(ui->game_label_3, &lv_font_icomoon_32, LV_PART_MAIN|LV_STATE_DEFAULT);
     lv_obj_set_style_text_opa(ui->game_label_3, 255, LV_PART_MAIN|LV_STATE_DEFAULT);
     lv_obj_set_style_text_letter_space(ui->game_label_3, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
     lv_obj_set_style_text_line_space(ui->game_label_3, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
     lv_obj_set_style_text_align(ui->game_label_3, LV_TEXT_ALIGN_CENTER, LV_PART_MAIN|LV_STATE_DEFAULT);
-    lv_obj_set_style_bg_opa(ui->game_label_3, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
+    lv_obj_set_style_bg_opa(ui->game_label_3, 255, LV_PART_MAIN|LV_STATE_DEFAULT);
+    lv_obj_set_style_bg_color(ui->game_label_3, lv_color_hex(0x6ae5ff), LV_PART_MAIN|LV_STATE_DEFAULT);
+    lv_obj_set_style_bg_grad_dir(ui->game_label_3, LV_GRAD_DIR_NONE, LV_PART_MAIN|LV_STATE_DEFAULT);
     lv_obj_set_style_pad_top(ui->game_label_3, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
     lv_obj_set_style_pad_right(ui->game_label_3, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
     lv_obj_set_style_pad_bottom(ui->game_label_3, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
@@ -191,21 +195,23 @@ void setup_scr_game(lv_ui *ui)
 
     //Write codes game_label_4
     ui->game_label_4 = lv_label_create(ui->game);
-    lv_label_set_text(ui->game_label_4, "");
+    lv_label_set_text(ui->game_label_4, "");
     lv_label_set_long_mode(ui->game_label_4, LV_LABEL_LONG_WRAP);
     lv_obj_set_pos(ui->game_label_4, 10, 159);
-    lv_obj_set_size(ui->game_label_4, 34, 30);
+    lv_obj_set_size(ui->game_label_4, 36, 36);
 
     //Write style for game_label_4, Part: LV_PART_MAIN, State: LV_STATE_DEFAULT.
     lv_obj_set_style_border_width(ui->game_label_4, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
-    lv_obj_set_style_radius(ui->game_label_4, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
+    lv_obj_set_style_radius(ui->game_label_4, 36, LV_PART_MAIN|LV_STATE_DEFAULT);
     lv_obj_set_style_text_color(ui->game_label_4, lv_color_hex(0x000000), LV_PART_MAIN|LV_STATE_DEFAULT);
     lv_obj_set_style_text_font(ui->game_label_4, &lv_font_icomoon_32, LV_PART_MAIN|LV_STATE_DEFAULT);
     lv_obj_set_style_text_opa(ui->game_label_4, 255, LV_PART_MAIN|LV_STATE_DEFAULT);
     lv_obj_set_style_text_letter_space(ui->game_label_4, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
     lv_obj_set_style_text_line_space(ui->game_label_4, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
     lv_obj_set_style_text_align(ui->game_label_4, LV_TEXT_ALIGN_CENTER, LV_PART_MAIN|LV_STATE_DEFAULT);
-    lv_obj_set_style_bg_opa(ui->game_label_4, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
+    lv_obj_set_style_bg_opa(ui->game_label_4, 255, LV_PART_MAIN|LV_STATE_DEFAULT);
+    lv_obj_set_style_bg_color(ui->game_label_4, lv_color_hex(0x8cd5c2), LV_PART_MAIN|LV_STATE_DEFAULT);
+    lv_obj_set_style_bg_grad_dir(ui->game_label_4, LV_GRAD_DIR_NONE, LV_PART_MAIN|LV_STATE_DEFAULT);
     lv_obj_set_style_pad_top(ui->game_label_4, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
     lv_obj_set_style_pad_right(ui->game_label_4, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
     lv_obj_set_style_pad_bottom(ui->game_label_4, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
@@ -237,21 +243,23 @@ void setup_scr_game(lv_ui *ui)
 
     //Write codes game_label_5
     ui->game_label_5 = lv_label_create(ui->game);
-    lv_label_set_text(ui->game_label_5, "");
+    lv_label_set_text(ui->game_label_5, "");
     lv_label_set_long_mode(ui->game_label_5, LV_LABEL_LONG_WRAP);
     lv_obj_set_pos(ui->game_label_5, 10, 209);
-    lv_obj_set_size(ui->game_label_5, 34, 30);
+    lv_obj_set_size(ui->game_label_5, 36, 36);
 
     //Write style for game_label_5, Part: LV_PART_MAIN, State: LV_STATE_DEFAULT.
     lv_obj_set_style_border_width(ui->game_label_5, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
-    lv_obj_set_style_radius(ui->game_label_5, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
+    lv_obj_set_style_radius(ui->game_label_5, 36, LV_PART_MAIN|LV_STATE_DEFAULT);
     lv_obj_set_style_text_color(ui->game_label_5, lv_color_hex(0x000000), LV_PART_MAIN|LV_STATE_DEFAULT);
     lv_obj_set_style_text_font(ui->game_label_5, &lv_font_icomoon_32, LV_PART_MAIN|LV_STATE_DEFAULT);
     lv_obj_set_style_text_opa(ui->game_label_5, 255, LV_PART_MAIN|LV_STATE_DEFAULT);
     lv_obj_set_style_text_letter_space(ui->game_label_5, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
     lv_obj_set_style_text_line_space(ui->game_label_5, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
     lv_obj_set_style_text_align(ui->game_label_5, LV_TEXT_ALIGN_CENTER, LV_PART_MAIN|LV_STATE_DEFAULT);
-    lv_obj_set_style_bg_opa(ui->game_label_5, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
+    lv_obj_set_style_bg_opa(ui->game_label_5, 255, LV_PART_MAIN|LV_STATE_DEFAULT);
+    lv_obj_set_style_bg_color(ui->game_label_5, lv_color_hex(0xf7ba64), LV_PART_MAIN|LV_STATE_DEFAULT);
+    lv_obj_set_style_bg_grad_dir(ui->game_label_5, LV_GRAD_DIR_NONE, LV_PART_MAIN|LV_STATE_DEFAULT);
     lv_obj_set_style_pad_top(ui->game_label_5, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
     lv_obj_set_style_pad_right(ui->game_label_5, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
     lv_obj_set_style_pad_bottom(ui->game_label_5, 0, LV_PART_MAIN|LV_STATE_DEFAULT);

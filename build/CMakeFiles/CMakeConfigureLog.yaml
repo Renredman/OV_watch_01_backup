@@ -17,51 +17,79 @@ events:
       - "D:/STM32CubeCLT/STM32CubeCLT/STM32CubeCLT_1.19.0/CMake/share/cmake-3.28/Modules/CMakeDetermineCCompiler.cmake:123 (CMAKE_DETERMINE_COMPILER_ID)"
       - "CMakeLists.txt:32 (project)"
     message: |
-      Compiling the C compiler identification source file "CMakeCCompilerId.c" succeeded.
-      Compiler: arm-none-eabi-gcc 
-      Build flags: -mcpu=cortex-m4;-mfpu=fpv4-sp-d16;-mfloat-abi=hard;-Wall;-Wextra;-Wpedantic;-fdata-sections;-ffunction-sections;-Os;-g0
+      Compiling the C compiler identification source file "CMakeCCompilerId.c" failed.
+      Compiler: D:/STM32CubeCLT/STM32CubeCLT/STM32CubeCLT_1.19.0/GNU-tools-for-STM32/bin/arm-none-eabi-gcc.exe 
+      Build flags: -mcpu=cortex-m4;-mfpu=fpv4-sp-d16;-mfloat-abi=hard;-Wall;-Wextra;-Wpedantic;-fdata-sections;-ffunction-sections;-Os;-g0;-mcpu=cortex-m4;-mfpu=fpv4-sp-d16;-mfloat-abi=hard;-Wall;-Wextra;-Wpedantic;-fdata-sections;-ffunction-sections;-Os;-g0;-mcpu=cortex-m4;-mfpu=fpv4-sp-d16;-mfloat-abi=hard;-Wall;-Wextra;-Wpedantic;-fdata-sections;-ffunction-sections;-Os;-g0
       Id flags:  
       
       The output was:
+      1
+      D:/STM32CubeCLT/STM32CubeCLT/STM32CubeCLT_1.19.0/GNU-tools-for-STM32/bin/../lib/gcc/arm-none-eabi/13.3.1/../../../../arm-none-eabi/bin/ld.exe: D:/STM32CubeCLT/STM32CubeCLT/STM32CubeCLT_1.19.0/GNU-tools-for-STM32/bin/../lib/gcc/arm-none-eabi/13.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard\\libg.a(libc_a-exit.o): in function `exit':
+      /build/gnu-tools-for-stm32_13.3.rel1.20240926-1715/src/newlib/newlib/libc/stdlib/exit.c:65:(.text.exit+0x14): undefined reference to `_exit'
+      D:/STM32CubeCLT/STM32CubeCLT/STM32CubeCLT_1.19.0/GNU-tools-for-STM32/bin/../lib/gcc/arm-none-eabi/13.3.1/../../../../arm-none-eabi/bin/ld.exe: D:/STM32CubeCLT/STM32CubeCLT/STM32CubeCLT_1.19.0/GNU-tools-for-STM32/bin/../lib/gcc/arm-none-eabi/13.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard\\libg.a(libc_a-closer.o): in function `_close_r':
+      /build/gnu-tools-for-stm32_13.3.rel1.20240926-1715/src/newlib/newlib/libc/reent/closer.c:47:(.text._close_r+0xc): undefined reference to `_close'
+      D:/STM32CubeCLT/STM32CubeCLT/STM32CubeCLT_1.19.0/GNU-tools-for-STM32/bin/../lib/gcc/arm-none-eabi/13.3.1/../../../../arm-none-eabi/bin/ld.exe: D:/STM32CubeCLT/STM32CubeCLT/STM32CubeCLT_1.19.0/GNU-tools-for-STM32/bin/../lib/gcc/arm-none-eabi/13.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard\\libg.a(libc_a-lseekr.o): in function `_lseek_r':
+      /build/gnu-tools-for-stm32_13.3.rel1.20240926-1715/src/newlib/newlib/libc/reent/lseekr.c:49:(.text._lseek_r+0x10): undefined reference to `_lseek'
+      D:/STM32CubeCLT/STM32CubeCLT/STM32CubeCLT_1.19.0/GNU-tools-for-STM32/bin/../lib/gcc/arm-none-eabi/13.3.1/../../../../arm-none-eabi/bin/ld.exe: D:/STM32CubeCLT/STM32CubeCLT/STM32CubeCLT_1.19.0/GNU-tools-for-STM32/bin/../lib/gcc/arm-none-eabi/13.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard\\libg.a(libc_a-readr.o): in function `_read_r':
+      /build/gnu-tools-for-stm32_13.3.rel1.20240926-1715/src/newlib/newlib/libc/reent/readr.c:49:(.text._read_r+0x10): undefined reference to `_read'
+      D:/STM32CubeCLT/STM32CubeCLT/STM32CubeCLT_1.19.0/GNU-tools-for-STM32/bin/../lib/gcc/arm-none-eabi/13.3.1/../../../../arm-none-eabi/bin/ld.exe: D:/STM32CubeCLT/STM32CubeCLT/STM32CubeCLT_1.19.0/GNU-tools-for-STM32/bin/../lib/gcc/arm-none-eabi/13.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard\\libg.a(libc_a-writer.o): in function `_write_r':
+      /build/gnu-tools-for-stm32_13.3.rel1.20240926-1715/src/newlib/newlib/libc/reent/writer.c:49:(.text._write_r+0x10): undefined reference to `_write'
+      D:/STM32CubeCLT/STM32CubeCLT/STM32CubeCLT_1.19.0/GNU-tools-for-STM32/bin/../lib/gcc/arm-none-eabi/13.3.1/../../../../arm-none-eabi/bin/ld.exe: D:/STM32CubeCLT/STM32CubeCLT/STM32CubeCLT_1.19.0/GNU-tools-for-STM32/bin/../lib/gcc/arm-none-eabi/13.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard\\libg.a(libc_a-sbrkr.o): in function `_sbrk_r':
+      /build/gnu-tools-for-stm32_13.3.rel1.20240926-1715/src/newlib/newlib/libc/reent/sbrkr.c:51:(.text._sbrk_r+0xc): undefined reference to `_sbrk'
+      collect2.exe: error: ld returned 1 exit status
+      
+      
+  -
+    kind: "message-v1"
+    backtrace:
+      - "D:/STM32CubeCLT/STM32CubeCLT/STM32CubeCLT_1.19.0/CMake/share/cmake-3.28/Modules/CMakeDetermineCompilerId.cmake:17 (message)"
+      - "D:/STM32CubeCLT/STM32CubeCLT/STM32CubeCLT_1.19.0/CMake/share/cmake-3.28/Modules/CMakeDetermineCompilerId.cmake:64 (__determine_compiler_id_test)"
+      - "D:/STM32CubeCLT/STM32CubeCLT/STM32CubeCLT_1.19.0/CMake/share/cmake-3.28/Modules/CMakeDetermineCCompiler.cmake:123 (CMAKE_DETERMINE_COMPILER_ID)"
+      - "CMakeLists.txt:32 (project)"
+    message: |
+      Compiling the C compiler identification source file "CMakeCCompilerId.c" succeeded.
+      Compiler: D:/STM32CubeCLT/STM32CubeCLT/STM32CubeCLT_1.19.0/GNU-tools-for-STM32/bin/arm-none-eabi-gcc.exe 
+      Build flags: -mcpu=cortex-m4;-mfpu=fpv4-sp-d16;-mfloat-abi=hard;-Wall;-Wextra;-Wpedantic;-fdata-sections;-ffunction-sections;-Os;-g0;-mcpu=cortex-m4;-mfpu=fpv4-sp-d16;-mfloat-abi=hard;-Wall;-Wextra;-Wpedantic;-fdata-sections;-ffunction-sections;-Os;-g0;-mcpu=cortex-m4;-mfpu=fpv4-sp-d16;-mfloat-abi=hard;-Wall;-Wextra;-Wpedantic;-fdata-sections;-ffunction-sections;-Os;-g0
+      Id flags: -c 
+      
+      The output was:
       0
-      适用于 .NET Framework MSBuild 版本 17.7.2+d6990bcfa
-      生成启动时间为 2026/3/1 22:27:11。
-      
-      节点 1 上的项目“D:\\stm32_hal_program\\FreeRtos\\OV_watch_01\\build\\CMakeFiles\\3.28.1\\CompilerIdC\\CompilerIdC.vcxproj”(默认目标)。
-      PrepareForBuild:
-        正在创建目录“Debug\\”。
-        正在创建目录“Debug\\CompilerIdC.tlog\\”。
-      InitializeBuildStatus:
-        正在创建“Debug\\CompilerIdC.tlog\\unsuccessfulbuild”，因为已指定“AlwaysCreate”。
-        正在对“Debug\\CompilerIdC.tlog\\unsuccessfulbuild”执行 Touch 任务。
-      ClCompile:
-        C:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\VC\\Tools\\MSVC\\14.37.32822\\bin\\HostX64\\x64\\CL.exe /c /nologo /W0 /WX- /diagnostics:column /Od /D _MBCS /Gm- /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Zc:inline /Fo"Debug\\\\" /Fd"Debug\\vc143.pdb" /external:W0 /Gd /TC /FC /errorReport:queue CMakeCCompilerId.c
-        CMakeCCompilerId.c
-      Link:
-        C:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\VC\\Tools\\MSVC\\14.37.32822\\bin\\HostX64\\x64\\link.exe /ERRORREPORT:QUEUE /OUT:".\\CompilerIdC.exe" /INCREMENTAL:NO /NOLOGO kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib /MANIFEST /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /manifest:embed /PDB:".\\CompilerIdC.pdb" /SUBSYSTEM:CONSOLE /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:".\\CompilerIdC.lib" /MACHINE:X64 Debug\\CMakeCCompilerId.obj
-        CompilerIdC.vcxproj -> D:\\stm32_hal_program\\FreeRtos\\OV_watch_01\\build\\CMakeFiles\\3.28.1\\CompilerIdC\\CompilerIdC.exe
-      PostBuildEvent:
-        for %%i in (cl.exe) do @echo CMAKE_C_COMPILER=%%~$PATH:i
-        :VCEnd
-        CMAKE_C_COMPILER=C:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\VC\\Tools\\MSVC\\14.37.32822\\bin\\Hostx64\\x64\\cl.exe
-      FinalizeBuildStatus:
-        正在删除文件“Debug\\CompilerIdC.tlog\\unsuccessfulbuild”。
-        正在对“Debug\\CompilerIdC.tlog\\CompilerIdC.lastbuildstate”执行 Touch 任务。
-      已完成生成项目“D:\\stm32_hal_program\\FreeRtos\\OV_watch_01\\build\\CMakeFiles\\3.28.1\\CompilerIdC\\CompilerIdC.vcxproj”(默认目标)的操作。
-      
-      已成功生成。
-          0 个警告
-          0 个错误
-      
-      已用时间 00:00:04.93
       
       
-      Compilation of the C compiler identification source "CMakeCCompilerId.c" produced "CompilerIdC.exe"
+      Compilation of the C compiler identification source "CMakeCCompilerId.c" produced "CMakeCCompilerId.o"
       
-      Compilation of the C compiler identification source "CMakeCCompilerId.c" produced "CompilerIdC.vcxproj"
+      The C compiler identification is GNU, found in:
+        D:/stm32_hal_program/FreeRtos/OV_watch_01/build/CMakeFiles/3.28.1/CompilerIdC/CMakeCCompilerId.o
       
-      The C compiler identification is MSVC, found in:
-        D:/stm32_hal_program/FreeRtos/OV_watch_01/build/CMakeFiles/3.28.1/CompilerIdC/CompilerIdC.exe
+  -
+    kind: "message-v1"
+    backtrace:
+      - "D:/STM32CubeCLT/STM32CubeCLT/STM32CubeCLT_1.19.0/CMake/share/cmake-3.28/Modules/CMakeDetermineCompilerId.cmake:17 (message)"
+      - "D:/STM32CubeCLT/STM32CubeCLT/STM32CubeCLT_1.19.0/CMake/share/cmake-3.28/Modules/CMakeDetermineCompilerId.cmake:64 (__determine_compiler_id_test)"
+      - "D:/STM32CubeCLT/STM32CubeCLT/STM32CubeCLT_1.19.0/CMake/share/cmake-3.28/Modules/CMakeDetermineCXXCompiler.cmake:126 (CMAKE_DETERMINE_COMPILER_ID)"
+      - "CMakeLists.txt:32 (project)"
+    message: |
+      Compiling the CXX compiler identification source file "CMakeCXXCompilerId.cpp" failed.
+      Compiler: D:/STM32CubeCLT/STM32CubeCLT/STM32CubeCLT_1.19.0/GNU-tools-for-STM32/bin/arm-none-eabi-g++.exe 
+      Build flags: -mcpu=cortex-m4;-mfpu=fpv4-sp-d16;-mfloat-abi=hard;-Wall;-Wextra;-Wpedantic;-fdata-sections;-ffunction-sections;-Os;-g0;-mcpu=cortex-m4;-mfpu=fpv4-sp-d16;-mfloat-abi=hard;-Wall;-Wextra;-Wpedantic;-fdata-sections;-ffunction-sections;-Os;-g0;-mcpu=cortex-m4;-mfpu=fpv4-sp-d16;-mfloat-abi=hard;-Wall;-Wextra;-Wpedantic;-fdata-sections;-ffunction-sections;-Os;-g0;-fno-rtti;-fno-exceptions;-fno-threadsafe-statics
+      Id flags:  
+      
+      The output was:
+      1
+      D:/STM32CubeCLT/STM32CubeCLT/STM32CubeCLT_1.19.0/GNU-tools-for-STM32/bin/../lib/gcc/arm-none-eabi/13.3.1/../../../../arm-none-eabi/bin/ld.exe: D:/STM32CubeCLT/STM32CubeCLT/STM32CubeCLT_1.19.0/GNU-tools-for-STM32/bin/../lib/gcc/arm-none-eabi/13.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard\\libg.a(libc_a-exit.o): in function `exit':
+      /build/gnu-tools-for-stm32_13.3.rel1.20240926-1715/src/newlib/newlib/libc/stdlib/exit.c:65:(.text.exit+0x14): undefined reference to `_exit'
+      D:/STM32CubeCLT/STM32CubeCLT/STM32CubeCLT_1.19.0/GNU-tools-for-STM32/bin/../lib/gcc/arm-none-eabi/13.3.1/../../../../arm-none-eabi/bin/ld.exe: D:/STM32CubeCLT/STM32CubeCLT/STM32CubeCLT_1.19.0/GNU-tools-for-STM32/bin/../lib/gcc/arm-none-eabi/13.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard\\libg.a(libc_a-closer.o): in function `_close_r':
+      /build/gnu-tools-for-stm32_13.3.rel1.20240926-1715/src/newlib/newlib/libc/reent/closer.c:47:(.text._close_r+0xc): undefined reference to `_close'
+      D:/STM32CubeCLT/STM32CubeCLT/STM32CubeCLT_1.19.0/GNU-tools-for-STM32/bin/../lib/gcc/arm-none-eabi/13.3.1/../../../../arm-none-eabi/bin/ld.exe: D:/STM32CubeCLT/STM32CubeCLT/STM32CubeCLT_1.19.0/GNU-tools-for-STM32/bin/../lib/gcc/arm-none-eabi/13.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard\\libg.a(libc_a-lseekr.o): in function `_lseek_r':
+      /build/gnu-tools-for-stm32_13.3.rel1.20240926-1715/src/newlib/newlib/libc/reent/lseekr.c:49:(.text._lseek_r+0x10): undefined reference to `_lseek'
+      D:/STM32CubeCLT/STM32CubeCLT/STM32CubeCLT_1.19.0/GNU-tools-for-STM32/bin/../lib/gcc/arm-none-eabi/13.3.1/../../../../arm-none-eabi/bin/ld.exe: D:/STM32CubeCLT/STM32CubeCLT/STM32CubeCLT_1.19.0/GNU-tools-for-STM32/bin/../lib/gcc/arm-none-eabi/13.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard\\libg.a(libc_a-readr.o): in function `_read_r':
+      /build/gnu-tools-for-stm32_13.3.rel1.20240926-1715/src/newlib/newlib/libc/reent/readr.c:49:(.text._read_r+0x10): undefined reference to `_read'
+      D:/STM32CubeCLT/STM32CubeCLT/STM32CubeCLT_1.19.0/GNU-tools-for-STM32/bin/../lib/gcc/arm-none-eabi/13.3.1/../../../../arm-none-eabi/bin/ld.exe: D:/STM32CubeCLT/STM32CubeCLT/STM32CubeCLT_1.19.0/GNU-tools-for-STM32/bin/../lib/gcc/arm-none-eabi/13.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard\\libg.a(libc_a-writer.o): in function `_write_r':
+      /build/gnu-tools-for-stm32_13.3.rel1.20240926-1715/src/newlib/newlib/libc/reent/writer.c:49:(.text._write_r+0x10): undefined reference to `_write'
+      D:/STM32CubeCLT/STM32CubeCLT/STM32CubeCLT_1.19.0/GNU-tools-for-STM32/bin/../lib/gcc/arm-none-eabi/13.3.1/../../../../arm-none-eabi/bin/ld.exe: D:/STM32CubeCLT/STM32CubeCLT/STM32CubeCLT_1.19.0/GNU-tools-for-STM32/bin/../lib/gcc/arm-none-eabi/13.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard\\libg.a(libc_a-sbrkr.o): in function `_sbrk_r':
+      /build/gnu-tools-for-stm32_13.3.rel1.20240926-1715/src/newlib/newlib/libc/reent/sbrkr.c:51:(.text._sbrk_r+0xc): undefined reference to `_sbrk'
+      collect2.exe: error: ld returned 1 exit status
+      
       
   -
     kind: "message-v1"
@@ -72,50 +100,18 @@ events:
       - "CMakeLists.txt:32 (project)"
     message: |
       Compiling the CXX compiler identification source file "CMakeCXXCompilerId.cpp" succeeded.
-      Compiler: arm-none-eabi-g++ 
-      Build flags: -mcpu=cortex-m4;-mfpu=fpv4-sp-d16;-mfloat-abi=hard;-Wall;-Wextra;-Wpedantic;-fdata-sections;-ffunction-sections;-Os;-g0;-fno-rtti;-fno-exceptions;-fno-threadsafe-statics
-      Id flags:  
+      Compiler: D:/STM32CubeCLT/STM32CubeCLT/STM32CubeCLT_1.19.0/GNU-tools-for-STM32/bin/arm-none-eabi-g++.exe 
+      Build flags: -mcpu=cortex-m4;-mfpu=fpv4-sp-d16;-mfloat-abi=hard;-Wall;-Wextra;-Wpedantic;-fdata-sections;-ffunction-sections;-Os;-g0;-mcpu=cortex-m4;-mfpu=fpv4-sp-d16;-mfloat-abi=hard;-Wall;-Wextra;-Wpedantic;-fdata-sections;-ffunction-sections;-Os;-g0;-mcpu=cortex-m4;-mfpu=fpv4-sp-d16;-mfloat-abi=hard;-Wall;-Wextra;-Wpedantic;-fdata-sections;-ffunction-sections;-Os;-g0;-fno-rtti;-fno-exceptions;-fno-threadsafe-statics
+      Id flags: -c 
       
       The output was:
       0
-      适用于 .NET Framework MSBuild 版本 17.7.2+d6990bcfa
-      生成启动时间为 2026/3/1 22:27:25。
-      
-      节点 1 上的项目“D:\\stm32_hal_program\\FreeRtos\\OV_watch_01\\build\\CMakeFiles\\3.28.1\\CompilerIdCXX\\CompilerIdCXX.vcxproj”(默认目标)。
-      PrepareForBuild:
-        正在创建目录“Debug\\”。
-        正在创建目录“Debug\\CompilerIdCXX.tlog\\”。
-      InitializeBuildStatus:
-        正在创建“Debug\\CompilerIdCXX.tlog\\unsuccessfulbuild”，因为已指定“AlwaysCreate”。
-        正在对“Debug\\CompilerIdCXX.tlog\\unsuccessfulbuild”执行 Touch 任务。
-      ClCompile:
-        C:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\VC\\Tools\\MSVC\\14.37.32822\\bin\\HostX64\\x64\\CL.exe /c /nologo /W0 /WX- /diagnostics:column /Od /D _MBCS /Gm- /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Zc:inline /Fo"Debug\\\\" /Fd"Debug\\vc143.pdb" /external:W0 /Gd /TP /FC /errorReport:queue CMakeCXXCompilerId.cpp
-        CMakeCXXCompilerId.cpp
-      Link:
-        C:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\VC\\Tools\\MSVC\\14.37.32822\\bin\\HostX64\\x64\\link.exe /ERRORREPORT:QUEUE /OUT:".\\CompilerIdCXX.exe" /INCREMENTAL:NO /NOLOGO kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib /MANIFEST /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /manifest:embed /PDB:".\\CompilerIdCXX.pdb" /SUBSYSTEM:CONSOLE /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:".\\CompilerIdCXX.lib" /MACHINE:X64 Debug\\CMakeCXXCompilerId.obj
-        CompilerIdCXX.vcxproj -> D:\\stm32_hal_program\\FreeRtos\\OV_watch_01\\build\\CMakeFiles\\3.28.1\\CompilerIdCXX\\CompilerIdCXX.exe
-      PostBuildEvent:
-        for %%i in (cl.exe) do @echo CMAKE_CXX_COMPILER=%%~$PATH:i
-        :VCEnd
-        CMAKE_CXX_COMPILER=C:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\VC\\Tools\\MSVC\\14.37.32822\\bin\\Hostx64\\x64\\cl.exe
-      FinalizeBuildStatus:
-        正在删除文件“Debug\\CompilerIdCXX.tlog\\unsuccessfulbuild”。
-        正在对“Debug\\CompilerIdCXX.tlog\\CompilerIdCXX.lastbuildstate”执行 Touch 任务。
-      已完成生成项目“D:\\stm32_hal_program\\FreeRtos\\OV_watch_01\\build\\CMakeFiles\\3.28.1\\CompilerIdCXX\\CompilerIdCXX.vcxproj”(默认目标)的操作。
-      
-      已成功生成。
-          0 个警告
-          0 个错误
-      
-      已用时间 00:00:05.35
       
       
-      Compilation of the CXX compiler identification source "CMakeCXXCompilerId.cpp" produced "CompilerIdCXX.exe"
+      Compilation of the CXX compiler identification source "CMakeCXXCompilerId.cpp" produced "CMakeCXXCompilerId.o"
       
-      Compilation of the CXX compiler identification source "CMakeCXXCompilerId.cpp" produced "CompilerIdCXX.vcxproj"
-      
-      The CXX compiler identification is MSVC, found in:
-        D:/stm32_hal_program/FreeRtos/OV_watch_01/build/CMakeFiles/3.28.1/CompilerIdCXX/CompilerIdCXX.exe
+      The CXX compiler identification is GNU, found in:
+        D:/stm32_hal_program/FreeRtos/OV_watch_01/build/CMakeFiles/3.28.1/CompilerIdCXX/CMakeCXXCompilerId.o
       
   -
     kind: "message-v1"

@@ -3,3 +3,11 @@ lv_customer_font_simsun_48.c
 
 lv_customer_font_simsun_32.c
 LV_SYMBOL_PLAY,LV_SYMBOL_REFRESH,LV_SYMBOL_TINT
+
+lv_font_icomoon_32
+//
+
+lv_font_icomoon_48
+
+
+lv_font_icomoon_24

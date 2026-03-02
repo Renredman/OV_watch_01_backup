@@ -287,6 +287,7 @@ add_executable(${CMAKE_PROJECT_NAME}
         LVGL/myGUI/generated/setup_scr_time_date.c
         LVGL/myGUI/generated/setup_scr_secret.c
         LVGL/myGUI/generated/setup_scr_secret_change.c
+        LVGL/myGUI/generated/guider_fonts/lv_font_icomoon_48.c
 )
 
 # Add STM32CubeMX generated sources

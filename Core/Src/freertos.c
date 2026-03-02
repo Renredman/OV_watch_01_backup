@@ -83,7 +83,7 @@ osThreadId_t myPageTaskHandle;
 const osThreadAttr_t myPageTask_attributes = {
   .name = "myPageTask",
   .stack_size = 128 * 4,
-  .priority = (osPriority_t) osPriorityLow7,
+  .priority = (osPriority_t) osPriorityLow3,  // Optimized from Low7 to Low3 for faster page switching
 };
 /* Definitions for myFeedTask */
 osThreadId_t myFeedTaskHandle;
@@ -383,7 +383,7 @@ void StartLvglTask(void *argument)
   custom_init(&guider_ui);
 
   uint32_t last_wake_time = osKernelGetTickCount();
-  const uint32_t lvgl_period_ms = 5;
+  const uint32_t lvgl_period_ms = 3;  // Optimized from 5ms to 3ms for better responsiveness
   // char text_buf[10];
   static uint32_t last_tick = 0;
   /* Infinite loop */
