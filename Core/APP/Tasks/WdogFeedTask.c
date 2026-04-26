@@ -3,18 +3,19 @@
 #include "stm32f4xx_hal.h"
 #include "WDOG.h"
 
-// uint8_t cnt=0;
-void WdogFeedTask(void *argument) {
+#include "Config/ov_project_config.h"
+#include "Services/SystemStatus.h"
+
+void WdogFeedTask(void *argument)
+{
+    (void)argument;
+
     WDOG_Port_Init();
+    SystemStatus_SetModule(OV_MODULE_WDOG, OV_MODULE_STATUS_OK);
+
     for (;;) {
         WDOG_Feed();
         WDOG_Enable();
-        // cnt++;
-        // if (cnt>=50) {
-        //
-        //     HAL_Delay(10000);
-        // }
-
-        osDelay(100);
+        osDelay(OV_WDOG_FEED_PERIOD_MS);
     }
 }

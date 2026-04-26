@@ -39,6 +39,7 @@
 #include "gui_guider.h"           // Gui Guider 生成的界面和控件的声明
 #include "events_init.h"          // Gui Guider 生成的初始化事件、回调函数
 #include "custom.h"
+#include "Config/ov_project_config.h"
 #include "Tasks//SensorDataTask.h"
 #include "Tasks/user_PowerManager.h"
 #include "Types/PageType.h"
@@ -286,40 +287,40 @@ void MX_FREERTOS_Init(void) {
   Idle_TimerHandle = osTimerNew(IdleTimerCallback, osTimerPeriodic, NULL, &Idle_Timer_attributes);
 
   /* USER CODE BEGIN RTOS_TIMERS */
-  osTimerStart(Idle_TimerHandle,100);
+  osTimerStart(Idle_TimerHandle, OV_IDLE_TIMER_PERIOD_MS);
   /* start timers, add new ones, ... */
   /* USER CODE END RTOS_TIMERS */
 
   /* Create the queue(s) */
   /* creation of PageQueue */
-  PageQueueHandle = osMessageQueueNew (16, sizeof(PageMessage*), &PageQueue_attributes);
+  PageQueueHandle = osMessageQueueNew (OV_PAGE_QUEUE_LENGTH, sizeof(PageCommand), &PageQueue_attributes);
 
   /* creation of EnvirQueue */
-  EnvirQueueHandle = osMessageQueueNew (16, sizeof(EnvirMessage*), &EnvirQueue_attributes);
+  EnvirQueueHandle = osMessageQueueNew (OV_SENSOR_QUEUE_LENGTH, sizeof(EnvirMessage), &EnvirQueue_attributes);
 
   /* creation of HeartQueue */
-  HeartQueueHandle = osMessageQueueNew (16, sizeof(HeartMessage*), &HeartQueue_attributes);
+  HeartQueueHandle = osMessageQueueNew (OV_SENSOR_QUEUE_LENGTH, sizeof(HeartMessage), &HeartQueue_attributes);
 
   /* creation of HrCmdQueue */
-  HrCmdQueueHandle = osMessageQueueNew (16, sizeof(hr_command_t), &HrCmdQueue_attributes);
+  HrCmdQueueHandle = osMessageQueueNew (OV_HEART_COMMAND_QUEUE_LENGTH, sizeof(hr_command_t), &HrCmdQueue_attributes);
 
   /* creation of CommonQueue */
-  CommonQueueHandle = osMessageQueueNew (16, sizeof(CommonMessage*), &CommonQueue_attributes);
+  CommonQueueHandle = osMessageQueueNew (OV_COMMON_QUEUE_LENGTH, sizeof(CommonMessage), &CommonQueue_attributes);
 
   /* creation of Idle_MessageQueue */
-  Idle_MessageQueueHandle = osMessageQueueNew (1, sizeof(uint8_t), &Idle_MessageQueue_attributes);
+  Idle_MessageQueueHandle = osMessageQueueNew (OV_IDLE_QUEUE_LENGTH, sizeof(uint8_t), &Idle_MessageQueue_attributes);
 
   /* creation of IdleBreak_MessageQueue */
-  IdleBreak_MessageQueueHandle = osMessageQueueNew (1, sizeof(uint8_t), &IdleBreak_MessageQueue_attributes);
+  IdleBreak_MessageQueueHandle = osMessageQueueNew (OV_IDLE_QUEUE_LENGTH, sizeof(uint8_t), &IdleBreak_MessageQueue_attributes);
 
   /* creation of Stop_MessageQueue */
-  Stop_MessageQueueHandle = osMessageQueueNew (1, sizeof(uint8_t), &Stop_MessageQueue_attributes);
+  Stop_MessageQueueHandle = osMessageQueueNew (OV_IDLE_QUEUE_LENGTH, sizeof(uint8_t), &Stop_MessageQueue_attributes);
 
   /* creation of BluetoothTxQueue */
-  BluetoothTxQueueHandle = osMessageQueueNew (8, 64, &BluetoothTxQueue_attributes);
+  BluetoothTxQueueHandle = osMessageQueueNew (OV_BLUETOOTH_TX_QUEUE_LENGTH, OV_BLUETOOTH_TX_MESSAGE_SIZE, &BluetoothTxQueue_attributes);
 
   /* creation of BluetoothRxQueue */
-  BluetoothRxQueueHandle = osMessageQueueNew (8, sizeof(char*), &BluetoothRxQueue_attributes);
+  BluetoothRxQueueHandle = osMessageQueueNew (OV_BLUETOOTH_RX_QUEUE_LENGTH, OV_BLUETOOTH_TX_MESSAGE_SIZE, &BluetoothRxQueue_attributes);
 
   /* USER CODE BEGIN RTOS_QUEUES */
   /* add queues, ... */
@@ -383,7 +384,7 @@ void StartLvglTask(void *argument)
   custom_init(&guider_ui);
 
   uint32_t last_wake_time = osKernelGetTickCount();
-  const uint32_t lvgl_period_ms = 3;  // Optimized from 5ms to 3ms for better responsiveness
+  const uint32_t lvgl_period_ms = OV_LVGL_TASK_PERIOD_MS;
   // char text_buf[10];
   static uint32_t last_tick = 0;
   /* Infinite loop */

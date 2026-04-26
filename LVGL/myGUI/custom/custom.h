@@ -13,20 +13,24 @@
 extern "C" {
 #endif
 
+#include "Config/ov_project_config.h"
 #include "gui_guider.h"
 #include "Types/Sensor.h"
 
-#define MAX_CHAT_LINES 10
-#define MAX_LINE_LENGTH 64
+#define MAX_CHAT_LINES OV_CHAT_HISTORY_LINES
+#define MAX_LINE_LENGTH OV_CHAT_LINE_LENGTH
+
 extern char chat_history[MAX_CHAT_LINES][MAX_LINE_LENGTH];
 extern uint8_t history_count;
 extern scr1_sensor_data_t scr1_sensor_data;
 
 void custom_init(lv_ui *ui);
+void custom_chat_append_message(const char *prefix, const char *message, lv_anim_enable_t anim);
 void scr1_screen_loaded_event_handler(lv_event_t *e);
 void setting_screen_loaded_event_handler(lv_event_t *e);
 void chat_screen_loaded_handler(lv_event_t *e);
 void environment_screen_loaded_cb(lv_event_t *e);
+
 #ifdef __cplusplus
 }
 #endif

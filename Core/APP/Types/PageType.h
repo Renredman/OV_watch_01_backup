@@ -1,7 +1,6 @@
 #ifndef OV_WATCH_01_PAGETYPE_H
 #define OV_WATCH_01_PAGETYPE_H
 
-// #include "lvgl.h"
 #include "gui_guider.h"
 
 typedef struct {
@@ -10,12 +9,15 @@ typedef struct {
     bool *old_scr_del;
     ui_setup_scr_t setup_cb;
     lv_scr_load_anim_t anim;
-}PageMessage;
+} PageMessage;
 
-// typedef struct {
-//     float humidity;
-//     float temperature;
-// }EnvirMessage;
+typedef enum {
+    PAGE_COMMAND_BACK = 0
+} PageCommandType;
+
+typedef struct {
+    PageCommandType type;
+} PageCommand;
 
 typedef enum {
     scr1_index = 0,
@@ -24,26 +26,12 @@ typedef enum {
     card_bag_index = 2,
     calendar_index = 2,
     environment_index = 2,
-    second_chronograph_index =2
-}Interface_index;
-
-// typedef struct {
-//     Interface_index page;
-//     uint8_t t;
-// }PageMessage;
-
-
-
-// typedef struct {
-//     bool scr1_valid;
-//     bool menu2_valid;
-//     bool page3_valid;
-// } page_state_t;
+    second_chronograph_index = 2
+} Interface_index;
 
 typedef enum {
     TARGET_SCR1,
     TARGET_MENU2
-}TargetScreen;
-
+} TargetScreen;
 
 #endif //OV_WATCH_01_PAGETYPE_H

@@ -52,6 +52,9 @@
 #include "gui_guider.h"           // Gui Guider 生成的界面和控件的声明
 #include "events_init.h"          // Gui Guider 生成的初始化事件、回调函数
 #include "custom.h"
+#include "Config/ov_project_config.h"
+#include "Services/ProjectLog.h"
+#include "Services/SystemStatus.h"
 #include "Tasks/AppState.h"
 lv_ui  guider_ui;                     // 声明 界面对象
 
@@ -123,6 +126,8 @@ int main(void)
 
   /* Reset of all peripherals, Initializes the Flash interface and the Systick. */
   HAL_Init();
+  SystemStatus_Init();
+  OV_LOGI("boot", "startup");
 
   /* USER CODE BEGIN Init */
 
@@ -144,10 +149,13 @@ int main(void)
   MX_TIM3_Init();
   MX_USART1_UART_Init();
   /* USER CODE BEGIN 2 */
-  if(HAL_RTCEx_SetWakeUpTimer_IT(&hrtc, 2000, RTC_WAKEUPCLOCK_RTCCLK_DIV16) != HAL_OK)
+  if(HAL_RTCEx_SetWakeUpTimer_IT(&hrtc, OV_RTC_WAKEUP_ACTIVE_TICKS, RTC_WAKEUPCLOCK_RTCCLK_DIV16) != HAL_OK)
   {
+    SystemStatus_SetModule(OV_MODULE_RTC, OV_MODULE_STATUS_ERROR);
+    OV_LOGE("boot", "rtc wakeup timer init failed");
     Error_Handler();
   }
+  SystemStatus_SetModule(OV_MODULE_RTC, OV_MODULE_STATUS_OK);
   delay_init();
   delay_ms(100);
 
@@ -156,7 +164,12 @@ int main(void)
   KT6328_GPIO_Init();
   KT6328_Enable();
 
-  HAL_UARTEx_ReceiveToIdle_DMA(&huart1, rx_buffer, RX_BUFFER_SIZE);
+  if (HAL_UARTEx_ReceiveToIdle_DMA(&huart1, rx_buffer, RX_BUFFER_SIZE) != HAL_OK) {
+    SystemStatus_SetModule(OV_MODULE_BLUETOOTH, OV_MODULE_STATUS_ERROR);
+    OV_LOGE("boot", "bluetooth dma receive init failed");
+    Error_Handler();
+  }
+  SystemStatus_SetModule(OV_MODULE_BLUETOOTH, OV_MODULE_STATUS_OK);
   __HAL_DMA_DISABLE_IT(&hdma_usart1_rx, DMA_IT_HT);
   // HAL_UARTEx_ReceiveToIdle_DMA(&huart1, rx_buffer, RX_BUFFER_SIZE);
   // __HAL_UART_ENABLE_IT(&huart1, UART_IT_IDLE);
@@ -167,17 +180,23 @@ int main(void)
   //touch
   CST816_GPIO_Init();
   CST816_RESET();
+  SystemStatus_SetModule(OV_MODULE_TOUCH, OV_MODULE_STATUS_OK);
 
   //Key
   Key_Port_Init();
+  SystemStatus_SetModule(OV_MODULE_KEY, OV_MODULE_STATUS_OK);
 
-  uint8_t num = 3;
+  uint8_t num = OV_SENSOR_INIT_RETRY_COUNT;
   while (num && Sensor_AHT21_Erro) {
     num--;
     Sensor_AHT21_Erro = AHT_Init();
   }
+  SystemStatus_SetModule(OV_MODULE_AHT21, Sensor_AHT21_Erro ? OV_MODULE_STATUS_ERROR : OV_MODULE_STATUS_OK);
+  if (Sensor_AHT21_Erro) {
+    OV_LOGW("boot", "AHT21 init failed");
+  }
 
-  num = 3;
+  num = OV_SENSOR_INIT_RETRY_COUNT;
 	while(num && Sensor_LSM303_Erro)
 	{
 		num--;
@@ -185,35 +204,49 @@ int main(void)
 	}
 	if(!Sensor_LSM303_Erro)
 		LSM303DLH_Sleep();
+  SystemStatus_SetModule(OV_MODULE_LSM303, Sensor_LSM303_Erro ? OV_MODULE_STATUS_ERROR : OV_MODULE_STATUS_OK);
+  if (Sensor_LSM303_Erro) {
+    OV_LOGW("boot", "LSM303 init failed");
+  }
 
-  num = 3;
+  num = OV_SENSOR_INIT_RETRY_COUNT;
 	while(num && Sensor_SPL_Erro)
 	{
 		num--;
 		Sensor_SPL_Erro = SPL_init();
-	}
+  }
+  SystemStatus_SetModule(OV_MODULE_SPL06, Sensor_SPL_Erro ? OV_MODULE_STATUS_ERROR : OV_MODULE_STATUS_OK);
+  if (Sensor_SPL_Erro) {
+    OV_LOGW("boot", "SPL06 init failed");
+  }
 
-  num = 3;
+  num = OV_SENSOR_INIT_RETRY_COUNT;
   while(num && Sensor_EM_Erro){
     num--;
     Sensor_EM_Erro = EM7028_hrs_init();
   }
   if(!Sensor_EM_Erro)
     EM7028_hrs_DisEnable();
+  SystemStatus_SetModule(OV_MODULE_EM7028, Sensor_EM_Erro ? OV_MODULE_STATUS_ERROR : OV_MODULE_STATUS_OK);
+  if (Sensor_EM_Erro) {
+    OV_LOGW("boot", "EM7028 init failed");
+  }
 
   LCD_Init();
   LCD_Fill(0,0,LCD_W,LCD_H,BLACK);
   delay_ms(10);
-  LCD_Set_Light(50);
+  LCD_Set_Light(OV_DEFAULT_BRIGHTNESS);
+  SystemStatus_SetModule(OV_MODULE_LCD, OV_MODULE_STATUS_OK);
   LCD_ShowString(72,LCD_H/2,(uint8_t*)"Welcome!",WHITE,BLACK,24,0);
   LCD_ShowString(42,LCD_H/2+48,(uint8_t*)"OV-Watch V1.0",WHITE,BLACK,24,0);
-  HAL_Delay(500);
+  HAL_Delay(OV_BOOT_WELCOME_DELAY_MS);
   // 在 main() 中初始化
 
   Appstate_Init();
   lv_init();
   lv_port_disp_init();
   lv_port_indev_init();
+  SystemStatus_SetModule(OV_MODULE_LVGL, OV_MODULE_STATUS_OK);
 
   // while (1)
   // {

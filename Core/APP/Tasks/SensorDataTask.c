@@ -6,116 +6,111 @@
 #include "FreeRTOS.h"
 #include "gui_guider.h"
 #include "Types/Sensor.h"
+#include "Config/ov_project_config.h"
+#include "Services/ProjectLog.h"
+#include "Services/SystemStatus.h"
 #include "SPL06_001.h"
 #include "LSM303.h"
 
-// RTC_DateTypeDef nowdate;
-// RTC_TimeTypeDef nowtime;
-// date_time time={2025, 12, 31, 17, 34, 32};
-// float humidity, temperature;
-uint8_t AHT_State=0;
-uint32_t user_HR_timecount=0;
+uint8_t AHT_State = 0;
+uint32_t user_HR_timecount = 0;
+
 void trigger_immediate_envir_update(void);
 void trigger_immediate_heart_update(void);
 
-void SensorDataRenewTask(void *argument) {
+void SensorDataRenewTask(void *argument)
+{
+    (void)argument;
+
     for (;;) {
         trigger_immediate_envir_update();
-        osDelay(3000);
+        osDelay(OV_ENVIRONMENT_REFRESH_PERIOD_MS);
     }
 }
 
-// void HeartDataRenewTask(void *argument) {
-//     for (;;) {
-//         trigger_immediate_heart_update();
-//         osDelay(40);
-//     }
-// }
 void HeartDataRenewTask(void *argument)
 {
     hr_command_t cmd;
-    for (;;)
-    {
-        // 【关键】阻塞等待命令
-        if (osMessageQueueGet(HrCmdQueueHandle, &cmd, NULL, osWaitForever) == osOK)
-        {
-            if (cmd == HR_CMD_START)
-            {
-                // 启用心率传感器
-                EM7028_hrs_Enable();
 
+    (void)argument;
+
+    for (;;) {
+        if (osMessageQueueGet(HrCmdQueueHandle, &cmd, NULL, osWaitForever) == osOK) {
+            if (cmd == HR_CMD_START) {
+                HeartMessage heart_msg;
+
+                SystemStatus_SetHeartMeasurement(true);
+                OV_LOGI("heart", "measurement start");
+                EM7028_hrs_Enable();
                 Simple_HeartRate(0, HAL_GetTick(), true);
 
-                // 进入测量循环
-                for (int i = 0; i < 125; i++) // 假设测量5秒，40ms一次
-                {
+                for (int i = 0; i < OV_HEART_SAMPLE_COUNT; i++) {
                     uint16_t raw_ppg = EM7028_Get_HRS1();
                     uint32_t current_time = HAL_GetTick();
-                    uint16_t heart_rate = Simple_HeartRate(raw_ppg, current_time,false);
+                    uint16_t heart_rate = Simple_HeartRate(raw_ppg, current_time, false);
 
-                    if (heart_rate >0) {
-                        HeartMessage *heart_msg = pvPortMalloc(sizeof(HeartMessage));
-                        if (heart_msg != NULL) {
-                            heart_msg->status = 1;
-                            heart_msg->heart = heart_rate;
-                            if (osMessageQueuePut(HeartQueueHandle, &heart_msg, 0, 0) != osOK) {
-                                vPortFree(heart_msg);
-                            }
+                    if (heart_rate > 0U) {
+                        heart_msg.status = 1U;
+                        heart_msg.heart = heart_rate;
+                        if (osMessageQueuePut(HeartQueueHandle, &heart_msg, 0, 0) != osOK) {
+                            OV_LOGW("heart", "drop realtime heart sample");
                         }
                     }
-                    osDelay(40);
+
+                    osDelay(OV_HEART_SAMPLE_PERIOD_MS);
                 }
 
-                // 测量结束，发送完成消息
-                HeartMessage *complete_msg = pvPortMalloc(sizeof(HeartMessage));
-                if (complete_msg != NULL) {
-                    complete_msg->status = 2; // 2 表示测量完成
-                    complete_msg->heart = 0;
-                    osMessageQueuePut(HeartQueueHandle, &complete_msg, 0, 0);
+                heart_msg.status = 2U;
+                heart_msg.heart = 0U;
+                if (osMessageQueuePut(HeartQueueHandle, &heart_msg, 0, 0) != osOK) {
+                    OV_LOGW("heart", "drop heart complete message");
                 }
 
-                // 停用传感器
                 EM7028_hrs_DisEnable();
+                SystemStatus_SetHeartMeasurement(false);
+                OV_LOGI("heart", "measurement complete");
             }
         }
     }
 }
 
-void trigger_immediate_envir_update(void) {
-    float humidity=0, temperature=0, altitude=0, azimuth=0;
-    int16_t Xa, Ya, Za, Xm, Ym, Zm;
-    
-    // 获取温湿度数据
+void trigger_immediate_envir_update(void)
+{
+    float humidity = 0;
+    float temperature = 0;
+    float altitude = 0;
+    float azimuth = 0;
+    int16_t Xa;
+    int16_t Ya;
+    int16_t Za;
+    int16_t Xm;
+    int16_t Ym;
+    int16_t Zm;
+    EnvirMessage envir_msg;
+
     if (!Sensor_AHT21_Erro) {
-        if (AHT_Read(&humidity, &temperature)!=0) {
+        if (AHT_Read(&humidity, &temperature) != 0) {
             humidity = 0;
             temperature = 0;
         }
     }
-    
-    // 获取高度数据
+
     if (!Sensor_SPL_Erro) {
         altitude = Altitude_Calculate();
     }
-    
-    // 获取方位数据
+
     if (!Sensor_LSM303_Erro) {
         LSM303_ReadAcceleration(&Xa, &Ya, &Za);
         LSM303_ReadMagnetic(&Xm, &Ym, &Zm);
         azimuth = Azimuth_Calculate(Xa, Ya, Za, Xm, Ym, Zm);
     }
-    
-    // 发送环境数据消息
-    EnvirMessage *envir_msg=(EnvirMessage*)pvPortMalloc(sizeof(EnvirMessage));
-    if (envir_msg!=NULL) {
-        envir_msg->humidity=humidity;
-        envir_msg->temperature=temperature;
-        envir_msg->altitude=altitude;
-        envir_msg->azimuth=azimuth;
-        if (osMessageQueuePut(EnvirQueueHandle,&envir_msg,0,0)!= osOK) {
-            vPortFree(envir_msg);
-        }
+
+    envir_msg.humidity = humidity;
+    envir_msg.temperature = temperature;
+    envir_msg.altitude = altitude;
+    envir_msg.azimuth = azimuth;
+
+    if (osMessageQueuePut(EnvirQueueHandle, &envir_msg, 0, 0) != osOK) {
+        OV_LOGW("sensor", "drop environment sample");
     }
 }
-
-

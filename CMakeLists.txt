@@ -36,6 +36,23 @@ enable_language(C ASM)
 
 message("Build type: " ${CMAKE_BUILD_TYPE})
 
+set(APP_TASK_SRCS
+        Core/APP/Tasks/KeyTask.c
+        Core/APP/Tasks/PageTask.c
+        Core/APP/Tasks/WdogFeedTask.c
+        Core/APP/Tasks/SensorDataTask.c
+        Core/APP/Tasks/DataUpdateTask.c
+        Core/APP/Tasks/TimeUpdateTask.c
+        Core/APP/Tasks/AppState.c
+        Core/APP/Tasks/user_PowerManager.c
+        Core/APP/Tasks/BluetoothTask.c
+)
+
+set(APP_SERVICE_SRCS
+        Core/APP/Services/SystemStatus.c
+        Core/APP/Services/PageRouter.c
+)
+
 # LVGL 全量文件（GUI核心 + porting + UI应用 + Screens）
 file(GLOB_RECURSE LVGL_SRCS
         "LVGL_porting/**/*.c"
@@ -264,12 +281,6 @@ add_executable(${CMAKE_PROJECT_NAME}
         LVGL_src/lv_tabview.c
         LVGL_conf/lv_conf.h
         LVGL_conf/lvgl.h
-        Core/APP/Tasks/KeyTask.c
-        Core/APP/Tasks/PageTask.c
-        Core/APP/Tasks/WdogFeedTask.c
-        Core/APP/Tasks/SensorDataTask.c
-        Core/APP/Tasks/DataUpdateTask.c
-        Core/APP/Tasks/TimeUpdateTask.c
         Core/APP/Tasks/TimeUpdateTask.h
         Core/APP/Tasks/SensorDataTask.h
         LVGL/myGUI/generated/setup_scr_about_watch.c
@@ -277,17 +288,16 @@ add_executable(${CMAKE_PROJECT_NAME}
         LVGL/myGUI/generated/setup_scr_game.c
         LVGL/myGUI/generated/setup_scr_game_2048.c
         LVGL/myGUI/generated/setup_scr_story.c
-        Core/APP/Tasks/AppState.c
         Core/APP/Tasks/AppState.h
-        Core/APP/Tasks/user_PowerManager.c
         Core/APP/Tasks/user_PowerManager.h
         LVGL/myGUI/generated/setup_scr_chat.c
-        Core/APP/Tasks/BluetoothTask.c
         LVGL/myGUI/generated/setup_scr_compass.c
         LVGL/myGUI/generated/setup_scr_time_date.c
         LVGL/myGUI/generated/setup_scr_secret.c
         LVGL/myGUI/generated/setup_scr_secret_change.c
         LVGL/myGUI/generated/guider_fonts/lv_font_icomoon_48.c
+        ${APP_TASK_SRCS}
+        ${APP_SERVICE_SRCS}
 )
 
 # Add STM32CubeMX generated sources

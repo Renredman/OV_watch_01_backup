@@ -1,5 +1,5 @@
 //
-// Created by 侯力楷 on 2026/1/28.
+// Created by 渚姏妤?on 2026/1/28.
 //
 
 #ifndef OV_WATCH_01_APPSTATE_H
@@ -15,9 +15,9 @@ typedef struct {
 
     bool settings_sw_1_state;
     
-    bool password_set; // 密码是否设置
-    uint8_t password[4]; // 4位密码
-    bool password_verified; // 密码是否已验证
+    bool password_set;
+    uint8_t password[4];
+    bool password_verified;
 }AppState;
 
 typedef struct {
@@ -27,6 +27,7 @@ typedef struct {
 extern AppState g_app_state;
 
 void Appstate_Init(void);
+void AppState_SetScreenBrightness(uint8_t value);
 void AppState_SyncToUI_ASync(lv_ui *ui);
 
 void AppState_SyncToScr1(lv_ui *ui);

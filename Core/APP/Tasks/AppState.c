@@ -2,9 +2,10 @@
 #include "AppState.h"
 
 #include <stdlib.h>
-#include "FreeRTOS.h"
-#include "custom.h"
 
+#include "FreeRTOS.h"
+#include "Config/ov_project_config.h"
+#include "custom.h"
 
 void AppState_SyncToUI(lv_ui *ui);
 AppState g_app_state = {0};
@@ -12,8 +13,13 @@ AppState g_app_state = {0};
 void Appstate_Init(void) {
     g_app_state.scr1_btn_2_checked = true;
     g_app_state.scr1_btn_4_checked = false;
-    g_app_state.scr1_slider_value = 50;
+    g_app_state.scr1_slider_value = OV_DEFAULT_BRIGHTNESS;
     g_app_state.settings_sw_1_state = false;
+}
+
+void AppState_SetScreenBrightness(uint8_t value)
+{
+    g_app_state.scr1_slider_value = value;
 }
 
 static void app_state_sync_to_ui_async_cb(void *data) {
@@ -66,9 +72,6 @@ void AppState_SyncToUI(lv_ui *ui) {
     }
 }
 
-// AppState.c
-
-// 【实现】同步 scr1
 void AppState_SyncToScr1(lv_ui *ui)
 {
     if (ui == NULL || ui->scr1 == NULL) return;
@@ -88,8 +91,6 @@ void AppState_SyncToScr1(lv_ui *ui)
     lv_slider_set_value(ui->scr1_slider_1, g_app_state.scr1_slider_value, LV_ANIM_OFF);
 } 
 
-
-// 【实现】同步 settings
 void AppState_SyncToSettings(lv_ui *ui)
 {
     if (ui == NULL || ui->settings == NULL) return;
@@ -100,5 +101,3 @@ void AppState_SyncToSettings(lv_ui *ui)
         lv_obj_clear_state(ui->settings_sw_1, LV_STATE_CHECKED);
     }
 }
-
-

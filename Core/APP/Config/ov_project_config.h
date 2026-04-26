@@ -1,0 +1,47 @@
+#ifndef OV_PROJECT_CONFIG_H
+#define OV_PROJECT_CONFIG_H
+
+#define OV_LOG_ENABLE                    0
+
+#define OV_SENSOR_INIT_RETRY_COUNT       3U
+
+#define OV_DEFAULT_BRIGHTNESS            50U
+#define OV_DIMMED_BRIGHTNESS             5U
+
+#define OV_IDLE_TIMEOUT_SECONDS          10U
+#define OV_STOP_TIMEOUT_SECONDS          30U
+#define OV_IDLE_TIMER_PERIOD_MS          100U
+
+#define OV_LVGL_TASK_PERIOD_MS           3U
+#define OV_KEY_SCAN_PERIOD_MS            5U
+#define OV_WDOG_FEED_PERIOD_MS           100U
+
+#define OV_ENVIRONMENT_REFRESH_PERIOD_MS 3000U
+#define OV_TIME_REFRESH_PERIOD_MS        60000U
+
+#define OV_HEART_SAMPLE_PERIOD_MS        40U
+#define OV_HEART_SAMPLE_COUNT            125U
+
+#define OV_PAGE_QUEUE_LENGTH             16U
+#define OV_SENSOR_QUEUE_LENGTH           16U
+#define OV_HEART_COMMAND_QUEUE_LENGTH    16U
+#define OV_COMMON_QUEUE_LENGTH           16U
+#define OV_IDLE_QUEUE_LENGTH             1U
+
+#define OV_BLUETOOTH_TX_QUEUE_LENGTH     8U
+#define OV_BLUETOOTH_RX_QUEUE_LENGTH     8U
+#define OV_BLUETOOTH_TX_MESSAGE_SIZE     64U
+
+#define OV_CHAT_HISTORY_LINES            10U
+#define OV_CHAT_LINE_LENGTH              64U
+#define OV_CHAT_RENDER_BUFFER_SIZE       1024U
+
+#define OV_PAGE_LOAD_TIME_MS             100U
+#define OV_PAGE_LOAD_DELAY_MS            10U
+
+#define OV_RTC_WAKEUP_ACTIVE_TICKS       2000U
+#define OV_RTC_WAKEUP_STOP_TICKS         204U
+
+#define OV_BOOT_WELCOME_DELAY_MS         500U
+
+#endif /* OV_PROJECT_CONFIG_H */
